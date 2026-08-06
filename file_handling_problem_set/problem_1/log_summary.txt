@@ -1,0 +1,10 @@
+=== Log Summary ===
+INFO :2
+WARNING :1
+ERROR :2
+Errors found
+-User login successful for user_id=204
+-Database connection timeout
+-Cache refreshed
+-Disk usage at 82%
+-Null pointer in payment module
