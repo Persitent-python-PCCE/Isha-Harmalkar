@@ -14,6 +14,14 @@ class Character:
     def take_damage(self, amount):
         dmg = max(1, amount - self.defense)
         self.health -= dmg
+
+        if isinstance(self, Warrior):
+            #rage attribute
+            self.rage += 10
+            if self.health < (0.30 * self.max_health):
+                self.attack_power = self.attack_power * 2
+                print(self.name, "(Warrior) enters Berserk Mode! Attack power increased.")
+            
         return dmg
 
     def is_alive(self):
@@ -25,14 +33,23 @@ class Character:
 
 
 class Warrior(Character):
-    def __init__(self, name, health, attack_power, defense, speed):
+    def __init__(self, name, health, attack_power, defense, speed, rage):
         super().__init__(name, health, attack_power, defense, speed)
-        self.rage = 0
+        self.rage = rage
 
 
     def attack(self, target):
         #check berserk, then apply the damage formula
-        pass
+        damageDealt = self.attack_power
+        if self.health < (0.30 * self.max_health):
+            #self.attack_power = self.attack_power * 2
+            #damageDealt = self.attack_power
+            print(self.name, "(Warrior's) strikes with double power! Deals",{damageDealt}, "damage.")
+        else:
+            print(self.name, "(Warrior) swings a sword! Deals", damageDealt, "damage.")
+
+        return damageDealt
+        
 
 class Mage(Character):
     def __init__(self, name, health, attack_power, defense, speed, mana):
@@ -45,10 +62,12 @@ class Mage(Character):
         #backlash also harma the mage slightly
         damageDealt = self.attack
         if self.mana > 50:
-            damageDealt =  1.5 * self.attack
+            damageDealt =  1.5 * self.attack_power
             #causes a little self damage
 
             dmgTaken = self.take_damage(10)
+            #decrease mana
+            self.mana -= 10
             print(self.name, "(Mage) casts Fireball! Deals", damageDealt, "damage but loses ",dmgTaken, "health.")
 
         else:
@@ -91,43 +110,82 @@ class Stimulator:
         self.turn = ""
         self.hashMap = {}
 
+    def createCharacter(self, characterType):
+        hashMap = { 1: "Warrior", 2: "Mage", 3:"Archer"}
 
-    def startBattle():
-        warrior = Warrior("AmyWarrior", 130, 22, 12, 6)
+        #name, health, attack_power, defense, speed
+        name = input("Enter name for character")
+        health = float(input("Enter health for character"))
+        attack_power = float(input("Enter attack power for character"))
+        defense = float(input("Enter defense for character"))
+        speed = float(input("Enter speed for character"))
+
+        character = None
+        if characterType == 1:
+            rage = float(input("Enter rage value for your Warrior"))
+            character = Warrior(name, health, attack_power, defense, speed, rage)
+
+        elif characterType == 2:
+            mana = float(input("Enter mana for your Mage"))
+            character = Mage(name, health, attack_power, defense, speed, mana)
+        elif characterType == 3:
+            critical_chance = float(input("Enter critical chance probabilty for your Archer"))
+            character = Archer(name, health, attack_power, defense, speed, critical_chance)
+        print(character.name)
+        return character
+            
+
+
+
+
+    def startBattle(self):
+        warrior = Warrior("AmyWarrior", 130, 22, 12, 6, 0)
         mage = Mage("SibaMage", 90, 30, 5, 8, 100)
         archer = Archer("IvyArcher", 100, 24, 7, 12, 0.30)
 
+        p1_type = int(input("Please select a type and enter the number against it. 1. warrior 2.mage 3.archer"))
+        p1 = self.createCharacter(p1_type)
+        p2_type = int(input("Please select a type and enter the number against it. 1. warrior 2.mage 3.archer"))
+        p2 = self.createCharacter(p2_type)
 
-        turns = {"warrior" : warrior.speed, "mage":mage.speed, "archer":archer.speed}
-        sortedTurns = {key: value for key, value in sorted(turns.items(), key = lambda item: item[1], reverse=True)}
-        print(sortedTurns)
-        cur = archer
-        opponent = mage
+
+
+
+        #turns = {"p1" : p1.speed, "p2":p2.speed}
+        #sortedTurns = {key: value for key, value in sorted(turns.items(), key = lambda item: item[1], reverse=True)}
+        #sortedTurns = sorted(turns, key=turns.get, reverse=True)
+        #print(sortedTurns)
+        """  cur = archer
+        opponent = mage """
+
+        #cur = sortedTurns[0]
+        #opponent = sortedTurns[1]
+
+
+        players = [p1, p2]
+        players.sort(key=lambda x: x.speed, reverse=True)
+
+        cur = players[0]
+        opponent = players[1]
         winner = False
         while not winner:            
-            #winner = True
+         
 
-            #for player in sortedTurns:
-                #two players
-            
-            #cur = sortedTurns[0]
-            #opponent = sortedTurns[1]
-
-            if cur.name == "archer":                
+            if isinstance(cur, Archer):                
                 dmgDealt = archer.attack(opponent)
                 opponent.take_damage(dmgDealt)
                 cur = opponent
                 opponent = archer
-            elif cur.name == "mage":
+            elif isinstance(cur, Mage):
                 dmgDealt  = mage.attack(opponent)
                 opponent.take_damage(dmgDealt)
                 
                 cur = opponent
                 opponent = mage
 
-            elif cur.name == "warrior":
+            elif isinstance(cur, Warrior):
                 dmgDealt = warrior.attack(opponent)
-                opponent.take_damage()
+                opponent.take_damage(dmgDealt)
                 cur = opponent
                 opponent = warrior
 
@@ -150,7 +208,8 @@ class Stimulator:
 
 
 
+s1 = Stimulator()
 
-Stimulator.startBattle()
+s1.startBattle()
 
 
