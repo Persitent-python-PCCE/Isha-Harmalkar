@@ -43,7 +43,20 @@ class Mage(Character):
     def attack(self, target):
         #fireball, costs aman to deal damge 1.5 * attackPower aapprox.
         #backlash also harma the mage slightly
-        pass
+        damageDealt = self.attack
+        if self.mana > 50:
+            damageDealt =  1.5 * self.attack
+            #causes a little self damage
+
+            dmgTaken = self.take_damage(10)
+            print(self.name, "(Mage) casts Fireball! Deals", damageDealt, "damage but loses ",dmgTaken, "health.")
+
+        else:
+            print(self.name, "(Mage) casts a spell! Deals", damageDealt)
+
+        return damageDealt
+
+
 
 class Archer(Character):
     def __init__(self, name, health, attack_power, defense, speed, critical_chance):
@@ -84,30 +97,54 @@ class Stimulator:
         mage = Mage("SibaMage", 90, 30, 5, 8, 100)
         archer = Archer("IvyArcher", 100, 24, 7, 12, 0.30)
 
+
+        turns = {"warrior" : warrior.speed, "mage":mage.speed, "archer":archer.speed}
+        sortedTurns = {key: value for key, value in sorted(turns.items(), key = lambda item: item[1], reverse=True)}
+        print(sortedTurns)
+        cur = archer
+        opponent = mage
         winner = False
-        while not winner:
-            turns = {"warrior" : warrior.speed, "mage":mage.speed, "archer":archer.speed}
-            sortedTurns = {key: value for key, value in sorted(turns.items(), key = lambda item: item[1], reverse=True)}
-            print(sortedTurns)
-            winner = True
+        while not winner:            
+            #winner = True
 
             #for player in sortedTurns:
                 #two players
             
             #cur = sortedTurns[0]
             #opponent = sortedTurns[1]
-            cur = "archer"
-            opponent = "mage"
-            if cur == "archer":
-                
+
+            if cur.name == "archer":                
                 dmgDealt = archer.attack(opponent)
-                mage.take_damage(dmgDealt)
+                opponent.take_damage(dmgDealt)
+                cur = opponent
+                opponent = archer
+            elif cur.name == "mage":
+                dmgDealt  = mage.attack(opponent)
+                opponent.take_damage(dmgDealt)
                 
+                cur = opponent
+                opponent = mage
+
+            elif cur.name == "warrior":
+                dmgDealt = warrior.attack(opponent)
+                opponent.take_damage()
+                cur = opponent
+                opponent = warrior
 
 
-            #testing condition
-            winner = True
 
+            if opponent.health <= 0:
+                print(opponent.name, "is deafeated!")
+                print(cur.name, "wins the battle")
+                winner = True
+
+            else:
+                print("Stats of current round")
+                print(cur.name, "health stands at: ", cur.health)
+                print(opponent.name, "health stands at: ", opponent.health)
+
+
+    
 
 
 
