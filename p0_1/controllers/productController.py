@@ -1,10 +1,11 @@
-from venv import logger
+
 
 from config.logger import safeRun
 from services.productService import ProductService
 from models.product import Product
+import logging
 
-
+logger =  logging.getLogger(__name__)
 class ProductController:
 
     def __init__(self):
@@ -55,10 +56,10 @@ class ProductController:
 
         except ValueError as err:
             print("Could not create product: ", err)
-            logger.exception(f"Could Not  create product: {product.name} because of: {err}")
+            logger.exception(f"Could Not  create product because of: {err}")
         except Exception as e:
             print("Unexcpecte error: ", e)
-            logger.exception(f"Failed to create product: {product.name} because of: {err}")
+            logger.exception(f"Failed to create product because of: {err}")
 
 
         return None
@@ -73,14 +74,14 @@ class ProductController:
 
             print("-------Product--------")
             self.printProduct(product)
-            logger.info(f"Get Product By Id: id={product.id}, name={product.name}")
+            logger.info(f"Get Product By Id")
 
 
 
             return product
         except ValueError as err:
             print("Failed to get Product: ", err)
-            logger.exception(f"Failed to get product: {product.id} because of: {err}")
+            logger.exception(f"Failed to get product: {err}")
 
 
         return None
