@@ -18,7 +18,7 @@ words = ["AB-1234",
 "PQ-4567B"
 ]
 
-exp = r"[A-Z]{2,3}\-[0-9]{4,5}[A-Z]*"
+exp = r"[A-Z]{2,3}\-[0-9]{4,4}[A-Z]*"
 
 for word in words:
     if re.match(exp, word):
