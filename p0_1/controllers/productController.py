@@ -50,7 +50,7 @@ class ProductController:
 
             product = self.productService.createProduct(product)
             self.printProduct(product)
-            logger.info("Product created: id={product.id}, name={product.name}")
+            logger.info(f"Product created: id={product.id}, name={product.name}")
             return product
 
         except ValueError as err:
@@ -73,7 +73,7 @@ class ProductController:
 
             print("-------Product--------")
             self.printProduct(product)
-            logger.info("Get Product By Id: id={product.id}, name={product.name}")
+            logger.info(f"Get Product By Id: id={product.id}, name={product.name}")
 
 
 
