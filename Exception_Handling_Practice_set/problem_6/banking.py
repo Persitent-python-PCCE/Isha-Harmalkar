@@ -28,18 +28,17 @@ def withdraw(account_id, amount):
     # Otherwise subtract the amount, update the balance, and return it.
     
     #account = accounts[account_id]
-    try:
-        account = accounts[account_id]
-        if amount <= 0:
-            raise InvalidAmountError()
+    
+    #account = accounts[account_id]
+    if amount <= 0:
+        raise InvalidAmountError()
 
-        if accounts[account_id] >= amount:
-            accounts[account_id] -= amount
-            print("OK →", accounts[account_id])
-        else:
-            raise InsufficientFundsError()
-    except KeyError as e:
-        print("Key Error Handled")
+    if accounts[account_id] >= amount:
+        accounts[account_id] -= amount
+        print("OK →", accounts[account_id])
+    else:
+        raise InsufficientFundsError()
+
 
         
     
@@ -50,11 +49,10 @@ def process_withdrawal(account_id, amount):
     """
     try:
         withdraw(account_id, amount)
-    except Exception as e:
+    except KeyError as e:
         #print("Some other exception occured", e)
-        print(e)
-   
-        #print("Key Error Handled", e)
+        
+        print("Key Error Handled", e)
    
 # --- Test cases --
 process_withdrawal("ACC-1001", 1200) # OK -> 3800.0
