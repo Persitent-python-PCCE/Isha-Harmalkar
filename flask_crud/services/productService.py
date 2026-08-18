@@ -28,24 +28,24 @@ class ProductService:
             description=data.get("description")
 
         )
+        print("prdt service create data:", data)
         return self.productDao.saveProduct(product)
 
 
 
     def updateProduct(self,p_id,  data):
+        print("prdt id: ", p_id, "prdt service data: ", data)
+
         exists = self.productDao.getProductById(p_id)
+        
+
         if not exists:
             raise ValueError("product does not exist. Cannot update unexisitng product.")
-        product = Product(
-            id=data["id"],
-            name=data["name"],
-            category=data["category"],
-            price=data["price"],
-            quantity=data["quantity"],
-            description=data.get("description")
-        )
 
-        return self.productDao.updateProduct(p_id, product)
+        print("product exits")
+        
+
+        return self.productDao.updateProduct(p_id, data)
 
     def deleteProduct(self, p_id):
         product  = self.productDao.getProductById(p_id)

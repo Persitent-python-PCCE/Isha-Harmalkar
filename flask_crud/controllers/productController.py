@@ -57,6 +57,7 @@ def createProduct():
 def updateProduct(p_id):
     #id = request.args.get("id")
     data = request.get_json()
+    print("prdt id: ", p_id, "prdt controller data: ", data)
     try:
         product = productService.updateProduct(p_id, data)
         return jsonify({
