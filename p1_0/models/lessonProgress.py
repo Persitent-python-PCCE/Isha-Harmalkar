@@ -53,7 +53,7 @@ class LessonProgress(db.Model):
 
     enrollment = db.relationship(
         "Enrollment",
-        back_populates="lesson_progress"
+        back_populates="lesson_progress_records"
     )
 
     lesson = db.relationship(

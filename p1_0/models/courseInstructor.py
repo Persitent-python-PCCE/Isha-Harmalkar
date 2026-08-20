@@ -55,7 +55,7 @@ class CourseInstructor(db.Model):
         back_populates="course_instructors"
     )
 
-    enrollemnts = db.relationship(
+    enrollments = db.relationship(
         "Enrollment",
         back_populates="course_instructor",
         cascade="all, delete-orphan"
@@ -65,4 +65,5 @@ class CourseInstructor(db.Model):
         "Material",
         back_populates="course_instructor"
     )
+    quizzes = db.relationship("Quiz", back_populates="course_instructor")
 

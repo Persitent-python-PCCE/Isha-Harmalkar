@@ -1,0 +1,33 @@
+{%extends "base.html"%} {%block title%} Register {%endblock%} {%block content%}
+<h1>Create Account</h1>
+<form method="POST">
+  {{ form.hidden_tag() }}
+  <div>
+    {{ form.name.label}} {{ form.name() }} {%for error in form.name.errors%}
+    <span> {{ error }} </span>
+    {%endfor%}
+  </div>
+
+  <div>
+    {{ form.email.label }} {{ form.email() }} {%for error in form.email.errors
+    %}
+    <span> {{ error }} </span>
+    {%endfor%}
+  </div>
+  <div>
+    {{ form.password.label}} {{ form.password() }} {%for error in
+    form.password.errors%}
+    <span> {{ error }} </span>
+    {%endfor%}
+  </div>
+
+  <div>
+    {{ form.confirmPassword.label }} {{ form.confirmPassword() }} {%for error in
+    form.confirmPassword.errors%}
+    <span> {{ error }} </span>
+    {%endfor%}
+  </div>
+  {{ form.submit()}}
+</form>
+<a href="{{ url_for('auth.login')}}">ALready have an account?</a>
+{%endblock%}

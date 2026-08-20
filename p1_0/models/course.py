@@ -48,8 +48,8 @@ class Course(db.Model):
         cascade="all, delete-orphan"
     )
 
-    quizzes = db.relationship(
+    """    quizzes = db.relationship(
         "Quiz",
         back_populates="course",
         cascade="all, delete-orphan"
-    )
+    ) """

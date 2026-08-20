@@ -66,5 +66,10 @@ class Quiz(db.Model):
         back_populates="quiz",
         cascade="all, delete-orphan"
     )
+    instructor = db.relationship(
+        "User",
+        back_populates="quizzes"
+
+    )
 
     

@@ -1,0 +1,200 @@
+2026-08-20 23:09:50,780 [ERROR] controllers.authController: Unexpected error during user registration for user1@example.com.
+Traceback (most recent call last):
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1969, in _exec_single_context
+    self.dialect.do_execute(
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\cursors.py", line 159, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\cursors.py", line 330, in _query
+    conn.query(q)
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\connections.py", line 582, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\connections.py", line 847, in _read_query_result
+    result.read()
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\connections.py", line 1245, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\connections.py", line 803, in _read_packet
+    packet.raise_for_error()
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\err.py", line 154, in raise_mysql_exception
+    raise errorclass(errno, errval, sqlstate=sqlstate)
+pymysql.err.IntegrityError: (1048, "Column 'role_id' cannot be null")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\controllers\authController.py", line 32, in register
+    user = userService.register(
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\services\userService.py", line 44, in register
+    return self.userDao.saveUser(user)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\dao\userDao.py", line 22, in saveUser
+    db.session.commit()
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\orm\scoping.py", line 596, in commit
+    return self._proxied.commit()
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2035, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\orm\state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 1316, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\orm\state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 1290, in _prepare_impl
+    self.session.flush()
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4353, in flush
+    self._flush(objects)
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4488, in _flush
+    with util.safe_reraise():
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 122, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4449, in _flush
+    flush_context.execute()
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 465, in execute
+    rec.execute(self)
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 641, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 94, in save_obj
+    _emit_insert_statements(
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 1049, in _emit_insert_statements
+    result = connection.execute(
+             ^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1421, in execute
+    return meth(
+           ^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 526, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1643, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1848, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1988, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2365, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1969, in _exec_single_context
+    self.dialect.do_execute(
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\cursors.py", line 159, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\cursors.py", line 330, in _query
+    conn.query(q)
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\connections.py", line 582, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\connections.py", line 847, in _read_query_result
+    result.read()
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\connections.py", line 1245, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\connections.py", line 803, in _read_packet
+    packet.raise_for_error()
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\err.py", line 154, in raise_mysql_exception
+    raise errorclass(errno, errval, sqlstate=sqlstate)
+sqlalchemy.exc.IntegrityError: (pymysql.err.IntegrityError) (1048, "Column 'role_id' cannot be null")
+[SQL: INSERT INTO users (id, name, email, password, role_id, created_at, updated_at) VALUES (%(id)s, %(name)s, %(email)s, %(password)s, %(role_id)s, %(created_at)s, %(updated_at)s)]
+[parameters: {'id': 1, 'name': 'user1', 'email': 'user1@example.com', 'password': 'scrypt:32768:8:1$2wwxiSwncyobPw2e$920928e77e0a52b61969bf5ec4e1e100a640f1672ed7c6f9f5baeefa5180007e0141c4d036b78e502174906ca0141d3d2992ccc5b6c87cd04d55034f61e99498', 'role_id': None, 'created_at': datetime.datetime(2026, 8, 20, 17, 39, 50, 779834, tzinfo=datetime.timezone.utc), 'updated_at': datetime.datetime(2026, 8, 20, 17, 39, 50, 779834, tzinfo=datetime.timezone.utc)}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2026-08-20 23:09:50,834 [INFO] werkzeug: 127.0.0.1 - - [20/Aug/2026 23:09:50] "POST /register HTTP/1.1" 200 -
+2026-08-20 23:14:58,778 [INFO] app: Flask appplication initialed successfully
+2026-08-20 23:16:23,931 [INFO] __main__: Flask appplication initialed successfully
+2026-08-20 23:16:23,970 [INFO] werkzeug: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-08-20 23:16:23,970 [INFO] werkzeug: [33mPress CTRL+C to quit[0m
+2026-08-20 23:16:23,970 [INFO] werkzeug:  * Restarting with stat
+2026-08-20 23:16:25,436 [INFO] __main__: Flask appplication initialed successfully
+2026-08-20 23:16:25,455 [WARNING] werkzeug:  * Debugger is active!
+2026-08-20 23:16:25,460 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-20 23:16:35,136 [INFO] controllers.authController: User resgistered successfully: user1@example.com
+2026-08-20 23:16:35,138 [INFO] werkzeug: 127.0.0.1 - - [20/Aug/2026 23:16:35] "[32mPOST /register HTTP/1.1[0m" 302 -
+2026-08-20 23:16:35,159 [INFO] werkzeug: 127.0.0.1 - - [20/Aug/2026 23:16:35] "GET /login HTTP/1.1" 200 -
+2026-08-20 23:16:47,847 [INFO] werkzeug: 127.0.0.1 - - [20/Aug/2026 23:16:47] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+2026-08-20 23:16:48,238 [INFO] werkzeug: 127.0.0.1 - - [20/Aug/2026 23:16:48] "GET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2026-08-20 23:16:48,241 [INFO] werkzeug: 127.0.0.1 - - [20/Aug/2026 23:16:48] "GET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2026-08-20 23:16:48,580 [INFO] werkzeug: 127.0.0.1 - - [20/Aug/2026 23:16:48] "GET /login?__debugger__=yes&cmd=resource&f=console.png&s=51EWueg0j39QG4IQgPy0 HTTP/1.1" 200 -
+2026-08-20 23:16:48,842 [INFO] werkzeug: 127.0.0.1 - - [20/Aug/2026 23:16:48] "GET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2026-08-20 23:17:20,034 [INFO] werkzeug:  * Detected change in 'E:\\projects\\LearningThings\\psl_python\\day_3\\problems\\p1_0\\services\\userService.py', reloading
+2026-08-20 23:17:20,357 [INFO] werkzeug:  * Restarting with stat
+2026-08-20 23:17:21,742 [INFO] __main__: Flask appplication initialed successfully
+2026-08-20 23:17:21,762 [WARNING] werkzeug:  * Debugger is active!
+2026-08-20 23:17:21,780 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-20 23:17:23,979 [INFO] werkzeug:  * Detected change in 'E:\\projects\\LearningThings\\psl_python\\day_3\\problems\\p1_0\\services\\userService.py', reloading
+2026-08-20 23:17:24,259 [INFO] werkzeug:  * Restarting with stat
+2026-08-20 23:17:25,793 [INFO] __main__: Flask appplication initialed successfully
+2026-08-20 23:17:25,811 [WARNING] werkzeug:  * Debugger is active!
+2026-08-20 23:17:25,816 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-20 23:17:27,426 [INFO] werkzeug: 127.0.0.1 - - [20/Aug/2026 23:17:27] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+2026-08-20 23:17:27,566 [INFO] werkzeug: 127.0.0.1 - - [20/Aug/2026 23:17:27] "[36mGET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2026-08-20 23:17:27,627 [INFO] werkzeug: 127.0.0.1 - - [20/Aug/2026 23:17:27] "[36mGET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2026-08-20 23:17:27,960 [INFO] werkzeug: 127.0.0.1 - - [20/Aug/2026 23:17:27] "GET /login?__debugger__=yes&cmd=resource&f=console.png&s=qt2d4W5mUa9u2pa4SJac HTTP/1.1" 200 -
+2026-08-20 23:17:28,216 [INFO] werkzeug: 127.0.0.1 - - [20/Aug/2026 23:17:28] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2026-08-20 23:17:30,723 [INFO] werkzeug: 127.0.0.1 - - [20/Aug/2026 23:17:30] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+2026-08-20 23:17:31,030 [INFO] werkzeug: 127.0.0.1 - - [20/Aug/2026 23:17:31] "[36mGET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2026-08-20 23:17:31,060 [INFO] werkzeug: 127.0.0.1 - - [20/Aug/2026 23:17:31] "[36mGET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2026-08-20 23:17:31,398 [INFO] werkzeug: 127.0.0.1 - - [20/Aug/2026 23:17:31] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png&s=qt2d4W5mUa9u2pa4SJac HTTP/1.1[0m" 304 -
+2026-08-20 23:17:31,662 [INFO] werkzeug: 127.0.0.1 - - [20/Aug/2026 23:17:31] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2026-08-20 23:17:32,463 [INFO] werkzeug: 127.0.0.1 - - [20/Aug/2026 23:17:32] "GET /login HTTP/1.1" 200 -
+2026-08-20 23:17:36,855 [INFO] werkzeug: 127.0.0.1 - - [20/Aug/2026 23:17:36] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+2026-08-20 23:17:37,162 [INFO] werkzeug: 127.0.0.1 - - [20/Aug/2026 23:17:37] "[36mGET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2026-08-20 23:17:37,170 [INFO] werkzeug: 127.0.0.1 - - [20/Aug/2026 23:17:37] "[36mGET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2026-08-20 23:17:37,511 [INFO] werkzeug: 127.0.0.1 - - [20/Aug/2026 23:17:37] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png&s=qt2d4W5mUa9u2pa4SJac HTTP/1.1[0m" 304 -
+2026-08-20 23:17:49,992 [INFO] werkzeug:  * Detected change in 'E:\\projects\\LearningThings\\psl_python\\day_3\\problems\\p1_0\\services\\userService.py', reloading
+2026-08-20 23:17:50,298 [INFO] werkzeug:  * Restarting with stat
+2026-08-20 23:17:51,744 [INFO] __main__: Flask appplication initialed successfully
+2026-08-20 23:17:51,784 [WARNING] werkzeug:  * Debugger is active!
+2026-08-20 23:17:51,795 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-20 23:17:54,027 [INFO] werkzeug:  * Detected change in 'E:\\projects\\LearningThings\\psl_python\\day_3\\problems\\p1_0\\services\\userService.py', reloading
+2026-08-20 23:17:54,242 [INFO] werkzeug:  * Restarting with stat
+2026-08-20 23:17:55,625 [INFO] __main__: Flask appplication initialed successfully
+2026-08-20 23:17:55,658 [WARNING] werkzeug:  * Debugger is active!
+2026-08-20 23:17:55,659 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-20 23:17:59,446 [INFO] werkzeug: 127.0.0.1 - - [20/Aug/2026 23:17:59] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+2026-08-20 23:17:59,558 [INFO] werkzeug: 127.0.0.1 - - [20/Aug/2026 23:17:59] "[36mGET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2026-08-20 23:17:59,560 [INFO] werkzeug: 127.0.0.1 - - [20/Aug/2026 23:17:59] "[36mGET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2026-08-20 23:17:59,894 [INFO] werkzeug: 127.0.0.1 - - [20/Aug/2026 23:17:59] "GET /login?__debugger__=yes&cmd=resource&f=console.png&s=kAX42kveL3tJ6jFf6g8J HTTP/1.1" 200 -
+2026-08-20 23:21:06,961 [INFO] werkzeug:  * Detected change in 'E:\\projects\\LearningThings\\psl_python\\day_3\\problems\\p1_0\\controllers\\studentController.py', reloading
+2026-08-20 23:21:07,237 [INFO] werkzeug:  * Restarting with stat
+2026-08-20 23:21:08,643 [INFO] __main__: Flask appplication initialed successfully
+2026-08-20 23:21:08,676 [WARNING] werkzeug:  * Debugger is active!
+2026-08-20 23:21:08,676 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-20 23:22:11,275 [INFO] werkzeug:  * Detected change in 'E:\\projects\\LearningThings\\psl_python\\day_3\\problems\\p1_0\\controllers\\studentController.py', reloading
+2026-08-20 23:22:11,541 [INFO] werkzeug:  * Restarting with stat
+2026-08-20 23:22:12,735 [INFO] __main__: Flask appplication initialed successfully
+2026-08-20 23:22:12,770 [WARNING] werkzeug:  * Debugger is active!
+2026-08-20 23:22:12,776 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-20 23:22:14,928 [INFO] werkzeug:  * Detected change in 'E:\\projects\\LearningThings\\psl_python\\day_3\\problems\\p1_0\\controllers\\studentController.py', reloading
+2026-08-20 23:22:15,235 [INFO] werkzeug:  * Restarting with stat
+2026-08-20 23:22:16,783 [INFO] __main__: Flask appplication initialed successfully
+2026-08-20 23:22:16,815 [WARNING] werkzeug:  * Debugger is active!
+2026-08-20 23:22:16,824 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-20 23:22:52,061 [INFO] werkzeug:  * Detected change in 'E:\\projects\\LearningThings\\psl_python\\day_3\\problems\\p1_0\\app.py', reloading
+2026-08-20 23:22:52,275 [INFO] werkzeug:  * Restarting with stat
+2026-08-20 23:22:53,796 [INFO] __main__: Flask appplication initialed successfully
+2026-08-20 23:23:25,425 [INFO] __main__: Flask appplication initialed successfully
+2026-08-20 23:23:25,476 [INFO] werkzeug: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-08-20 23:23:25,476 [INFO] werkzeug: [33mPress CTRL+C to quit[0m
+2026-08-20 23:23:25,476 [INFO] werkzeug:  * Restarting with stat
+2026-08-20 23:23:26,856 [INFO] __main__: Flask appplication initialed successfully
+2026-08-20 23:23:26,875 [WARNING] werkzeug:  * Debugger is active!
+2026-08-20 23:23:26,890 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-20 23:23:35,745 [INFO] werkzeug: 127.0.0.1 - - [20/Aug/2026 23:23:35] "[32mPOST /login HTTP/1.1[0m" 302 -
+2026-08-20 23:23:35,753 [INFO] werkzeug: 127.0.0.1 - - [20/Aug/2026 23:23:35] "GET /dashboard HTTP/1.1" 200 -
