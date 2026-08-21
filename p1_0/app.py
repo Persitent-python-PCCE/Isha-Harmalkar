@@ -9,11 +9,15 @@ from models import (
 )
 from controllers.authController import authBp
 from controllers.studentController import studentBp
+from controllers.instructorController import instructorBp
+from controllers.adminController import adminBp
+from controllers.courseController import courseBp
 
 load_dotenv()
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+app.config['WTF_CSRF_ENABLED'] = False
 init_db(app)
 
 logging.basicConfig(
@@ -28,10 +32,11 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 logger.info("Flask appplication initialed successfully")
 
-app.register_blueprint(
-    authBp
-)
+app.register_blueprint(authBp)
+app.register_blueprint(courseBp)
 app.register_blueprint(studentBp)
+app.register_blueprint(instructorBp)
+app.register_blueprint(adminBp)
 
 @app.route("/")
 def index():

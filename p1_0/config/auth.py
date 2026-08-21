@@ -2,8 +2,8 @@ from functools import wraps
 from flask import request, session, redirect, url_for, jsonify
 
 
-def loginRequired(view):
-    @wraps(view)
+def loginRequired(viewFunction):
+    @wraps(viewFunction)
     def wrappedView(*args, **kwargs):
         if "user_id" not in session:
             if wantsJson():
@@ -12,15 +12,15 @@ def loginRequired(view):
                     "message": "Authentication required"
                 }), 401
 
-            return redirect(url_for("login"))
+            return redirect(url_for("auth.login"))
 
-        return view(*args, **kwargs)
+        return viewFunction(*args, **kwargs)
 
     return wrappedView
 
-def roleRequired(*allowedParams):
-    def decorator(view):
-        @wraps(view)
+def roleRequired(*allowedRoles):
+    def decorator(viewFunction):
+        @wraps(viewFunction)
         def wrappedView(*args, **kwargs):
             if "user_id" not in session:
                 if wantsJson():
@@ -29,11 +29,11 @@ def roleRequired(*allowedParams):
                         "message": "Authentication reuqired"
                     }), 401
 
-                return redirect(url_for("login"))
+                return redirect(url_for("auth.login"))
 
-            role = session.get("role")
+            currentRole = session.get("role")
 
-            if role not in allowedRoles:
+            if currentRole not in allowedRoles:
                 if wantsJson():
                     return jsonify({
                         "success": False,
@@ -41,16 +41,16 @@ def roleRequired(*allowedParams):
                     }), 403
 
                 return "Forbidden", 403
-            return  view(*args, **kwargs)
+            return  viewFunction(*args, **kwargs)
 
         return wrappedView
+    return decorator
+
 
 
 
 def wantsJson():
-    return (
-        "application/json"
-        in request.accept_mimetypes
-    )
-                
+    return request.is_json or  request.accept_mimetypes.best == "application/json"
 
+
+        

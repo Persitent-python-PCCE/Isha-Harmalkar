@@ -35,6 +35,11 @@ class QuizRecord(db.Model):
         db.JSON,
         nullable=False
     )
+    """ 
+    questionId: slectedOption,
+    questionIdL selctedOption
+    """
+
 
     created_at = db.Column(
             db.DateTime,

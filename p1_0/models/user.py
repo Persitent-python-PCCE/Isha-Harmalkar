@@ -74,15 +74,13 @@ class User(db.Model):
     )
 
 
-    def toDict(self, includeDates=False):
-        data = {
+    def toDict(self):
+        return {
             "id":  self.id,
             "name": self.name,
             "email": self.email,
-            "role": self.role.role_name if self.role else None
+            "role": self.role.role_name if self.role else None,
+            "created_at": self.created_at.isoformat() if self.created_at else None,
+            "updated_at": self.updated_at.isoformat() if self.updated_at else None
         }
 
-
-        if includeDates:
-            data["created_at"] = self.created_at.isoformat() if self.created_at else None
-            data["updated_at"] = self.updated_at.isoformat() if self.updated_at else None

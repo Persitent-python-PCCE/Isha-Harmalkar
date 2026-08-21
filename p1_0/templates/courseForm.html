@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %} Create Course -LMS {% endblock %}
+
+{% block content%}
+<h1>Create Course</h1>
+<form action="{{url_for('course.createCourse')}}" method="POST">
+
+    {{form.hidden_tag()}}
+    <div>
+        {{ form.courseName.label}} <br>
+        {{ form.courseName(size=40)}}
+        {% for error in form.courseName.errors%}
+         <span style="color:red;">[{{error}}]</span>
+         {% endfor %}
+    </div>
+
+    <br>
+    <div>
+        {{form.description.label}}
+        {{ form.description(rows=5, cols=40)}}
+        {% for error in form.description.errors %}
+        <span style="color:red;">[{{ error }}]</span>
+        {% endfor %}
+    </div>
+    <br>
+    {{ form.submit() }}
+</form>
+
+<br>
+<a href="{{ url_for('course.listCourses')}}">&larr; Cancel</a>
+{% endblock %}

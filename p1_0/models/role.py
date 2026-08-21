@@ -25,4 +25,15 @@ class Role(db.Model):
 
 
     users = db.relationship("User", back_populates="role")
-     
+
+    def toDict(self, includeDates=False):
+        return {
+            "id": self.id,
+            "role_name": self.role_name,
+            "created_at" : self.created_at.isoformat() if self.created_at else None,
+            "updated_at" : self.updated_at.isoformat() if self.updated_at else None
+    
+
+        }
+
+  

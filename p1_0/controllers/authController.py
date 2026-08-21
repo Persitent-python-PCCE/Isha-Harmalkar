@@ -13,6 +13,8 @@ from forms.authForms import(
     LoginForm
 )
 
+from config.auth import wantsJson
+
 from services.userService import UserService
 
 logger = logging.getLogger(__name__)
@@ -170,9 +172,3 @@ def logout():
     )
 
 
-def wantsJson():
-    return request.is_json or  request.accept_mimetypes.best == "application/json"
-
-
-
-        

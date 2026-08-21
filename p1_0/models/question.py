@@ -28,7 +28,13 @@ class Question(db.Model):
     question_options = db.Column(
         db.JSON,
         nullable=False
-    )
+    )  
+    """ 
+     Paris: false,
+     Spain : True,
+     Georgia : False,
+     France: False
+       """
 
     points = db.Column(
         db.Integer,
