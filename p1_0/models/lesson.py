@@ -57,3 +57,13 @@ class Lesson(db.Model):
         "LessonProgress",
         back_populates="lesson"
     )
+
+    def toDict(self):
+        return {
+            "id": self.id,
+            "module_id": self.module_id,
+            "lesson_name": self.lesson_name,
+            "content": self.content,
+            "created_at": self.created_at.isoformat() if self.created_at else None,
+            "updated_at": self.updated_At.isoformat() if self.updated_at else None
+        }

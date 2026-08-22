@@ -60,3 +60,13 @@ class LessonProgress(db.Model):
         "Lesson",
         back_populates="progress_records"
     )
+
+    def toDict(self):
+        return {
+            "id": self.id,
+            "enrollment_id": self.enrollment_id,
+            "lesson_id": self.lesson_id,
+            "completed": self.completed,
+            "created_at": self.created_at.isoformat() if self.created_at else None,
+            "updated_at": self.updated_at.isoformat() if self.updated_at else None
+        }

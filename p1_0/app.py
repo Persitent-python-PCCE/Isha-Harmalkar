@@ -12,6 +12,8 @@ from controllers.studentController import studentBp
 from controllers.instructorController import instructorBp
 from controllers.adminController import adminBp
 from controllers.courseController import courseBp
+from controllers.courseInstructorController import courseInstructorBp
+from controllers.enrollmentController import enrollmentBp
 
 load_dotenv()
 
@@ -37,6 +39,8 @@ app.register_blueprint(courseBp)
 app.register_blueprint(studentBp)
 app.register_blueprint(instructorBp)
 app.register_blueprint(adminBp)
+app.register_blueprint(courseInstructorBp)
+app.register_blueprint(enrollmentBp)
 
 @app.route("/")
 def index():

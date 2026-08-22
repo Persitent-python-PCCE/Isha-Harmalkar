@@ -67,3 +67,15 @@ class CourseInstructor(db.Model):
     )
     quizzes = db.relationship("Quiz", back_populates="course_instructor")
 
+
+    def toDict(self):
+        return {
+            "id": self.id,
+            "course_id": self.course_id,
+            "instructor_id": self.instructor_id,
+            "course_name": self.course.course_name if self.course else None,
+            "instructor_name": self.instructor.name if self.instructor else None,
+            "created_at": self.created_at.isoformat() if self.created_at else None,
+            "updated_at": self.updated_at.isoformat() if self.updated_at else None
+
+            }

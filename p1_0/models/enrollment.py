@@ -67,3 +67,15 @@ class Enrollment(db.Model):
         back_populates="enrollment",
         cascade="all, delete-orphan"
     )
+
+    def toDict(self):
+        return {
+            "id": self.id,
+            "student_id": self.student_id,
+            "course_instructor_id": self.course_instructor_id,
+            "student_name": self.student.name if self.student else None,
+            "course_name": self.course_instructor.course.course_name if self.course_instructor else None,
+            "status": self.status,
+            "created_at": self.created_at.isoformat() if self.created_at else None,
+            "updated_at": self.updated_at.isoformat() if self.updated_at else None
+        }

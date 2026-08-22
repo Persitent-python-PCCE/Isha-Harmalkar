@@ -69,3 +69,15 @@ class Material(db.Model):
     )
 
 
+    def toDict(self):
+        return {
+            "id": self.id,
+            "lesson_id": self.lesson_id,
+            "course_instructor_id": self.course_instructor_id,
+            "title": self.title,
+            "file_path": self.file_path,
+            "file_type": self.file_type,
+            "access": self.access,
+            "created_at": self.created_at.isoformat() if self.created_at else None,
+            "updated_at": self.updated_at.isoformat() if self.updated_at else None
+        }

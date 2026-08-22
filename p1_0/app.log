@@ -426,3 +426,4 @@ sqlalchemy.exc.IntegrityError: (pymysql.err.IntegrityError) (1048, "Column 'role
 2026-08-21 22:56:36,584 [INFO] werkzeug: 127.0.0.1 - - [21/Aug/2026 22:56:36] "GET /courses HTTP/1.1" 200 -
 2026-08-21 22:56:40,133 [INFO] werkzeug: 127.0.0.1 - - [21/Aug/2026 22:56:40] "GET /courses/3 HTTP/1.1" 200 -
 2026-08-21 22:56:43,467 [INFO] werkzeug: 127.0.0.1 - - [21/Aug/2026 22:56:43] "GET /courses HTTP/1.1" 200 -
+2026-08-22 11:10:06,014 [INFO] app: Flask appplication initialed successfully

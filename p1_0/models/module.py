@@ -49,4 +49,14 @@ class Module(db.Model):
         back_populates="module",
         cascade="all, delete-orphan"
     )
-    
+
+
+    def toDict(self):
+        return {
+            "id": self.id,
+            "course": self.course_id,
+            "module_name": self.module_name,
+            "description": self.description,
+            "created_at": self.created_at.isoformat if self.created_at else None,
+            "updated_at": self.updated_at.isoformat if self.updated_at else None
+        }
