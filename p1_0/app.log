@@ -464,3 +464,20 @@ sqlalchemy.exc.IntegrityError: (pymysql.err.IntegrityError) (1048, "Column 'role
 2026-08-22 20:59:09,826 [INFO] __main__: Flask appplication initialed successfully
 2026-08-22 20:59:09,843 [WARNING] werkzeug:  * Debugger is active!
 2026-08-22 20:59:09,859 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-23 00:04:39,390 [INFO] app: Flask appplication initialed successfully
+2026-08-23 00:06:49,438 [INFO] app: Flask appplication initialed successfully
+2026-08-23 00:06:50,739 [WARNING] controllers.authController: Form validation failed on register: {'confirmPassword': ['This field is required.']}
+2026-08-23 00:09:11,161 [INFO] app: Flask appplication initialed successfully
+2026-08-23 00:09:12,122 [WARNING] controllers.authController: Form validation failed on register: {'confirmPassword': ['This field is required.']}
+2026-08-23 00:10:06,303 [INFO] app: Flask appplication initialed successfully
+2026-08-23 00:10:07,454 [WARNING] controllers.authController: Form validation failed on register: {'confirmPassword': ['This field is required.']}
+2026-08-23 00:10:20,939 [INFO] app: Flask appplication initialed successfully
+2026-08-23 00:10:21,954 [WARNING] controllers.authController: Form validation failed on register: {'confirmPassword': ['This field is required.']}
+2026-08-23 00:11:20,802 [INFO] app: Flask appplication initialed successfully
+2026-08-23 00:11:21,859 [INFO] controllers.authController: User registered successfully: jane@example.com
+2026-08-23 00:20:05,269 [INFO] app: Flask appplication initialed successfully
+2026-08-23 00:20:06,249 [WARNING] controllers.authController: Form validation failed on register: {'confirmPassword': ['This field is required.']}
+2026-08-23 00:24:43,212 [INFO] app: Flask appplication initialed successfully
+2026-08-23 00:24:44,234 [WARNING] controllers.authController: Form validation failed on register: {'confirmPassword': ['This field is required.']}
+2026-08-23 00:25:18,227 [INFO] app: Flask appplication initialed successfully
+2026-08-23 00:25:19,273 [INFO] controllers.authController: User registered successfully: jane@example.com

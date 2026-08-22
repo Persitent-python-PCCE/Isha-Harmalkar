@@ -41,19 +41,19 @@ def register():
                 email=form.email.data,
                 password=form.password.data
             )
-            logger.info("User resgistered successfully: %s", form.email.data)
+            logger.info("User registered successfully: %s", form.email.data)
 
             if wantsJson():
                 return jsonify({
                     "success": True,
-                    "message": "Registration successfull",
+                    "message": "Registration successful",
                     "user": 
                        user.toDict()
                     
                 }), 201
 
             flash(
-                "Registration succesful. Please Login",
+                "Registration successful. Please Login",
                 "success"
 
             )
@@ -79,7 +79,7 @@ def register():
                     "success": False,
                     "message": str(e)
                 }), 400
-            flash("An unexpected error occured", "danger")
+            flash("An unexpected error occurred", "danger")
 
     if request.method == "POST" and wantsJson():
         logger.warning("Form validation failed on register: %s", form.errors)
@@ -110,7 +110,7 @@ def login():
             if wantsJson():
                 return jsonify({
                     "success": False,
-                    "message": "Invlaid email or password"
+                    "message": "Invalid email or password"
                 }), 401
 
             flash(
@@ -180,7 +180,7 @@ def logout():
         response = make_response(jsonify({
             "success": True,
             "message": "Logged Out"
-        })), 200
+        }))
 
         unset_jwt_cookies(response)
         return  response
