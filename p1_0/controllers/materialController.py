@@ -3,17 +3,18 @@ from flask import(
     Blueprint,  render_template,
     redirect, send_file,
     url_for,
-    session,jsonify,
+    jsonify,
     request,
     flash
 )
+from flask_jwt_extended import get_jwt_identity
 
 from dao.courseInstructorDao import CourseInstructorDao
 from forms.materialForms import MaterialForm
 from dao.materialDao import MaterialDao
 from dao.lessonDao import LessonDao
-from services.materialService import MaterialServicea
-from config.auth import roleRequired, wantsJson, loginRequired
+from services.materialService import MaterialService
+from config.auth import roleRequired, wantsJson, loginRequired, getCurrentUserIdentity
 
 logger = logging.getLogger(__name__)
 materialBp = Blueprint("material", __name__)
@@ -21,7 +22,7 @@ materialBp = Blueprint("material", __name__)
 materialDao = MaterialDao()
 lessonDao = LessonDao()
 courseInstructorDao = CourseInstructorDao()
-materialService = MaterialServicea(materialDao, lessonDao)
+materialService = MaterialService(materialDao, lessonDao)
 
 
 @materialBp.route("/lessons/<int:lessonId>/materials", methods=["GET"])
@@ -39,14 +40,15 @@ def listMaterials(lessonId):
 
 
 @materialBp.route("/lessons/<int:lessonId>/materials", methods=["POST"])
-@roleRequired("admin", "instructor")
+@roleRequired("instructor")
 def uploadMaterial(lessonId):
     form = MaterialForm()
     if form.validate_on_submit():
         try:
             lesson = lessonDao.getLessonById(lessonId)
             courseId = lesson.module.course_id
-            courseInstructor = courseInstructorDao.getByCourseAndInstructor(courseId, session["user_id"])
+            userId = getCurrentUserIdentity()
+            courseInstructor = courseInstructorDao.getByCourseAndInstructor(courseId, userId)
             if not courseInstructor:
                 raise ValueError("You are not assigned to teach this course")
             
@@ -81,19 +83,19 @@ def uploadMaterial(lessonId):
             flash(str(ve), "danger")
 
         except Exception as e:
-            logger.warning("An unexpected error occured while material upload")
+            logger.warning("An unexpected error occurred while material upload")
             if wantsJson():
                 return jsonify({
                     "success": False,
                     "message": str(e)
                 }), 400
 
-            flash("An unexpected error occured", "danger")
+            flash("An unexpected error occurred", "danger")
 
     if request.method == "POST" and wantsJson():
         return jsonify({
             "success": False,
-            "erros": form.errors
+            "errors": form.errors
         }), 400
 
     return render_template("materialForm.html", form=form, lessonId=lessonId)
@@ -118,7 +120,7 @@ def downloadMaterial(materialId):
         return redirect(url_for("course.listCourses"))
 
 
-    except ValueError as e:
+    except Exception as e:
         logger.warning("Unexpected error during material download  for id: %s", materialId)
 
         if wantsJson():
@@ -127,7 +129,7 @@ def downloadMaterial(materialId):
                 "message": str(e)
             }), 404
 
-        flash("An unexpected error occured while downloading material", "danger")
+        flash("An unexpected error occurred while downloading material", "danger")
         return redirect(url_for("course.listCourses"))
 
 
@@ -135,17 +137,23 @@ def downloadMaterial(materialId):
 
 @materialBp.route("/materials/<int:materialId>/delete", methods=["POST"])
 @loginRequired
+@roleRequired("instructor")
 def deleteMaterial(materialId):
     try:
         material = materialService.getMaterialById(materialId)
         lessonId = material.lesson_id
-        materialService.deleteMaterial(materialId)
+        instructorId = int(get_jwt_identity())
+        
+          
+
+        
+        materialService.deleteMaterial(material, instructorId)
         logger.info("Material deleted successfully: %s", materialId)
 
         if wantsJson():
             return jsonify({
                 "success": True,
-                "message": "Material delted successfully"
+                "message": "Material deleted successfully"
             })
 
         flash("Material deleted successfully", "success")
@@ -163,7 +171,7 @@ def deleteMaterial(materialId):
      
 
 
-    except ValueError as e:
+    except Exception as e:
         logger.warning("Unexpected error during material deletion  for id: %s", materialId)
 
         if wantsJson():
@@ -172,7 +180,7 @@ def deleteMaterial(materialId):
                 "message": str(e)
             }), 404
 
-        flash("An unexpected error occured while deleting material", "danger")
+        flash("An unexpected error occurred while deleting material", "danger")
 
     return redirect(url_for("course.listCourses"))
    

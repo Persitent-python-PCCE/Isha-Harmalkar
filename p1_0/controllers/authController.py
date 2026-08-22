@@ -1,11 +1,16 @@
 import logging
 from flask import(
-    Blueprint,  render_template,
+    Blueprint, make_response,  render_template,
     redirect,
     url_for,
-    session,jsonify,
+   jsonify,
     request,
     flash
+)
+from flask_jwt_extended import (
+    create_access_token,
+    set_access_cookies,
+    unset_jwt_cookies
 )
 
 from forms.authForms import(
@@ -118,33 +123,44 @@ def login():
                 form=form
             )
 
-        session.clear()
-        session["user_id"] = user.id
-        session["role"] = user.role.role_name
+        roleName = user.role.role_name.lower() if user.role else "student"
+        additionalClaims = {
+            "role": roleName,
+            "name": user.name,
+            "email":user.email
+        }
+
+        accessToken = create_access_token(
+            identity=str(user.id),
+            additional_claims=additionalClaims
+        )
 
         if wantsJson():
             return jsonify({
 
                 "success": True,
                 "message": "Login successful",
+                "accessToken": accessToken,
                 "user": 
                    user.toDict()
                 
-            })
+            }), 200
 
-        if user.role.role_name == "admin":
-            return redirect(
-                url_for("admin.dashboard")
-            )
+        if roleName == "admin":
+            targetUrl = url_for("admin.dashboard")
+            
 
-        if user.role.role_name == "instructor":
-            return redirect(
-                url_for("instructor.dashboard")
-            )
+        if roleName == "instructor":
+            targetUrl =  url_for("instructor.dashboard")
+       
 
-        return redirect(
-            url_for("student.dashboard")
-        )
+        else:
+            targetUrl = url_for("student.dashboard")
+
+        response = make_response(redirect(targetUrl))
+        set_access_cookies(response, accessToken)
+        return response
+       
 
     if request.method == "POST" and wantsJson():
         return jsonify({
@@ -159,16 +175,19 @@ def login():
 
 @authBp.route("/logout")
 def logout():
-    session.clear()
+    
     if wantsJson():
-        return jsonify({
+        response = make_response(jsonify({
             "success": True,
             "message": "Logged Out"
+        })), 200
 
-        })
+        unset_jwt_cookies(response)
+        return  response
 
-    return redirect(
-        url_for("auth.login")
-    )
+    response = make_response(redirect(url_for("auth.login")))
+    unset_jwt_cookies(response)
+    flash("Logged out successfully", "info")
+    return response
 
 

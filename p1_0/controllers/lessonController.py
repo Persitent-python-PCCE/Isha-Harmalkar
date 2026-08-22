@@ -34,7 +34,7 @@ def listLessons(moduleId):
 
 
 
-@lessonBp.route("/lessons/<int:lessonId>", method=["GET"])
+@lessonBp.route("/lessons/<int:lessonId>", methods=["GET"])
 @loginRequired
 def getLesson(lessonId):
     try:
@@ -60,13 +60,13 @@ def getLesson(lessonId):
         if wantsJson():
             return jsonify({"success": False, "message": str(e)}), 400
 
-        flash("An unexpected error occured", "danger")
+        flash("An unexpected error occurred", "danger")
         return redirect(url_for("course.listCourses"))
 
 
 
 @lessonBp.route("/modules/<int:moduleId>/lessons", methods=["POST"])
-@roleRequired("admin", "instructor")
+@roleRequired("admin")
 def createLesson(moduleId):
     form = LessonForm()
     if form.validate_on_submit():
@@ -87,7 +87,7 @@ def createLesson(moduleId):
 
             flash("Lesson created successfully", "success")
 
-            return redirect(url_for("lessong.listLesson", moduleId=moduleId))
+            return redirect(url_for("lessong.listLessons", moduleId=moduleId))
 
 
         except ValueError as ve:
@@ -119,8 +119,8 @@ def createLesson(moduleId):
 
 
 @lessonBp.route("/lessons/<int:lessonId>/update", methods=["POST"])
-@roleRequired("admin", "instructor")
-def deleteLesson(lessonId):
+@roleRequired("admin")
+def updateLesson(lessonId):
     form = LessonForm()
 
     if form.validate_on_submit():
@@ -144,7 +144,7 @@ def deleteLesson(lessonId):
 
 
         except ValueError as ve:
-            logger.warning("Lesson update validationf failed for id %s", lessonId)
+            logger.warning("Lesson update validation failed for id %s", lessonId)
             if wantsJson():
                 return jsonify({
                     "success": False,
@@ -154,14 +154,14 @@ def deleteLesson(lessonId):
             flash(str(ve), "danger")
 
         except Exception as e:
-            logger.warning("Unexpected error occured during lesson update for %s", lessonId)
+            logger.warning("Unexpected error occurred during lesson update for %s", lessonId)
             if wantsJson():
                 return jsonify({
                     "success": False,
                     "message": str(e)
                 }), 400
 
-            flash("An unexpected error occured during update", "danger")
+            flash("An unexpected error occurred during update", "danger")
 
     if request.method == "POST" and wantsJson():
         return jsonify({
@@ -172,7 +172,7 @@ def deleteLesson(lessonId):
     return render_template("lessonForm.html", form=form)
 
 @lessonBp.route("/lessons/<int:lessonId>/delete", methods=["POST"])
-@roleRequired("admin", "instructor")
+@roleRequired("admin")
 def deleteLesson(lessonId):
     try:
         lesson = lessonService.getLessonById(lessonId)
@@ -187,7 +187,7 @@ def deleteLesson(lessonId):
             })
 
         flash("Lesson deleted successfully", "success")
-        return redirect(url_for("lesson.firstLessons", moduleId=moduleId))
+        return redirect(url_for("lesson.listLessons", moduleId=moduleId))
 
 
     except ValueError as ve:
@@ -213,7 +213,7 @@ def deleteLesson(lessonId):
 
 
 
-        flash("An unexpected error occured when trying to delete", "danger")
+        flash("An unexpected error occurred when trying to delete", "danger")
 
     return redirect(url_for("course.listCourses"))
 

@@ -103,7 +103,7 @@ def listEnrollmentsForOffering(courseInstructorId):
 @enrollmentBp.route("/enrollments/<int:enrollmentId>/status", methods=["POST"])
 @roleRequired("admin", "instructor", "student")
 def updateStatus(enrollmentId):
-    payload  = request.get_json(silent=True) or request.forms
+    payload  = request.get_json(silent=True) or request.form
     status = payload.get("status")
 
     try:
@@ -127,19 +127,13 @@ def updateStatus(enrollmentId):
         logging.exception("Unexpected error updating status for enrollment %s", enrollmentId)
         return jsonify({
             "success": False,
-            "message": str(ve)
-        }), 400
-
-    except Exception as e:
-        logger.exception("Unexpected error updating status for enrollment %s", enrollmentId)
-        return jsonify({
-            "success": False,
             "message": str(e)
         }), 400
 
+  
 
-@enrollmentBp.route("/enrollments/<int:enrollmentId>/uneroll", methods=["POST"])
-@roleRequired("admin", "student")
+@enrollmentBp.route("/enrollments/<int:enrollmentId>/unenroll", methods=["POST"])
+@roleRequired("student")
 def unenroll(enrollmentId):
     try:
         enrollmentService.unenrollStudent(enrollmentId)
@@ -154,7 +148,7 @@ def unenroll(enrollmentId):
         flash("Unenrolled successfully", "success")
 
     except ValueError as ve:
-        logger.warning("Uneroll failed for id %s", enrollmentId)
+        logger.warning("Unenroll failed for id %s", enrollmentId)
         if wantsJson():
             return jsonify({
                 "success": False,
@@ -164,7 +158,7 @@ def unenroll(enrollmentId):
         flash(str(ve), "danger")
 
     except Exception as e:
-        logger.exception("Unexpected error unerolling %s", enrollmentId)
+        logger.exception("Unexpected error unenrolling %s", enrollmentId)
         if wantsJson():
             return jsonify({
                 "success": False,

@@ -2,6 +2,7 @@ import os
 import logging
 from dotenv import load_dotenv
 from flask import Flask
+from flask_jwt_extended import JWTManager
 from config.database import init_db, db
 from models import (
     Role, User, Course, CourseInstructor, Enrollment,
@@ -19,6 +20,11 @@ load_dotenv()
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+app.config["JWT_SECRET_KEY"] = os.environ.get('JWT_SECRET_KEY', app.config['SECRET_KEY'])
+app.config['JWT_TOKEN_LOCATION'] = os.environ.get('JWT_SECRET_KEY', app.config['SECRET_KEY'])
+app.config['JWT_COOKIE_CSRF_PROTECT'] = False
+
+jwt = JWTManager(app)
 app.config['WTF_CSRF_ENABLED'] = False
 init_db(app)
 

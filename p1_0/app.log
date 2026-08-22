@@ -427,3 +427,40 @@ sqlalchemy.exc.IntegrityError: (pymysql.err.IntegrityError) (1048, "Column 'role
 2026-08-21 22:56:40,133 [INFO] werkzeug: 127.0.0.1 - - [21/Aug/2026 22:56:40] "GET /courses/3 HTTP/1.1" 200 -
 2026-08-21 22:56:43,467 [INFO] werkzeug: 127.0.0.1 - - [21/Aug/2026 22:56:43] "GET /courses HTTP/1.1" 200 -
 2026-08-22 11:10:06,014 [INFO] app: Flask appplication initialed successfully
+2026-08-22 20:34:54,443 [INFO] __main__: Flask appplication initialed successfully
+2026-08-22 20:37:08,298 [INFO] __main__: Flask appplication initialed successfully
+2026-08-22 20:37:08,404 [INFO] werkzeug: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-08-22 20:37:08,404 [INFO] werkzeug: [33mPress CTRL+C to quit[0m
+2026-08-22 20:37:08,404 [INFO] werkzeug:  * Restarting with stat
+2026-08-22 20:37:09,361 [INFO] __main__: Flask appplication initialed successfully
+2026-08-22 20:37:09,405 [WARNING] werkzeug:  * Debugger is active!
+2026-08-22 20:37:09,416 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-22 20:38:43,721 [INFO] werkzeug:  * Detected change in 'E:\\projects\\LearningThings\\psl_python\\day_3\\problems\\p1_0\\controllers\\courseInstructorController.py', reloading
+2026-08-22 20:38:43,931 [INFO] werkzeug:  * Restarting with stat
+2026-08-22 20:38:44,999 [INFO] __main__: Flask appplication initialed successfully
+2026-08-22 20:38:45,019 [WARNING] werkzeug:  * Debugger is active!
+2026-08-22 20:38:45,020 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-22 20:41:14,833 [INFO] werkzeug:  * Detected change in 'E:\\projects\\LearningThings\\psl_python\\day_3\\problems\\p1_0\\controllers\\courseInstructorController.py', reloading
+2026-08-22 20:41:15,104 [INFO] werkzeug:  * Restarting with stat
+2026-08-22 20:41:16,106 [INFO] __main__: Flask appplication initialed successfully
+2026-08-22 20:41:16,126 [WARNING] werkzeug:  * Debugger is active!
+2026-08-22 20:41:16,135 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-22 20:41:44,865 [INFO] werkzeug:  * Detected change in 'E:\\projects\\LearningThings\\psl_python\\day_3\\problems\\p1_0\\controllers\\courseInstructorController.py', reloading
+2026-08-22 20:41:45,235 [INFO] werkzeug:  * Restarting with stat
+2026-08-22 20:41:46,334 [INFO] __main__: Flask appplication initialed successfully
+2026-08-22 20:41:46,351 [WARNING] werkzeug:  * Debugger is active!
+2026-08-22 20:41:46,351 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-22 20:42:30,751 [INFO] werkzeug:  * Detected change in 'E:\\projects\\LearningThings\\psl_python\\day_3\\problems\\p1_0\\controllers\\courseInstructorController.py', reloading
+2026-08-22 20:42:31,064 [INFO] werkzeug:  * Restarting with stat
+2026-08-22 20:42:32,269 [INFO] __main__: Flask appplication initialed successfully
+2026-08-22 20:42:32,285 [WARNING] werkzeug:  * Debugger is active!
+2026-08-22 20:42:32,302 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-22 20:59:08,826 [INFO] __main__: Flask appplication initialed successfully
+2026-08-22 20:59:08,859 [INFO] werkzeug: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-08-22 20:59:08,859 [INFO] werkzeug: [33mPress CTRL+C to quit[0m
+2026-08-22 20:59:08,859 [INFO] werkzeug:  * Restarting with stat
+2026-08-22 20:59:09,826 [INFO] __main__: Flask appplication initialed successfully
+2026-08-22 20:59:09,843 [WARNING] werkzeug:  * Debugger is active!
+2026-08-22 20:59:09,859 [INFO] werkzeug:  * Debugger PIN: 258-857-572

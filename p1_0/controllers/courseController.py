@@ -88,7 +88,7 @@ def getCourse(courseId):
 
 
 @courseBp.route("/courses/create", methods=["GET", "POST"])
-@roleRequired("admin", "instructor")
+@roleRequired("admin")
 def createCourse():
     form = CourseForm()
 
@@ -148,7 +148,7 @@ def createCourse():
 
 
 @courseBp.route("/courses/<int:courseId>/update", methods=["GET", "POST"])
-@roleRequired("admin", "instructor")
+@roleRequired("admin")
 def updateCourse(courseId):
     form = CourseForm()
 
@@ -211,7 +211,7 @@ def updateCourse(courseId):
 
 
 @courseBp.route("/courses/<int:courseId>/delete", methods=["POST"])
-@roleRequired("admin", "instructor")
+@roleRequired("admin")
 def deleteCourse(courseId):
     try:
         courseService.deleteCourse(courseId)

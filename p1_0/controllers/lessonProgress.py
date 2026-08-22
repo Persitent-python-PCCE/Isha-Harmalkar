@@ -37,7 +37,7 @@ def getProgress(enrollmentId):
         })
 
     except Exception as e:
-        logger.exception("Unexpeccted error fetching progress for enrollment %s", enrollmentId)
+        logger.exception("Unexpected error fetching progress for enrollment %s", enrollmentId)
         if wantsJson():
             return jsonify({
                 "success": False,
@@ -49,10 +49,10 @@ def getProgress(enrollmentId):
 
 
 @lessonProgressBp.route(
-    "enrollments/<int:enrollmentId>/lessons/<int:lessonId>/complete",
+    "/enrollments/<int:enrollmentId>/lessons/<int:lessonId>/complete",
     methods=["POST"]
 )
-@roleRequired
+@roleRequired("student")
 def markLessonComplete(enrollmentId, lessonId):
     try:
         completed = request.get_json(silent=True) or {}
@@ -63,12 +63,12 @@ def markLessonComplete(enrollmentId, lessonId):
         )
 
         logger.info(
-            "Lesson progress updated: enrollement=%s lesson=%s completed=%s",
+            "Lesson progress updated: enrollment=%s lesson=%s completed=%s",
             enrollmentId, lessonId, progress.completed
                             )
         return jsonify({
             "success": True,
-            "message": "Progress.updated",
+            "message": "Progress updated",
             "progress": progress.toDict()
         })
 
@@ -82,7 +82,7 @@ def markLessonComplete(enrollmentId, lessonId):
         }), 400
 
     except Exception as e:
-        logger.warning("Progress update failed for enrollment %s lesson %s",
+        logger.exception("Progress update failed for enrollment %s lesson %s",
                        enrollmentId, lessonId)
 
         return jsonify({

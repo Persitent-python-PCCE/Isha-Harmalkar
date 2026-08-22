@@ -71,9 +71,12 @@ class MaterialService:
         return self.materialDao.getMaterialsByLessonId(lessonId)
 
 
-    def deleteMaterial(self, materialId):
+    def deleteMaterial(self, material, instructorId):
 
-        material = self.getMaterialById(materialId)
+        if material.course_instructor.instructor_id != instructorId:
+            raise PermissionError("You are not authorized to delete this material")
+
+        
 
         if os.path.exists(material.file_path):
             try:

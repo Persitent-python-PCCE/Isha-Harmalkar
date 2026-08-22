@@ -33,8 +33,8 @@ def listModules(courseId):
     return render_template("module_list.html", modules=modules, courseId=courseId)
 
 
-@moduleBp.route("/courses/<int:courseId>/moudles", methods=["POST"])
-@roleRequired("admin", "instructor")
+@moduleBp.route("/courses/<int:courseId>/modules", methods=["GET","POST"])
+@roleRequired("admin")
 def createModule(courseId):
     form = ModuleForm()
 
@@ -82,14 +82,14 @@ def createModule(courseId):
         return render_template("moduleForm.html", form=form, courseId=courseId)
 
 
-@moduleBp.route("/modules/<int:moduleId>/update", methods=["POST"])
-@roleRequired("admin", "instructor")
+@moduleBp.route("/modules/<int:moduleId>/update", methods=["GET", "POST"])
+@roleRequired("admin")
 def updateModule(moduleId):
     form = ModuleForm()
 
     if form.validate_on_submit():
         try:
-            mmodule = module.Service.updateModule(
+            module = module.Service.updateModule(
                 moduleId,
                 moduleName=form.moduleName.data,
                 description=form.description.data
@@ -132,11 +132,11 @@ def updateModule(moduleId):
 
 
 @moduleBp.route("/modules/<int:moduleId>/delete", methods=["POST"])
-@roleRequired("admin", "instructor")
+@roleRequired("admin")
 def deleteModule(moduleId):
     try:
         module = moduleService.getModuleById(moduleId)
-        courseId = module.courseId
+        courseId = module.course_id
         moduleService.deleteModule(moduleId)
         logger.info("Module deleted successfully: %s", moduleId)
 
@@ -145,6 +145,8 @@ def deleteModule(moduleId):
                 "success": True,
                 "message": "Module deleted successfully"
             })
+
+        flash("Module deleted successfully", "success")
 
     except ValueError as ve:
         logger.warning("Module delete failed for id %s", moduleId)

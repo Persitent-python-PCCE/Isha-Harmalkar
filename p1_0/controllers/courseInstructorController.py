@@ -73,7 +73,7 @@ def assignInstructors(courseId):
         logger.warning("Instrucotr assignment failed for course %s", courseId)
         if wantsJson():
             return jsonify({
-                "success": True,
+                "success": False,
                 "message": str(ve)
                 
             }), 400
@@ -96,9 +96,9 @@ def assignInstructors(courseId):
 
 
 
-@courseInstructorBp.route("/courses/<int:courseId>/remove", methods=["POST"])
+@courseInstructorBp.route("/courses/<int:courseInstructorId>/remove", methods=["POST"])
 @roleRequired("admin")
-def assignInstructors(courseInstructorId):
+def removeInstructors(courseInstructorId):
 
 
     try:
@@ -123,12 +123,13 @@ def assignInstructors(courseInstructorId):
         logger.warning("Instrucotr removal failed for id %s",courseInstructorId)
         if wantsJson():
             return jsonify({
-                "success": True,
+                "success": False,
                 "message": str(ve)
                 
             }), 400
 
         flash(str(ve), "danger")
+        return redirect(url_for("course.listCourses"))
         
 
     except Exception as e:
