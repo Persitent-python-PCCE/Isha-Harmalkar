@@ -1,0 +1,25 @@
+2026-08-24 02:26:08,755 [INFO] werkzeug: 127.0.0.1 - - [24/Aug/2026 02:26:08] "GET /dashboard HTTP/1.1" 200 -
+2026-08-24 02:26:12,130 [INFO] werkzeug: 127.0.0.1 - - [24/Aug/2026 02:26:12] "GET /instructor/courses HTTP/1.1" 200 -
+2026-08-24 02:26:14,259 [INFO] werkzeug: 127.0.0.1 - - [24/Aug/2026 02:26:14] "GET /courses/11 HTTP/1.1" 200 -
+2026-08-24 02:26:18,236 [INFO] werkzeug: 127.0.0.1 - - [24/Aug/2026 02:26:18] "GET /course-instructors/9/quizzes HTTP/1.1" 200 -
+2026-08-24 02:26:21,710 [INFO] werkzeug: 127.0.0.1 - - [24/Aug/2026 02:26:21] "GET /course-instructors/9/quizzes/create HTTP/1.1" 200 -
+2026-08-24 02:26:38,240 [INFO] controllers.quizController: Quiz created successfully: Java Quiz 1
+2026-08-24 02:26:38,244 [INFO] werkzeug: 127.0.0.1 - - [24/Aug/2026 02:26:38] "[32mPOST /course-instructors/9/quizzes/create HTTP/1.1[0m" 302 -
+2026-08-24 02:26:38,537 [INFO] werkzeug: 127.0.0.1 - - [24/Aug/2026 02:26:38] "GET /quizzes/1 HTTP/1.1" 200 -
+2026-08-24 02:26:41,965 [INFO] werkzeug: 127.0.0.1 - - [24/Aug/2026 02:26:41] "GET /quizzes/1/questions/create HTTP/1.1" 200 -
+2026-08-24 02:27:14,504 [INFO] controllers.quizController: Question added to quiz 1
+2026-08-24 02:27:14,507 [INFO] werkzeug: 127.0.0.1 - - [24/Aug/2026 02:27:14] "[32mPOST /quizzes/1/questions/create HTTP/1.1[0m" 302 -
+2026-08-24 02:27:14,522 [INFO] werkzeug: 127.0.0.1 - - [24/Aug/2026 02:27:14] "GET /quizzes/1 HTTP/1.1" 200 -
+2026-08-24 02:27:16,345 [INFO] werkzeug: 127.0.0.1 - - [24/Aug/2026 02:27:16] "GET /quizzes/1/questions/create HTTP/1.1" 200 -
+2026-08-24 02:27:46,937 [INFO] controllers.quizController: Question added to quiz 1
+2026-08-24 02:27:46,940 [INFO] werkzeug: 127.0.0.1 - - [24/Aug/2026 02:27:46] "[32mPOST /quizzes/1/questions/create HTTP/1.1[0m" 302 -
+2026-08-24 02:27:46,962 [INFO] werkzeug: 127.0.0.1 - - [24/Aug/2026 02:27:46] "GET /quizzes/1 HTTP/1.1" 200 -
+2026-08-24 02:27:48,640 [INFO] werkzeug: 127.0.0.1 - - [24/Aug/2026 02:27:48] "GET /quizzes/1/questions/create HTTP/1.1" 200 -
+2026-08-24 02:28:29,795 [INFO] controllers.quizController: Question added to quiz 1
+2026-08-24 02:28:29,795 [INFO] werkzeug: 127.0.0.1 - - [24/Aug/2026 02:28:29] "[32mPOST /quizzes/1/questions/create HTTP/1.1[0m" 302 -
+2026-08-24 02:28:29,815 [INFO] werkzeug: 127.0.0.1 - - [24/Aug/2026 02:28:29] "GET /quizzes/1 HTTP/1.1" 200 -
+2026-08-24 02:28:31,871 [INFO] werkzeug: 127.0.0.1 - - [24/Aug/2026 02:28:31] "GET /quizzes/1/questions/create HTTP/1.1" 200 -
+2026-08-24 02:29:03,033 [INFO] controllers.quizController: Question added to quiz 1
+2026-08-24 02:29:03,036 [INFO] werkzeug: 127.0.0.1 - - [24/Aug/2026 02:29:03] "[32mPOST /quizzes/1/questions/create HTTP/1.1[0m" 302 -
+2026-08-24 02:29:03,057 [INFO] werkzeug: 127.0.0.1 - - [24/Aug/2026 02:29:03] "GET /quizzes/1 HTTP/1.1" 200 -
+2026-08-24 02:29:06,434 [INFO] werkzeug: 127.0.0.1 - - [24/Aug/2026 02:29:06] "GET /quizzes/1/records HTTP/1.1" 200 -

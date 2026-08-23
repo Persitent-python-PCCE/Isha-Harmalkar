@@ -236,10 +236,17 @@ def listInstructorCourses():
                 ]
             })
 
-        return render_template(
+        """ return render_template(
             "course/instructorCourses.html",
             courses=courses
+        ) """
+
+        return render_template(
+            "course/instructorCourses.html",
+            assignments=assignments
         )
+
+
 
     except Exception as e:
 

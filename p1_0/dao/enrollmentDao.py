@@ -6,7 +6,7 @@ class EnrollmentDao:
     def getEnrollmentById(self, enrollmentId):
         return db.session.get(Enrollment, enrollmentId)
 
-
+    #getEnrollment(self, studentId, courseInstructorId):
     def getByStudentAndCourseInstructor(self, studentId, courseInstructorId):
         return Enrollment.query.filter_by(
             student_id=studentId,
@@ -35,6 +35,7 @@ class EnrollmentDao:
         db.session.delete(enrollment)
         db.session.commit()
 
+    #isStudentEnrolled:
     def enrollmentExists(self, studentId, courseInstructorId):
         return Enrollment.query.filter_by(
             student_id=studentId,

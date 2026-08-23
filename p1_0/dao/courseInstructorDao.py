@@ -14,13 +14,14 @@ class CourseInstructorDao:
             instructor_id=instructorId
         ).first()
 
-
+    #   getCourseInstructorsByCourse(self, courseId):
     def getInstructorsByCourseId(self, courseId):
         return CourseInstructor.query.filter_by(
             course_id=courseId
         ).order_by(CourseInstructor.id).all()
 
 
+    #   getCourseInstructorsByInstructor(self, instructorId):
     def getCoursesByInstructorId(self, instructorId):
         return CourseInstructor.query.filter_by(
             instructor_id=instructorId
