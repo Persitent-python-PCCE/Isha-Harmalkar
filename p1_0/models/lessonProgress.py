@@ -13,14 +13,15 @@ class LessonProgress(db.Model):
 
     enrollment_id = db.Column(
         db.Integer,
-        db.ForeignKey("enrollments.id"),
+        db.ForeignKey("enrollments.id",
+                      ondelete="CASCADE"),
         nullable=False,
         index=True
     )
 
     lesson_id = db.Column(
         db.Integer,
-        db.ForeignKey("lessons.id"),
+        db.ForeignKey("lessons.id", ondelete="CASCADE"),
         nullable=False,
         index=True
     )

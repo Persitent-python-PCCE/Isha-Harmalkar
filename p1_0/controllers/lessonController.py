@@ -65,7 +65,7 @@ def getLesson(lessonId):
 
 
 
-@lessonBp.route("/modules/<int:moduleId>/lessons", methods=["POST"])
+@lessonBp.route("/modules/<int:moduleId>/lessons/create", methods=["POST"])
 @roleRequired("admin")
 def createLesson(moduleId):
     form = LessonForm()
@@ -118,13 +118,26 @@ def createLesson(moduleId):
     return render_template("lessonForm.html", form=form, moduleId=moduleId)
 
 
-@lessonBp.route("/lessons/<int:lessonId>/update", methods=["POST"])
+@lessonBp.route("/lessons/<int:lessonId>/update", methods=["GET", "POST"])
 @roleRequired("admin")
 def updateLesson(lessonId):
     form = LessonUpdateForm()
 
-    if form.validate_on_submit():
-        try:
+   
+    try:
+        existingLesson = lessonService.getLessonById(lessonId)
+        moduleId = existingLesson.module_id
+        if request.method == "GET":
+            form.lessonName.data = getattr(
+                existingLesson,
+                "lessonName",
+                getattr(existingLesson, "lesson_name", "")
+            )
+
+            form.content.data  = existingLesson.content
+
+        if form.validate_on_submit():
+        
             lesson = lessonService.updateLesson(
                 lessonId,
                 lessonName=form.lessonName.data,
@@ -142,34 +155,42 @@ def updateLesson(lessonId):
             flash("Lesson updated successfully", "success")
             return redirect(url_for("lesson.getLesson", lessonId=lesson.id))
 
+        if request.method == "POST" and wantsJson():
+            return jsonify({
+                "success": False,
+                "errors": form.errors
+            }), 400
 
-        except ValueError as ve:
-            logger.warning("Lesson update validation failed for id %s", lessonId)
-            if wantsJson():
-                return jsonify({
-                    "success": False,
-                    "message": str(ve)
-                }), 400
+        return render_template(
+            "lessonForm.html",
 
-            flash(str(ve), "danger")
+            form=form,
+            moduleId=moduleId
+        )
 
-        except Exception as e:
-            logger.warning("Unexpected error occurred during lesson update for %s", lessonId)
-            if wantsJson():
-                return jsonify({
-                    "success": False,
-                    "message": str(e)
-                }), 400
+    except ValueError as ve:
+        logger.warning("Lesson update validation failed for id %s", lessonId)
+        if wantsJson():
+            return jsonify({
+                "success": False,
+                "message": str(ve)
+            }), 400
 
-            flash("An unexpected error occurred during update", "danger")
+        flash(str(ve), "danger")
+        return redirect(url_for("course.listCourses"))
 
-    if request.method == "POST" and wantsJson():
-        return jsonify({
-            "success": False,
-            "errors": form.errors
-        }), 400
+    except Exception as e:
+        logger.warning("Unexpected error occurred during lesson update for %s", lessonId)
+        if wantsJson():
+            return jsonify({
+                "success": False,
+                "message": str(e)
+            }), 400
 
-    return render_template("lessonForm.html", form=form)
+        flash("An unexpected error occurred during update", "danger")
+
+
+        return redirect(url_for("course.listCourses"))
 
 @lessonBp.route("/lessons/<int:lessonId>/delete", methods=["POST"])
 @roleRequired("admin")
@@ -191,7 +212,7 @@ def deleteLesson(lessonId):
 
 
     except ValueError as ve:
-        logger.warning("Lesson deletion failed for id %s", lessonId)
+        logger.warning("Lesson deletion failed for id %s: error: %s", lessonId, str(ve))
         if wantsJson():
             return jsonify({
                 "success": False,
@@ -203,7 +224,7 @@ def deleteLesson(lessonId):
         flash(str(ve), "danger")
 
     except Exception as e:
-        logger.warning("Unexpeccted error during lesson deletion for id: ", lessonId)
+        logger.exception("Unexpected error during lesson deletion for id: %s with error: %s ", lessonId, str(e))
         if wantsJson():
             return jsonify({
                 "success": False,

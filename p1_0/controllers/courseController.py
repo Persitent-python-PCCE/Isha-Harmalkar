@@ -75,7 +75,7 @@ def getCourse(courseId):
 
 
     except Exception as e:
-        logger.exception("Unexpected error fetching course %s", courseId)
+        logger.exception("Unexpected error fetching course %s: error: %s", courseId, str(e))
         if wantsJson():
             return jsonify({
                 "success": False,

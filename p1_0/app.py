@@ -3,7 +3,7 @@ import os
 import logging
 from dotenv import load_dotenv
 from flask import Flask
-from flask_jwt_extended import JWTManager
+from flask_jwt_extended import JWTManager, verify_jwt_in_request, get_jwt, get_jwt_identity
 from config.database import init_db, db
 from models import (
     Role, User, Course, CourseInstructor, Enrollment,
@@ -31,6 +31,35 @@ app.config['JWT_COOKIE_CSRF_PROTECT'] = False
 app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(days=1)
 
 jwt = JWTManager(app)
+
+@app.context_processor
+def injectCurrentUser():
+    try:
+        verify_jwt_in_request(optional=True)
+        identity = get_jwt_identity()
+        claims = get_jwt()
+
+        if identity:
+            return {
+                'currentUser': {
+                    'isAuthenticated': True,
+                    'identity': identity,
+                    'role': claims.get('role', '').lower()
+
+                }
+            }
+
+    except Exception:
+        logger.exception("Exception in injecting current user")
+
+    return {
+        'currentUser': {
+            'isAuthenticated': False,
+            'identity': None,
+            'role': None
+        }
+    }
+
 app.config['WTF_CSRF_ENABLED'] = False
 init_db(app)
 

@@ -30,10 +30,10 @@ def listModules(courseId):
             "modules": [module.toDict() for module in modules]
         })
 
-    return render_template("module_list.html", modules=modules, courseId=courseId)
+    return render_template("moduleList.html", modules=modules, courseId=courseId)
 
 
-@moduleBp.route("/courses/<int:courseId>/modules", methods=["GET","POST"])
+@moduleBp.route("/courses/<int:courseId>/modules/create", methods=["GET","POST"])
 @roleRequired("admin")
 def createModule(courseId):
     form = ModuleForm()
@@ -89,6 +89,18 @@ def createModule(courseId):
 def updateModule(moduleId):
     form = ModuleUpdateForm()
 
+    try:
+        existingModule = moduleService.getModuleById(moduleId)
+        courseId = getattr(existingModule, "courseId", getattr(existingModule, "course_id", None))
+    except Exception as e:
+        flash("Module not found", "danger")
+        return redirect(url_for("course.listCourses"))
+
+    if request.method == "GET":
+        form.moduleName.data = getattr(existingModule, "moduleName", getattr(existingModule, "module_name", ""))
+        form.description.data = existingModule.description
+        
+
     if form.validate_on_submit():
         try:
             module = moduleService.updateModule(
@@ -132,15 +144,16 @@ def updateModule(moduleId):
             "errors": form.errors
         }), 400
 
-    return render_template("moduleForm.html", form=form)
+    return render_template("moduleForm.html", form=form, courseId=courseId)
 
 
 @moduleBp.route("/modules/<int:moduleId>/delete", methods=["POST"])
 @roleRequired("admin")
 def deleteModule(moduleId):
+    courseId = None
     try:
         module = moduleService.getModuleById(moduleId)
-        courseId = module.course_id
+        courseId = getattr(module, "courseId", getattr(module, "course_id", None))
         moduleService.deleteModule(moduleId)
         logger.info("Module deleted successfully: %s", moduleId)
 
@@ -172,4 +185,6 @@ def deleteModule(moduleId):
 
         flash("An unexpected error occured", "danger")
 
+    if courseId:
+        return redirect(url_for("module.listModules", courseId=courseId))
     return redirect(url_for("course.listCourses"))

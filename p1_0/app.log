@@ -1,44 +1,17 @@
-2026-08-23 16:48:33,658 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 16:48:33] "GET /register HTTP/1.1" 200 -
-2026-08-23 16:49:20,350 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 16:49:20] "POST /register HTTP/1.1" 200 -
-2026-08-23 16:53:59,375 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 16:53:59] "POST /register HTTP/1.1" 200 -
-2026-08-23 16:54:10,764 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 16:54:10] "POST /register HTTP/1.1" 200 -
-2026-08-23 16:55:00,864 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 16:55:00] "POST /register HTTP/1.1" 200 -
-2026-08-23 16:55:08,921 [WARNING] controllers.authController: registration validation failed for user13@example.com
-2026-08-23 16:55:08,923 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 16:55:08] "POST /register HTTP/1.1" 200 -
-2026-08-23 16:55:36,448 [INFO] controllers.authController: User registered successfully: user14@example.com
-2026-08-23 16:55:36,450 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 16:55:36] "[32mPOST /register HTTP/1.1[0m" 302 -
-2026-08-23 16:55:36,508 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 16:55:36] "GET /login HTTP/1.1" 200 -
-2026-08-23 16:55:42,831 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 16:55:42] "[32mPOST /login HTTP/1.1[0m" 302 -
-2026-08-23 16:55:42,835 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 16:55:42] "[35m[1mGET /student/dashboard HTTP/1.1[0m" 500 -
-2026-08-23 16:59:19,652 [INFO] werkzeug:  * Detected change in 'E:\\projects\\LearningThings\\psl_python\\day_3\\problems\\p1_0\\controllers\\courseController.py', reloading
-2026-08-23 16:59:19,963 [INFO] werkzeug:  * Restarting with stat
-2026-08-23 17:08:29,069 [INFO] __main__: Flask appplication initialed successfully
-2026-08-23 17:08:29,108 [INFO] werkzeug: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
- * Running on http://127.0.0.1:5000
-2026-08-23 17:08:29,108 [INFO] werkzeug: [33mPress CTRL+C to quit[0m
-2026-08-23 17:08:29,108 [INFO] werkzeug:  * Restarting with stat
-2026-08-23 17:08:30,430 [INFO] __main__: Flask appplication initialed successfully
-2026-08-23 17:08:30,481 [WARNING] werkzeug:  * Debugger is active!
-2026-08-23 17:08:30,490 [INFO] werkzeug:  * Debugger PIN: 258-857-572
-2026-08-23 17:08:30,584 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 17:08:30] "GET /login HTTP/1.1" 200 -
-2026-08-23 17:09:13,630 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 17:09:13] "[32mPOST /login HTTP/1.1[0m" 302 -
-2026-08-23 17:09:13,648 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 17:09:13] "[35m[1mGET /admin/dashboard HTTP/1.1[0m" 500 -
-2026-08-23 17:10:39,681 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 17:10:39] "[35m[1mGET /admin/dashboard HTTP/1.1[0m" 500 -
-2026-08-23 17:10:41,096 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 17:10:41] "[35m[1mGET /admin/dashboard HTTP/1.1[0m" 500 -
-2026-08-23 17:41:33,180 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 17:41:33] "GET /courses HTTP/1.1" 200 -
-2026-08-23 17:41:39,164 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 17:41:39] "GET /courses/create HTTP/1.1" 200 -
-2026-08-23 17:41:58,734 [INFO] controllers.courseController: Course created successfully: Python Advance
-2026-08-23 17:41:58,750 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 17:41:58] "[32mPOST /courses/create HTTP/1.1[0m" 302 -
-2026-08-23 17:41:59,033 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 17:41:59] "GET /courses HTTP/1.1" 200 -
-2026-08-23 17:42:02,981 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 17:42:02] "GET /courses/10 HTTP/1.1" 200 -
-2026-08-23 17:42:06,302 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 17:42:06] "GET /courses/10/update HTTP/1.1" 200 -
-2026-08-23 17:42:11,178 [INFO] controllers.courseController: Course updated successfully: Python Advance 101
-2026-08-23 17:42:11,181 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 17:42:11] "[32mPOST /courses/10/update HTTP/1.1[0m" 302 -
-2026-08-23 17:42:11,473 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 17:42:11] "GET /courses/10 HTTP/1.1" 200 -
-2026-08-23 17:42:13,016 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 17:42:13] "GET /courses/10/update HTTP/1.1" 200 -
-2026-08-23 17:42:16,969 [INFO] controllers.courseController: Course updated successfully: Python Advance 101
-2026-08-23 17:42:16,969 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 17:42:16] "[32mPOST /courses/10/update HTTP/1.1[0m" 302 -
-2026-08-23 17:42:17,000 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 17:42:17] "GET /courses/10 HTTP/1.1" 200 -
-2026-08-23 17:42:21,922 [INFO] controllers.courseController: Course delted successfully: 10
-2026-08-23 17:42:21,924 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 17:42:21] "[32mPOST /courses/10/delete HTTP/1.1[0m" 302 -
-2026-08-23 17:42:21,939 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 17:42:21] "GET /courses HTTP/1.1" 200 -
+2026-08-23 19:25:47,918 [INFO] werkzeug:  * Detected change in 'E:\\projects\\LearningThings\\psl_python\\day_3\\problems\\p1_0\\models\\lessonProgress.py', reloading
+2026-08-23 19:25:48,248 [INFO] werkzeug:  * Restarting with stat
+2026-08-23 19:25:49,624 [INFO] __main__: Flask appplication initialed successfully
+2026-08-23 19:25:49,658 [WARNING] werkzeug:  * Debugger is active!
+2026-08-23 19:25:49,658 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-23 19:26:11,624 [INFO] werkzeug:  * Detected change in 'E:\\projects\\LearningThings\\psl_python\\day_3\\problems\\p1_0\\models\\lessonProgress.py', reloading
+2026-08-23 19:26:11,972 [INFO] werkzeug:  * Restarting with stat
+2026-08-23 19:26:13,274 [INFO] __main__: Flask appplication initialed successfully
+2026-08-23 19:26:13,350 [WARNING] werkzeug:  * Debugger is active!
+2026-08-23 19:26:13,360 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-23 19:26:36,574 [INFO] werkzeug:  * Detected change in 'E:\\projects\\LearningThings\\psl_python\\day_3\\problems\\p1_0\\models\\lessonProgress.py', reloading
+2026-08-23 19:26:36,990 [INFO] werkzeug:  * Restarting with stat
+2026-08-23 19:26:38,217 [INFO] __main__: Flask appplication initialed successfully
+2026-08-23 19:26:38,270 [WARNING] werkzeug:  * Debugger is active!
+2026-08-23 19:26:38,277 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-23 19:27:01,130 [INFO] app: Flask appplication initialed successfully
+2026-08-23 19:28:57,221 [INFO] app: Flask appplication initialed successfully
