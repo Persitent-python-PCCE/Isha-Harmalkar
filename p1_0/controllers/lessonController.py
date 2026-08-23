@@ -8,15 +8,23 @@ from flask import(
     flash
 )
 
+from dao.enrollmentDao import EnrollmentDao
+from dao.lessonProgressDao import LessonProgressDao
+from dao.moduleDao import ModuleDao
 from forms.lessonForms import LessonForm, LessonUpdateForm
 from dao.lessonDao import LessonDao
+from services.lessonProgressService import LessonProgressService
 from services.lessonService import LessonService
 from config.auth import roleRequired, wantsJson, loginRequired
 
 logger = logging.getLogger(__name__)
 lessonBp = Blueprint("lesson", __name__)
 lessonDao = LessonDao()
-lessonService = LessonService(lessonDao)
+enrollmentDao = EnrollmentDao()
+lessonProgressDao = LessonProgressDao()
+moduleDao = ModuleDao()
+lessonService = LessonService(lessonDao=lessonDao, enrollmentDao=enrollmentDao, moduleDao=moduleDao)
+lessonProgressService = LessonProgressService(lessonProgressDao=lessonProgressDao, enrollmentDao=enrollmentDao)
 
 
 @lessonBp.route("/modules/<int:moduleId>/lessons", methods=["GET"])
@@ -65,7 +73,7 @@ def getLesson(lessonId):
 
 
 
-@lessonBp.route("/modules/<int:moduleId>/lessons/create", methods=["POST"])
+@lessonBp.route("/modules/<int:moduleId>/lessons/create", methods=["GET", "POST"])
 @roleRequired("admin")
 def createLesson(moduleId):
     form = LessonForm()
@@ -242,5 +250,142 @@ def deleteLesson(lessonId):
 
 
         
+@lessonBp.route(
+    "/enrollments/<int:enrollmentId>/lessons/<int:lessonId>",
+    methods=["GET"]
+)
+@roleRequired("student")
+def getEnrolledLesson(enrollmentId, lessonId):
 
-    
+    try:
+        lesson = lessonService.getLessonByEnrollment(
+            enrollmentId,
+            lessonId
+        )
+
+        progress = lessonProgressService.getProgressForLesson(
+            enrollmentId,
+            lessonId
+        )
+
+        if wantsJson():
+            return jsonify({
+                "success": True,
+                "lesson": lesson.toDict(),
+                "progress": progress.toDict() if progress else None
+            })
+
+        return render_template(
+            "lesson/lesson.html",
+            lesson=lesson,
+            enrollmentId=enrollmentId,
+            progress=progress
+        )
+
+    except ValueError as ve:
+        logger.warning(
+            "Lesson %s cannot be accessed through enrollment %s: %s",
+            lessonId,
+            enrollmentId,
+            str(ve)
+        )
+         
+        if wantsJson():
+            return jsonify({
+                "success": False,
+                "message": str(ve)
+            }), 404
+
+        flash(str(ve), "danger")
+
+        return redirect(
+            url_for("enrollment.listMyEnrollments")
+        )
+
+    except Exception:
+        logger.exception(
+            "Error loading lesson %s for enrollment %s",
+            lessonId,
+            enrollmentId
+        )
+
+        if wantsJson():
+            return jsonify({
+                "success": False,
+                "message": "Could not load lesson"
+            }), 400
+
+        flash("Could not load lesson", "danger")
+
+        return redirect(
+            url_for("enrollment.listMyEnrollments")
+        )
+
+
+@lessonBp.route(
+    "/enrollments/<int:enrollmentId>/modules/<int:moduleId>/lessons",
+    methods=["GET"]
+)
+@roleRequired("student")
+def listEnrolledLessons(enrollmentId, moduleId):
+
+    try:
+        lessons = lessonService.getLessonsByEnrollmentAndModule(
+            enrollmentId,
+            moduleId
+        )
+
+        if wantsJson():
+            return jsonify({
+                "success": True,
+                "lessons": [
+                    lesson.toDict()
+                    for lesson in lessons
+                ]
+            })
+
+        return render_template(
+            "lesson/lessonList.html",
+            lessons=lessons,
+            moduleId=moduleId,
+            enrollmentId=enrollmentId
+        )
+
+    except ValueError as ve:
+
+        logger.warning(
+            "Could not load lessons for enrollment %s, module %s: %s",
+            enrollmentId,
+            moduleId,
+            str(ve)
+        )
+
+        if wantsJson():
+            return jsonify({
+                "success": False,
+                "message": str(ve)
+            }), 404
+
+        flash(str(ve), "danger")
+
+        return redirect(
+            url_for("enrollment.listMyEnrollments")
+        )
+
+    except Exception:
+
+        logger.exception(
+            "Unexpected error loading lessons"
+        )
+
+        if wantsJson():
+            return jsonify({
+                "success": False,
+                "message": "Could not load lessons"
+            }), 400
+
+        flash("Could not load lessons", "danger")
+
+        return redirect(
+            url_for("enrollment.listMyEnrollments")
+        )

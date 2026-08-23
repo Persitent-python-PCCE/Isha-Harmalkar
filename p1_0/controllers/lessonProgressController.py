@@ -12,7 +12,7 @@ from flask import (
 from dao.enrollmentDao import EnrollmentDao
 from dao.lessonProgressDao import LessonProgressDao
 from services.lessonProgressService import LessonProgressService
-from config.auth import wantsJson, loginRequired, roleRequired
+from config.auth import getCurrentUserIdentity, wantsJson, loginRequired, roleRequired
 
 
 logger = logging.getLogger(__name__)
@@ -34,9 +34,11 @@ def getProgress(enrollmentId):
                 "progress": [record.toDict() for record in records]
             })
 
-        return jsonify({
-            "progress": [record.toDict() for record in records]
-        })
+        return render_template(
+            "lessonProgress/progress.html",
+            enrollmentId=enrollmentId,
+            records=records
+        )
 
     except Exception as e:
         logger.exception("Unexpected error fetching progress for enrollment %s", enrollmentId)
@@ -57,39 +59,107 @@ def getProgress(enrollmentId):
 @roleRequired("student")
 def markLessonComplete(enrollmentId, lessonId):
     try:
-        completed = request.get_json(silent=True) or {}
+        if request.is_json:
+            data = request.get_json(silent=True) or {}
+            completed = data.get("completed", True)
+        else:
+            completed = request.form.get("completed", "true").lower() == "true"
+
+        enrollment = enrollmentDao.getEnrollmentById(enrollmentId)
+        userId = int(getCurrentUserIdentity())
         progress = lessonProgressService.markLessonComplete(
             enrollmentId,
             lessonId,
-            completed=completed.get("completed", True)
+            completed=completed
         )
 
         logger.info(
             "Lesson progress updated: enrollment=%s lesson=%s completed=%s",
             enrollmentId, lessonId, progress.completed
                             )
-        return jsonify({
-            "success": True,
-            "message": "Progress updated",
-            "progress": progress.toDict()
-        })
+
+        if wantsJson():
+            return jsonify({
+                "success": True,
+                "message": "Progress updated",
+                "progress": progress.toDict()
+            })
+
+        flash("Lesson marked as completed", "success")
+        return redirect(
+            url_for(
+                "lesson.getEnrolledLesson",
+                enrollmentId=enrollmentId,
+                lessonId=lessonId
+            )
+        )
 
     except ValueError as ve:
-        logger.warning("Progress update failed for enrollment %s lesson %s",
-                       enrollmentId, lessonId)
+        logger.warning(
+                    "Progress update failed for enrollment %s lesson %s",
+                    enrollmentId,
+                    lessonId
+                )
 
-        return jsonify({
-            "success": False,
-            "message": str(ve)
-        }), 400
+        if wantsJson():
+            return jsonify({
+                "success": False,
+                "message": str(ve)
+            }), 400
+
+        flash(str(ve), "danger")
+
+        return redirect(
+            url_for(
+                "lesson.getEnrolledLesson",
+                enrollmentId=enrollmentId,
+                lessonId=lessonId
+            )
+        )
+    except PermissionError as pe:
+        logger.warning("Progress update attempted  for enrollment %s lesson %s by unauthorized user",
+                        enrollmentId, lessonId)
+
+        if wantsJson():
+
+            return jsonify({
+                "success": False,
+                "message": str(pe)
+            }), 400
+
+        flash("You are not authorized to complete this lesson", "danger")
+        
+        return redirect(
+            url_for(
+                "lesson.getEnrolledLesson",
+                enrollmentId=enrollmentId,
+                lessonId=lessonId
+            )
+        )
+        
 
     except Exception as e:
-        logger.exception("Progress update failed for enrollment %s lesson %s",
-                       enrollmentId, lessonId)
+        logger.exception(
+            "Progress update failed for enrollment %s lesson %s",
+            enrollmentId,
+            lessonId
+        )
 
-        return jsonify({
-            "success": False,
-            "message": str(e)
-        }), 400
-    
-    
+        if wantsJson():
+            return jsonify({
+                "success": False,
+                "message": str(e)
+            }), 400
+
+        flash(
+            "Could not update lesson progress",
+            "danger"
+        )
+
+        return redirect(
+            url_for(
+                "lesson.getEnrolledLesson",
+                enrollmentId=enrollmentId,
+                lessonId=lessonId
+            )
+        )

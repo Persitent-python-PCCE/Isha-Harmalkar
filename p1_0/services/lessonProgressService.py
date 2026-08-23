@@ -1,5 +1,6 @@
 import logging
 
+from config.auth import getCurrentUserIdentity
 from models.lessonProgress import LessonProgress
 
 logger = logging.getLogger(__name__)
@@ -12,7 +13,20 @@ class LessonProgressService:
 
 
     def markLessonComplete(self, enrollmentId, lessonId, completed=True):
-        
+
+        enrollment = self.enrollmentDao.getEnrollmentById(enrollmentId)
+        userId = int(getCurrentUserIdentity())
+        if userId != enrollment.student_id:
+            logger.warning(
+                "Unauthorized lesson completion attempt: User ID %s tried to access Student ID %s's enrollment (Enrollment ID: %s)",
+                userId,
+                enrollment.student_id,
+                enrollment.id
+            )
+                    
+            raise PermissionError("You are not authorized to complete this lesson")
+
+        #add check for lesson belongs to enrolled course
        
         progress = self.lessonProgressDao.getProgressByEnrollmentAndLesson(
             enrollmentId, lessonId
@@ -47,4 +61,8 @@ class LessonProgressService:
         return self.lessonProgressDao.getProgressByEnrollmentId(enrollmentId)
 
 
-    
+    def getProgressForLesson(self, enrollmentId, lessonId):
+        return self.lessonProgressDao.getProgressByEnrollmentAndLesson(
+            enrollmentId,
+            lessonId
+        )

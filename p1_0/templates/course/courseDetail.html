@@ -53,5 +53,87 @@
             </a>
         </div>
     </div>
+
+
+    <div class="mt-4">
+
+    <h4>Course Instructors</h4>
+
+    {% if instructors %}
+
+        <div class="row g-3">
+
+            {% for offering in instructors %}
+
+                <div class="col-md-6">
+
+                    <div class="card shadow-sm">
+
+                        <div class="card-body">
+
+                            <h5 class="card-title">
+                                {{ offering.instructor.name }}
+                            </h5>
+
+                            <p class="text-muted">
+                                Instructor
+                            </p>
+
+                            {% if currentUser.role == "student" %}
+
+                                <form
+                                    method="POST"
+                                    action="{{ url_for(
+                                        'enrollment.enroll',
+                                        courseInstructorId=offering.id
+                                    ) }}"
+                                >
+
+                                    <button
+                                        type="submit"
+                                        class="btn btn-primary"
+                                    >
+                                        Enroll
+                                    </button>
+
+                                </form>
+
+                            {% endif %}
+
+                            {% if currentUser.role == "admin" or currentUser.role == "instructor" %}
+
+                            <a
+                                href="{{ url_for(
+                                    'enrollment.listEnrollmentsForOffering',
+                                    courseInstructorId=offering.id
+                                ) }}"
+                                class="btn btn-outline-primary"
+                            >
+                                View Enrolled Students
+                            </a>
+
+                        {% endif %}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="alert alert-info">
+            No instructors have been assigned to this course yet.
+        </div>
+
+    {% endif %}
+
+</div>
+
+
 </div>
 {% endblock %}

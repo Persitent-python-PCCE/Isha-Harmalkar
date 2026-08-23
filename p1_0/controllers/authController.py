@@ -175,7 +175,7 @@ def login():
         form=form
     )
 
-@authBp.route("/logout")
+@authBp.route("/logout", methods=["POST", "GET"])
 def logout():
     
     if wantsJson():

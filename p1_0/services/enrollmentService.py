@@ -65,6 +65,10 @@ class EnrollmentService:
         return self.enrollmentDao.saveEnrollment(enrollment)
 
 
-    def unenrollStudent(self, enrollmentId):
+    def unenrollStudent(self, enrollmentId, studentId):
         enrollment = self.getEnrolledById(enrollmentId)
+        if enrollment.student_id != studentId:
+            raise PermissionError(
+                "You are not autthorize to unenroll this student"
+            )
         self.enrollmentDao.deleteEnrollment(enrollment)

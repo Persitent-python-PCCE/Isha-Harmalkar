@@ -8,6 +8,7 @@ from flask import(
     request,
     flash
 )
+from dao.enrollmentDao import EnrollmentDao
 from forms.moduleForms import ModuleForm, ModuleUpdateForm
 from dao.moduleDao import ModuleDao
 from models import module
@@ -17,7 +18,8 @@ from config.auth import wantsJson, loginRequired, roleRequired
 logger = logging.getLogger(__name__)
 moduleBp = Blueprint("module", __name__)
 moduleDao = ModuleDao()
-moduleService = ModuleService(moduleDao)
+enrollmentDao = EnrollmentDao()
+moduleService = ModuleService(moduleDao=moduleDao, enrollmentDao=enrollmentDao)
 
 
 @moduleBp.route("/courses/<int:courseId>/modules", methods=["GET"])
@@ -188,3 +190,59 @@ def deleteModule(moduleId):
     if courseId:
         return redirect(url_for("module.listModules", courseId=courseId))
     return redirect(url_for("course.listCourses"))
+
+
+
+
+
+@moduleBp.route(
+    "/enrollments/<int:enrollmentId>/modules",
+    methods=["GET"]
+)
+@roleRequired("student")
+def listEnrolledModules(enrollmentId):
+
+    try:
+        modules = moduleService.getModulesByEnrollmentId(enrollmentId)
+
+        if wantsJson():
+            return jsonify({
+                "success": True,
+                "modules": [module.toDict() for module in modules]
+            })
+
+        return render_template(
+            "module/moduleList.html",
+            modules=modules,
+            enrollmentId=enrollmentId
+        )
+
+    except ValueError as ve:
+        logger.warning(
+            "Could not load modules for enrollment %s",
+            enrollmentId
+        )
+
+        if wantsJson():
+            return jsonify({
+                "success": False,
+                "message": str(ve)
+            }), 404
+
+        flash(str(ve), "danger")
+        return redirect(url_for("enrollment.listMyEnrollments"))
+
+    except Exception:
+        logger.exception(
+            "Unexpected error loading modules for enrollment %s",
+            enrollmentId
+        )
+
+        if wantsJson():
+            return jsonify({
+                "success": False,
+                "message": "Could not load course modules"
+            }), 400
+
+        flash("Could not load course modules", "danger")
+        return redirect(url_for("enrollment.listMyEnrollments"))

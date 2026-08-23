@@ -58,7 +58,8 @@ def getCourse(courseId):
 
         return render_template(
             "course/courseDetail.html",
-            course=course
+            course=course,
+            instructors=course.instructors
         )
 
     except ValueError as ve:

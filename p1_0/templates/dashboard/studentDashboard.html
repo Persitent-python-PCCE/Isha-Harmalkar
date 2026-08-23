@@ -34,17 +34,15 @@
                     </h5>
 
                     <p class="text-muted small">
-                        View the courses you are enrolled in.
+                        View the courses you are currently enrolled in.
                     </p>
 
-                    <!-- We'll connect this to Enrollment later -->
-                    <button
-                        type="button"
+                    <a
+                        href="{{ url_for('enrollment.listMyEnrollments') }}"
                         class="btn btn-primary btn-sm"
-                        disabled
                     >
                         My Courses
-                    </button>
+                    </a>
 
                 </div>
 
@@ -97,7 +95,8 @@
                         Track completed lessons and course progress.
                     </p>
 
-                    <!-- We'll connect this later -->
+                    <!-- Progress UI will be connected
+                         after enrollment flow is complete -->
                     <button
                         type="button"
                         class="btn btn-outline-primary btn-sm"
@@ -128,7 +127,8 @@
                         Continue from where you last stopped.
                     </p>
 
-                    <!-- We'll connect this later -->
+                    <!-- Continue Learning will be connected
+                         after lesson progress UI is complete -->
                     <button
                         type="button"
                         class="btn btn-outline-primary btn-sm"

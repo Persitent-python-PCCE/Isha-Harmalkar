@@ -34,9 +34,10 @@ def listMyEnrollments():
             "enrollments": [enrollment.toDict() for enrollment in enrollments]
         })
 
-    return jsonify({
-        "enrollments": [enrollment.toDict() for enrollment in enrollments]
-    })
+    return render_template(
+        "enrollment/myEnrollments.html",
+        enrollments=enrollments
+    )
 
 
 
@@ -100,9 +101,11 @@ def listEnrollmentsForOffering(courseInstructorId):
             
             })
 
-        return jsonify({
-            "enrollments": [enrollment.toDict() for enrollment in enrollments]
-        })
+        return render_template(
+            "enrollment/offeringEnrollments.html",
+            enrollments=enrollments,
+            courseInstructorId=courseInstructorId
+        )
     except PermissionError as pe:
         logger.warning("Unauthorized access attempete by user on enrollments %s", pe)
         if wantsJson():
@@ -124,7 +127,7 @@ def listEnrollmentsForOffering(courseInstructorId):
         flash(str(ve), "danger")
         return redirect(url_for("course.listCourses"))
     except Exception as e:
-        logger.warning("An exception occured when trying to get enrollments for a CI")
+        logger.exception("An exception occured when trying to get enrollments for a CI with error %s", str(e))
         if wantsJson():
             return jsonify({
                 "success": False,
@@ -141,7 +144,10 @@ def listEnrollmentsForOffering(courseInstructorId):
 @roleRequired("student")
 def unenroll(enrollmentId):
     try:
-        enrollmentService.unenrollStudent(enrollmentId)
+        studentId = int(getCurrentUserIdentity())
+        
+        enrollmentService.unenrollStudent(enrollmentId=enrollmentId, studentId=studentId)
+
         logger.info("Enrollment %s removed", enrollmentId)
 
         if wantsJson():
@@ -161,7 +167,15 @@ def unenroll(enrollmentId):
             }), 404
 
         flash(str(ve), "danger")
+    except PermissionError as pe:
+        logger.warning("Unenroll failed for id %s due to unauthoried permission", enrollmentId)
+        if wantsJson():
+            return jsonify({
+                "success": False,
+                "message": str(ve)
+            }), 404
 
+        flash("You are not authorized to unenroll this student", "danger")
     except Exception as e:
         logger.exception("Unexpected error unenrolling %s", enrollmentId)
         if wantsJson():
@@ -173,3 +187,69 @@ def unenroll(enrollmentId):
         flash("An unexpected error occurred", "danger")
 
     return redirect(url_for("enrollment.listMyEnrollments"))
+
+
+
+
+@enrollmentBp.route(
+    "/enrollments/<int:enrollmentId>/learn",
+    methods=["GET"]
+)
+@roleRequired("student")
+def learning(enrollmentId):
+
+    try:
+        studentId = int(getCurrentUserIdentity())
+
+        enrollment = enrollmentService.getEnrolledById(enrollmentId)
+
+        if enrollment.student_id != studentId:
+            raise PermissionError(
+                "You are not authorized to access this enrollment"
+            )
+
+        courseInstructor = enrollment.course_instructor
+
+        course = courseInstructor.course
+
+        modules = course.modules
+
+        return render_template(
+            "enrollment/learning.html",
+            enrollment=enrollment,
+            course=course,
+            courseInstructor=courseInstructor,
+            modules=modules
+        )
+
+    except PermissionError as pe:
+
+        flash(str(pe), "danger")
+
+        return redirect(
+            url_for("enrollment.listMyEnrollments")
+        )
+
+    except ValueError as ve:
+
+        flash(str(ve), "danger")
+
+        return redirect(
+            url_for("enrollment.listMyEnrollments")
+        )
+
+    except Exception:
+
+        logger.exception(
+            "Unexpected error opening enrollment %s",
+            enrollmentId
+        )
+
+        flash(
+            "Could not open this course",
+            "danger"
+        )
+
+        return redirect(
+            url_for("enrollment.listMyEnrollments")
+        )

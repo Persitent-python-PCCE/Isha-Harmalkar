@@ -13,7 +13,7 @@ from dao.courseInstructorDao import CourseInstructorDao
 from dao.courseDao import CourseDao
 from dao.userDao import UserDao
 from services.courseInstructorService import CourseInstructorService
-from config.auth import wantsJson, loginRequired, roleRequired
+from config.auth import getCurrentUserIdentity, wantsJson, loginRequired, roleRequired
 
 logger = logging.getLogger(__name__)
 courseInstructorBp = Blueprint("courseInstructor", __name__)
@@ -205,3 +205,60 @@ def removeInstructors(courseInstructorId):
         return redirect(url_for("course.listCourses"))
 
 
+@courseInstructorBp.route(
+    "/instructor/courses",
+    methods=["GET"]
+)
+@roleRequired("instructor")
+def listInstructorCourses():
+
+    try:
+
+        instructorId = int(getCurrentUserIdentity())
+
+        assignments = (
+            courseInstructorService
+            .getCoursesByInstructorId(instructorId)
+        )
+
+        courses = [
+            assignment.course
+            for assignment in assignments
+        ]
+
+        if wantsJson():
+
+            return jsonify({
+                "success": True,
+                "courses": [
+                    course.toDict()
+                    for course in courses
+                ]
+            })
+
+        return render_template(
+            "course/instructorCourses.html",
+            courses=courses
+        )
+
+    except Exception as e:
+
+        logger.exception(
+            "Unexpected error fetching courses for instructor"
+        )
+
+        if wantsJson():
+
+            return jsonify({
+                "success": False,
+                "message": str(e)
+            }), 400
+
+        flash(
+            "Unable to load your courses",
+            "danger"
+        )
+
+        return redirect(
+            url_for("instructor.dashboard")
+        )

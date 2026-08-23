@@ -109,24 +109,36 @@
                                     </td>
 
 
-                                    <td class="fw-semibold">
+                                   <td class="fw-semibold">
+
+                                    {% if currentUser.role == 'student' %}
 
                                         <a
-                                            href="{{
-                                                url_for(
-                                                    'lesson.getLesson',
-                                                    lessonId=lesson.id
-                                                )
-                                            }}"
+                                            href="{{ url_for(
+                                                'lesson.getEnrolledLesson',
+                                                enrollmentId=enrollmentId,
+                                                lessonId=lesson.id
+                                            ) }}"
                                             class="text-decoration-none"
                                         >
-                                            {{
-                                                lesson.lessonName
-                                                or lesson.lesson_name
-                                            }}
+                                            {{ lesson.lessonName or lesson.lesson_name }}
                                         </a>
 
-                                    </td>
+                                    {% else %}
+
+                                        <a
+                                            href="{{ url_for(
+                                                'lesson.getLesson',
+                                                lessonId=lesson.id
+                                            ) }}"
+                                            class="text-decoration-none"
+                                        >
+                                            {{ lesson.lessonName or lesson.lesson_name }}
+                                        </a>
+
+                                    {% endif %}
+
+                                </td>
 
 
                                     <td class="text-secondary small">
@@ -148,18 +160,32 @@
 
                                     <td class="text-end pe-3">
 
+                                    {% if currentUser.role == 'student' %}
+
                                         <a
-                                            href="{{
-                                                url_for(
-                                                    'lesson.getLesson',
-                                                    lessonId=lesson.id
-                                                )
-                                            }}"
+                                            href="{{ url_for(
+                                                'lesson.getEnrolledLesson',
+                                                enrollmentId=enrollmentId,
+                                                lessonId=lesson.id
+                                            ) }}"
                                             class="btn btn-outline-secondary btn-sm me-1"
                                         >
                                             View
                                         </a>
 
+                                    {% else %}
+
+                                        <a
+                                            href="{{ url_for(
+                                                'lesson.getLesson',
+                                                lessonId=lesson.id
+                                            ) }}"
+                                            class="btn btn-outline-secondary btn-sm me-1"
+                                        >
+                                            View
+                                        </a>
+
+                                    {% endif %}
 
                                         {% if currentUser.role == 'admin' %}
 

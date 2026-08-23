@@ -6,8 +6,9 @@ logger = logging.getLogger(__name__)
 
 class ModuleService:
 
-    def __init__(self, moduleDao):
+    def __init__(self, moduleDao, enrollmentDao):
         self.moduleDao = moduleDao
+        self.enrollmentDao = enrollmentDao
 
 
 
@@ -53,4 +54,14 @@ class ModuleService:
     def deleteModule(self, moduleId):
         module = self.getModuleById(moduleId)
         self.moduleDao.deleteModule(module)
-        
+
+
+    def getModulesByEnrollmentId(self, enrollmentId):
+        enrollment = self.enrollmentDao.getEnrollmentById(enrollmentId)
+
+        if not enrollment:
+            raise ValueError("Enrollment not found")
+
+        courseId = enrollment.course_instructor.course_id
+
+        return self.moduleDao.getModulesByCourseId(courseId)

@@ -36,22 +36,36 @@ def listMaterials(lessonId):
             "materials": [material.toDict() for material in materials]
         })
 
-    return render_template("materialList.html", materials=materials, lessonId=lessonId)
+    return render_template("material/materialList.html", materials=materials, lessonId=lessonId)
 
 
-@materialBp.route("/lessons/<int:lessonId>/materials", methods=["POST"])
+@materialBp.route("/lessons/<int:lessonId>/materials/upload", methods=["GET", "POST"])
 @roleRequired("instructor")
 def uploadMaterial(lessonId):
+   
+  
+    lesson = lessonDao.getLessonById(lessonId)
+    if not lesson:
+        if wantsJson():
+            return jsonify({"success": False, "message": "Lesson not found"}), 404
+        flash("Lesson not found", "danger")
+        return redirect(url_for("course.listCourses"))
+
+
+
+    courseId = lesson.module.course_id
+    userId = getCurrentUserIdentity()
+    courseInstructor = courseInstructorDao.getByCourseAndInstructor(courseId, userId)
+    if not courseInstructor:
+        if wantsJson():
+                return jsonify({"success": False, "message": "You are not assigned to teach this course"}), 403
+        flash("You are not assigned to teach this course", "danger")
+        return redirect(url_for("course.listCourses"))
+        
     form = MaterialForm()
     if form.validate_on_submit():
         try:
-            lesson = lessonDao.getLessonById(lessonId)
-            courseId = lesson.module.course_id
-            userId = getCurrentUserIdentity()
-            courseInstructor = courseInstructorDao.getByCourseAndInstructor(courseId, userId)
-            if not courseInstructor:
-                raise ValueError("You are not assigned to teach this course")
-            
+
             courseInstructorId = courseInstructor.id
             material = materialService.uploadMaterial(
                 lessonId,
@@ -97,7 +111,7 @@ def uploadMaterial(lessonId):
             "errors": form.errors
         }), 400
 
-    return render_template("materialForm.html", form=form, lessonId=lessonId)
+    return render_template("material/materialForm.html", form=form, lessonId=lessonId, lesson=lesson)
 
 
 

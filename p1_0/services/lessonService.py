@@ -6,8 +6,10 @@ logger = logging.getLogger(__name__)
 
 class LessonService:
 
-    def __init__(self, lessonDao):
+    def __init__(self, lessonDao, enrollmentDao, moduleDao):
         self.lessonDao = lessonDao
+        self.enrollmentDao = enrollmentDao
+        self.moduleDao = moduleDao
 
 
 
@@ -55,3 +57,58 @@ class LessonService:
     def deleteLesson(self, lessonId):
         lesson = self.getLessonById(lessonId)
         self.lessonDao.deleteLesson(lesson)
+
+
+
+    def getLessonsByEnrollmentAndModule(self, enrollmentId, moduleId):
+
+        enrollment = self.enrollmentDao.getEnrollmentById(enrollmentId)
+
+        if not enrollment:
+            raise ValueError("Enrollment not found")
+
+        courseId = enrollment.course_instructor.course_id
+
+        module = self.moduleDao.getModuleById(moduleId)
+
+        if not module:
+            raise ValueError("Module not found")
+
+       
+
+
+        if module.course_id != courseId:
+            raise ValueError(
+                "This module does not belong to your enrolled course"
+            )
+
+        return self.lessonDao.getLessonByModuleId(moduleId)
+
+
+
+    def getLessonByEnrollment(self,enrollmentId, lessonId):
+
+        enrollment = self.enrollmentDao.getEnrollmentById(
+            enrollmentId
+        )
+
+        if not enrollment:
+            raise ValueError("Enrollment not found")
+
+        lesson = self.lessonDao.getLessonById(
+            lessonId
+        )
+
+        if not lesson:
+            raise ValueError("Lesson not found")
+
+        courseId = enrollment.course_instructor.course_id
+
+        lessonCourseId = lesson.module.course_id
+
+        if lessonCourseId != courseId:
+            raise ValueError(
+                "This lesson does not belong to your enrolled course"
+            )
+
+        return lesson

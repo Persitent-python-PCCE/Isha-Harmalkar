@@ -43,16 +43,37 @@
                                 </td>
                                 <td class="text-end pe-3">
                                     <!-- Direct link pointing to lessons inside this module -->
-                                    <a href="{{
-                                            url_for(
+                                   
+
+
+                                    {% if currentUser.role == 'student' %}
+
+                                        <a
+                                            href="{{ url_for(
+                                                'lesson.listEnrolledLessons',
+                                                enrollmentId=enrollmentId,
+                                                moduleId=module.id
+                                            ) }}"
+                                            class="btn btn-outline-info btn-sm me-1"
+                                        >
+                                            Lessons
+                                        </a>
+
+                                    {% else %}
+
+                                        <a
+                                            href="{{ url_for(
                                                 'lesson.listLessons',
                                                 moduleId=module.id
-                                            )
-                                        }}"
-                                        class="btn btn-outline-info btn-sm me-1"
-                                    >
-                                        Lessons
-                                    </a>
+                                            ) }}"
+                                            class="btn btn-outline-info btn-sm me-1"
+                                        >
+                                            Lessons
+                                        </a>
+
+                                    {% endif %}
+
+                                   
                                     {% if currentUser.role == 'admin' %}
                                     <a href="{{ url_for('module.updateModule', moduleId=module.id) }}" class="btn btn-outline-primary btn-sm me-1">Edit</a>
                                     
