@@ -35,6 +35,8 @@ class CourseService:
     def updateCourse(self, courseId, courseName=None, description=None):
         course = self.getCourseById(courseId)
 
+        #if not course.name.strip() 
+
         if courseName and courseName != course.course_name:
             if self.courseDao.courseExistsByName(courseName):
                 raise ValueError("A course with this name already exists")

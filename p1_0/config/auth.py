@@ -7,11 +7,12 @@ def loginRequired(viewFunction):
     def wrappedView(*args, **kwargs):
         try:
             verify_jwt_in_request()
-        except Exception:
+        except Exception as e:
             if wantsJson():
                 return jsonify({
                     "success": False,
-                    "message": "Authentication required"
+                    "message": "Authentication required",
+                  
                 }), 401
 
             return redirect(url_for("auth.login"))
@@ -27,7 +28,9 @@ def roleRequired(*allowedRoles):
             try:
                 verify_jwt_in_request()
                 claims = get_jwt()
-                currentRole = get_jwt()
+                #currentRole = get_jwt()
+                currentRole = claims.get("role")
+
             except Exception:
                 if wantsJson():
                     return jsonify({

@@ -89,7 +89,7 @@ def register():
         }), 400
 
     return render_template(
-        "register.html",
+        "auth/register.html",
         form=form
     )
 
@@ -119,7 +119,7 @@ def login():
             )
 
             return render_template(
-                "login.html",
+                "auth/login.html",
                 form=form
             )
 
@@ -150,7 +150,7 @@ def login():
             targetUrl = url_for("admin.dashboard")
             
 
-        if roleName == "instructor":
+        elif roleName == "instructor":
             targetUrl =  url_for("instructor.dashboard")
        
 
@@ -169,7 +169,7 @@ def login():
         }), 400
 
     return render_template(
-        "login.html",
+        "auth/login.html",
         form=form
     )
 

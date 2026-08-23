@@ -10,7 +10,7 @@ from flask import (
 )
 
 
-from forms.courseForms import CourseForm
+from forms.courseForms import CourseForm, CourseUpdateForm
 from dao.courseDao import CourseDao
 from services.courseService import CourseService
 from config.auth import wantsJson, loginRequired, roleRequired
@@ -150,7 +150,7 @@ def createCourse():
 @courseBp.route("/courses/<int:courseId>/update", methods=["GET", "POST"])
 @roleRequired("admin")
 def updateCourse(courseId):
-    form = CourseForm()
+    form = CourseUpdateForm()
 
     if form.validate_on_submit():
         try:

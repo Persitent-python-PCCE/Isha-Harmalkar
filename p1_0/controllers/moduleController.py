@@ -8,7 +8,7 @@ from flask import(
     request,
     flash
 )
-from forms.moduleForms import ModuleForm
+from forms.moduleForms import ModuleForm, ModuleUpdateForm
 from dao.moduleDao import ModuleDao
 from models import module
 from services.moduleService import ModuleService
@@ -23,7 +23,7 @@ moduleService = ModuleService(moduleDao)
 @moduleBp.route("/courses/<int:courseId>/modules", methods=["GET"])
 @loginRequired
 def listModules(courseId):
-    modules  = moduleService.getModuleByCourseId(courseId)
+    modules  = moduleService.getModulesByCourseId(courseId)
     if wantsJson():
         return jsonify({
             "success": True,
@@ -72,24 +72,26 @@ def createModule(courseId):
                 return jsonify({"success": False, "message": str(e)}), 400
             flash("An unexpected error occured", "danger")
 
-        if request.method == "POST" and wantsJson():
-            return jsonify({
-                "success": False,
-                "errors": form.errors
-            }), 400
+    if request.method == "POST" and wantsJson():
+        return jsonify({
+            "success": False,
+            "errors": form.errors
+        }), 400
 
 
-        return render_template("moduleForm.html", form=form, courseId=courseId)
+    return render_template("moduleForm.html", form=form, courseId=courseId)
+
+   
 
 
 @moduleBp.route("/modules/<int:moduleId>/update", methods=["GET", "POST"])
 @roleRequired("admin")
 def updateModule(moduleId):
-    form = ModuleForm()
+    form = ModuleUpdateForm()
 
     if form.validate_on_submit():
         try:
-            module = module.Service.updateModule(
+            module = moduleService.updateModule(
                 moduleId,
                 moduleName=form.moduleName.data,
                 description=form.description.data
@@ -124,11 +126,13 @@ def updateModule(moduleId):
             flash("An unexpected error occurred", "danger")
 
 
-        if request.method == "POST" and wantsJson():
-            return jsonify({
-                "success": False,
-                "errors": form.errors
-            }), 400
+    if request.method == "POST" and wantsJson():
+        return jsonify({
+            "success": False,
+            "errors": form.errors
+        }), 400
+
+    return render_template("moduleForm.html", form=form)
 
 
 @moduleBp.route("/modules/<int:moduleId>/delete", methods=["POST"])

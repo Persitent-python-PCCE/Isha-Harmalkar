@@ -48,7 +48,7 @@ class CourseInstructorService:
 
 
     def getInstructorsByCourseId(self, courseId):
-        return self,self.courseInstructorDao.getInstructorsByCourseId(courseId)
+        return self.courseInstructorDao.getInstructorsByCourseId(courseId)
 
     def getCoursesByInstructorId(self, instructorId):
         return self.courseInstructorDao.getCourseByInstructorId(instructorId)

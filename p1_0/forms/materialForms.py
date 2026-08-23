@@ -1,18 +1,19 @@
 from flask_wtf import FlaskForm
-from flask_wtf.file import FielField, FileField, FileRequired, FileAllowed
+from flask_wtf.file import  FileField, FileRequired, FileAllowed
 from wtforms import StringField, SelectField, SubmitField
-from wtforms.validators import DataRequired, Length
+from wtforms.validators import DataRequired, Length, Optional
 
 
 ALLOWED_EXTENSIONS = ["pdf", "png", "jpg", "jpeg", "mp4", "docx", "pptx"]
 
 class MaterialForm(FlaskForm):
 
-    title = StringField(
-        "Title",
+    """  fileName = StringField(
+        "File Name",
         validators=[DataRequired(), Length(min=2, max=150)]
     )
-
+ `  """
+    
     file = FileField(
         "File",
         validators=[
@@ -28,3 +29,4 @@ class MaterialForm(FlaskForm):
     )
 
     submit = SubmitField("Upload Material")
+

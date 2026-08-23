@@ -17,3 +17,18 @@ class LessonForm(FlaskForm):
     )
 
     submit = SubmitField("Save Lesson")
+
+
+class LessonUpdateForm(FlaskForm):
+
+    lessonName = StringField(
+        "Lesson Name",
+        validators=[Optional(), Length(min=2, max=150)]
+    )
+
+    content = TextAreaField(
+        "Content",
+        validators=[Optional()]
+    )
+
+    submit = SubmitField("Save Lesson")

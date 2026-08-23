@@ -8,7 +8,7 @@ from flask import(
     flash
 )
 
-from forms.lessonForms import LessonForm
+from forms.lessonForms import LessonForm, LessonUpdateForm
 from dao.lessonDao import LessonDao
 from services.lessonService import LessonService
 from config.auth import roleRequired, wantsJson, loginRequired
@@ -19,7 +19,7 @@ lessonDao = LessonDao()
 lessonService = LessonService(lessonDao)
 
 
-@lessonBp.route("/moudles/<int:moduleId>/lessons", methods=["GET"])
+@lessonBp.route("/modules/<int:moduleId>/lessons", methods=["GET"])
 @loginRequired
 def listLessons(moduleId):
     lessons = lessonService.getLessonByModuleId(moduleId)
@@ -87,7 +87,7 @@ def createLesson(moduleId):
 
             flash("Lesson created successfully", "success")
 
-            return redirect(url_for("lessong.listLessons", moduleId=moduleId))
+            return redirect(url_for("lesson.listLessons", moduleId=moduleId))
 
 
         except ValueError as ve:
@@ -121,7 +121,7 @@ def createLesson(moduleId):
 @lessonBp.route("/lessons/<int:lessonId>/update", methods=["POST"])
 @roleRequired("admin")
 def updateLesson(lessonId):
-    form = LessonForm()
+    form = LessonUpdateForm()
 
     if form.validate_on_submit():
         try:

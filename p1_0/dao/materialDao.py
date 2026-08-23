@@ -13,6 +13,12 @@ class MaterialDao:
             lesson_id=lessonId
         ).order_by(Material.id).all()
 
+    def getByLessonAndFileName(self, lessonId, fileName):
+        return Material.query.filter_by(
+            lesson_id=lessonId,
+            file_name=fileName
+        ).first()
+
 
     def saveMaterial(self, material):
         db.session.add(material)

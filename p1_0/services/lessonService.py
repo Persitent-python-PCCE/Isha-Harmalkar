@@ -40,16 +40,16 @@ class LessonService:
         lesson = self.getLessonById(lessonId)
 
         if lessonName and lessonName != lesson.lesson_name:
-            if self.lessonDao.lessonExistsBYName(lesson.module_id, lessonName) or self.lessonDao.lessonExistsBYName(lesson.module_id, lessonName.lower()):
+            if self.lessonDao.lessonExistsByName(lesson.module_id, lessonName) or self.lessonDao.lessonExistsByName(lesson.module_id, lessonName.lower()):
                 raise ValueError("A lesson witht this name already exists in the moudles")
-            lesson.lesson_name = lessonName
+            lesson.lesson_name = lessonName.strip()
 
 
-            if content is not None:
-                lesson.content = content
+        if content is not None:
+            lesson.content = content.strip()
 
 
-            return self.lessonDao.saveLesson(lesson)
+        return self.lessonDao.saveLesson(lesson)
 
 
     def deleteLesson(self, lessonId):

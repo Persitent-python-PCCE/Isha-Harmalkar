@@ -31,14 +31,15 @@ class ModuleService:
         return module
 
 
-    def getModuleByCourseId(self, courseId):
+    def getModulesByCourseId(self, courseId):
         return self.moduleDao.getModulesByCourseId(courseId)
 
 
     def updateModule(self, moduleId,moduleName=None, description=None):
         module = self.getModuleById(moduleId)
         if moduleName and moduleName != module.module_name:
-            if self.moduleDao.moduleExistsByName(module.course_id, moduleName) or self.moduleDao.moduleExistByName(module.course_id, moduleName.strip().lower()):
+                              
+            if self.moduleDao.moduleExistsByName(module.course_id, moduleName) or self.moduleDao.moduleExistsByName(module.course_id, moduleName.strip().lower()):
                 raise ValueError("A module with this name already exists in this course")
             module.module_name = moduleName
 

@@ -4,6 +4,8 @@ from config.database import db
 class Material(db.Model):
     __tablename__ = "materials"
 
+ 
+
     id = db.Column(
         db.Integer,
         primary_key=True,
@@ -23,7 +25,8 @@ class Material(db.Model):
         nullable=False
     )
 
-    title = db.Column(
+
+    file_name = db.Column(
         db.String(150),
         nullable=False
     )
@@ -42,7 +45,8 @@ class Material(db.Model):
 
     access = db.Column(
         db.String(50),
-        default="public"
+        default="public",
+        nullable=False
     )
 
     created_at = db.Column(
@@ -58,6 +62,13 @@ class Material(db.Model):
         nullable=False
     )
 
+    __table_args__ = (
+        db.UniqueConstraint(
+            "lesson_id",
+            "file_name",
+            name="uq_material_lesson_file_name"
+        ),
+    )
     lesson = db.relationship(
         "Lesson",
         back_populates="materials"
@@ -74,7 +85,7 @@ class Material(db.Model):
             "id": self.id,
             "lesson_id": self.lesson_id,
             "course_instructor_id": self.course_instructor_id,
-            "title": self.title,
+            "file_name": self.file_name,
             "file_path": self.file_path,
             "file_type": self.file_type,
             "access": self.access,

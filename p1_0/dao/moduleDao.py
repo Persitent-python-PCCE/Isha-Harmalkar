@@ -7,7 +7,7 @@ class ModuleDao:
     def getModuleById(self, moduleId):
         return db.session.get(Module, moduleId)
 
-    def getModuleByCourseId(self, courseId):
+    def getModulesByCourseId(self, courseId):
         return Module.query.filter_by(
             course_id=courseId
         ).order_by(Module.id).all()

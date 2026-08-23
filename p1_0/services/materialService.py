@@ -24,13 +24,24 @@ class MaterialService:
         return filename.rsplit(".", 1)[1].lower()
 
 
-    def uploadMaterial(self, lessonId, courseInstructorId, title, fileStorage, access="public"):
+    def uploadMaterial(self, lessonId, courseInstructorId,  fileStorage, access="public"):
         lesson = self.lessonDao.getLessonById(lessonId)
         if not lesson:
             raise ValueError("Lesson not found")
 
-        filename = secure_filename(fileStorage.filename)
-        extension = self._getExtension(filename)
+        fileName = secure_filename(fileStorage.filename)
+        if not fileName:
+            raise ValueError("Invalid filename")
+
+        existingMaterial = self.materialDao.getByLessonAndFileName(lessonId, fileName)
+
+        if existingMaterial:
+            raise ValueError(
+                "A material with this file name already exists for this lesson."
+            )
+
+        
+        extension = self._getExtension(fileName)
 
 
 
@@ -38,20 +49,28 @@ class MaterialService:
             raise ValueError("File exceeds maximum allowed size")
 
 
+        fileStorage.stream.seek(0, os.SEEK_END)
+        fileSize = fileStorage.stream.tell()
+        fileStorage.stream.seek(0)
+
+        if fileSize > MAX_FILE_SIZE_BYTES:
+            raise ValueError("File exceedes maximum allowed size of 50 MB")
+
+
         courseId = lesson.module.course_id
         moduleId = lesson.module_id
 
 
-        targetDir = os.path.join(targetDir, filename)
+        targetDir = os.path.join(UPLOAD_ROOT, "courses", str(courseId), "modules", str(moduleId), "lessons", str(lessonId))
         os.makedirs(targetDir, exist_ok=True)
 
-        filePath = os.path.join(targetDir, filename)
+        filePath = os.path.join(targetDir, fileName)
         fileStorage.save(filePath)
 
         material = Material(
             lesson_id = lessonId,
             course_instructor_id =courseInstructorId,
-            title=title,
+            file_name=fileName,
             file_path=filePath,
             file_type=extension,
             access=access            
@@ -85,4 +104,4 @@ class MaterialService:
                 logger.exception("Failed to remove file from disk: %s", material.file_path)
 
 
-        self.materialDao.deleteMateria(material)
+        self.materialDao.deleteMaterial(material)

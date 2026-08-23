@@ -56,11 +56,10 @@ def uploadMaterial(lessonId):
             material = materialService.uploadMaterial(
                 lessonId,
                 courseInstructorId=courseInstructorId,
-                title=form.title.data,
                 fileStorage=form.file.data,
                 access=form.access.data
             )
-            logger.info("Material uploaded successfully: %s", material.title)
+            logger.info("Material uploaded successfully: %s", material.file_name)
 
             if wantsJson():
                 return jsonify({
@@ -118,7 +117,8 @@ def downloadMaterial(materialId):
 
         flash(str(ve), "danger")
         return redirect(url_for("course.listCourses"))
-
+    
+    
 
     except Exception as e:
         logger.warning("Unexpected error during material download  for id: %s", materialId)
@@ -167,7 +167,16 @@ def deleteMaterial(materialId):
                 "message": str(ve)
             }), 404
 
-        flash(str(ve), "danger")
+    except PermissionError as pe:
+            logger.warning("Unauthorized material deletion for id %s", materialId)
+            if wantsJson():
+                return jsonify({
+                    "success": False,
+                    "message": str(pe)
+                }), 403
+    
+
+            flash(str(ve), "danger")
      
 
 

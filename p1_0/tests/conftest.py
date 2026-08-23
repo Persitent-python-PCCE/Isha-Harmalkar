@@ -1,3 +1,7 @@
+import os
+os.environ["FLASK_ENV"] = "testing"
+os.environ["TEST_DATABASE_URI"] =  "mysql+pymysql://root:password@localhost/lms_test"
+
 import pytest
 from app import app as flask_app
 from config.database import db
@@ -22,6 +26,7 @@ def app():
     })
 
     with flask_app.app_context():
+        assert "lms_test" in str(db.engine.url), f"CRITCAL SAFETY STOP: db is not connected to test db"
         db.create_all()
         yield flask_app
 

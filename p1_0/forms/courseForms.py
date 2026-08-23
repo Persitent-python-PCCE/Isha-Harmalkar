@@ -32,4 +32,27 @@ class CourseForm(FlaskForm):
     )
 
     submit = SubmitField("Save Course")
+
+
+
+class CourseUpdateForm(FlaskForm):
+    courseName = StringField(
+        "Course Name",
+        validators=[
+            Optional(),
+            Length(min=2, max=150)
+        ]
+    )
+
+    description= TextAreaField(
+        "Description",
+        validators=[
+            Optional(),
+            Length(max=2000)
+
+        ]
+    )
+
+    submit = SubmitField("Save Course")
+    
     
