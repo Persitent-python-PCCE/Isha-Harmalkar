@@ -150,10 +150,22 @@ def createCourse():
 @courseBp.route("/courses/<int:courseId>/update", methods=["GET", "POST"])
 @roleRequired("admin")
 def updateCourse(courseId):
-    form = CourseUpdateForm()
 
-    if form.validate_on_submit():
-        try:
+    try:
+        course  = courseService.getCourseById(courseId)
+
+        if request.method == "GET":
+            form = CourseUpdateForm(
+                courseName=course.course_name,
+                description=course.description
+            )
+        else:
+            form = CourseUpdateForm()
+        
+   
+
+        if form.validate_on_submit():
+           
             course = courseService.updateCourse(
                 courseId,
                 courseName=form.courseName.data,
@@ -174,25 +186,30 @@ def updateCourse(courseId):
             return redirect(url_for("course.getCourse", courseId=course.id))
 
 
-        except ValueError as ve:
-            logger.warning("Course update validationf failed for id %s: %s", courseId, str(ve))
-            if wantsJson():
-                return jsonify({
-                    "success": False,
-                    "message": str(ve)
-                }), 400
+        
 
-            flash(str(ve), "danger")
+    except ValueError as ve:
+        logger.warning("Course update validationf failed for id %s: %s", courseId, str(ve))
+        if wantsJson():
+            return jsonify({
+                "success": False,
+                "message": str(ve)
+            }), 400
+
+        flash(str(ve), "danger")
+        return redirect(url_for("course.listCourses"))
 
 
-        except Exception as e:
-            logger.exception("Unexpected error during course update for id %s", courseId)
-            if wantsJson():
-                return jsonify({
-                    "success": False,
-                    "message": str(e)
-                }), 400
-            flash("An unexpected error occured", "danger")
+    except Exception as e:
+        logger.exception("Unexpected error during course update for id %s", courseId)
+        if wantsJson():
+            return jsonify({
+                "success": False,
+                "message": str(e)
+            }), 400
+        flash("An unexpected error occured", "danger")
+        return redirect(url_for("course.listCourses"))
+
 
 
     if request.method == "POST" and wantsJson():
