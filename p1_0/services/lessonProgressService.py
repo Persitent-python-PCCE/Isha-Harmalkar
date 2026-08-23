@@ -12,6 +12,8 @@ class LessonProgressService:
 
 
     def markLessonComplete(self, enrollmentId, lessonId, completed=True):
+        
+       
         progress = self.lessonProgressDao.getProgressByEnrollmentAndLesson(
             enrollmentId, lessonId
         )
@@ -32,8 +34,12 @@ class LessonProgressService:
             enrollment = self.enrollmentDao.updateStatus(enrollmentId, "completed")
         elif completedCount >= 1:
             enrollment = self.enrollmentDao.updateStatus(enrollmentId, "ongoing")
-
+        
+         
         return res
+        
+
+    
 
 
 

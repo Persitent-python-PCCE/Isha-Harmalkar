@@ -43,8 +43,8 @@ class EnrollmentDao:
 
     def updateStatus(self, enrollmentId, status):
         enrollment = self.getEnrollmentById(enrollmentId)
-        if enrollmentId:
-            enrollmentId.status = status
+        if enrollment:
+            enrollment.status = status
 
             db.session.commit()
             return enrollment

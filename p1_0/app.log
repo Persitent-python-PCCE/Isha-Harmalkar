@@ -1,43 +1,393 @@
-2026-08-23 15:03:05,905 [WARNING] controllers.enrollmentController: Unauthorized access attempete by user on enrollments You are not authoried to view enrollments for this offering
-2026-08-23 15:03:05,908 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:03:05] "[31m[1mGET /courseInstructors/6/enrollments HTTP/1.1[0m" 403 -
-2026-08-23 15:06:43,723 [INFO] werkzeug:  * Detected change in 'E:\\projects\\LearningThings\\psl_python\\day_3\\problems\\p1_0\\services\\enrollmentService.py', reloading
-2026-08-23 15:06:44,140 [INFO] werkzeug:  * Restarting with stat
-2026-08-23 15:06:45,489 [INFO] __main__: Flask appplication initialed successfully
-2026-08-23 15:06:45,539 [WARNING] werkzeug:  * Debugger is active!
-2026-08-23 15:06:45,539 [INFO] werkzeug:  * Debugger PIN: 258-857-572
-2026-08-23 15:06:47,919 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:06:47] "GET /courseInstructors/6/enrollments HTTP/1.1" 200 -
-2026-08-23 15:06:56,808 [WARNING] controllers.enrollmentController: Unauthorized access attempete by user on enrollments You are not authoried to view enrollments for this offering
-2026-08-23 15:06:56,810 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:06:56] "[31m[1mGET /courseInstructors/4/enrollments HTTP/1.1[0m" 403 -
-2026-08-23 15:07:11,169 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:07:11] "POST /login HTTP/1.1" 200 -
-2026-08-23 15:07:16,706 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:07:16] "GET /courseInstructors/4/enrollments HTTP/1.1" 200 -
-2026-08-23 15:07:27,790 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:07:27] "GET /courseInstructors/3/enrollments HTTP/1.1" 200 -
-2026-08-23 15:07:51,655 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:07:51] "POST /login HTTP/1.1" 200 -
-2026-08-23 15:08:00,570 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:08:00] "GET /courseInstructors/1/enrollments HTTP/1.1" 200 -
-2026-08-23 15:08:08,471 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:08:08] "GET /courseInstructors/2/enrollments HTTP/1.1" 200 -
-2026-08-23 15:08:20,789 [WARNING] controllers.enrollmentController: Unauthorized access attempete by user on enrollments You are not authoried to view enrollments for this offering
-2026-08-23 15:08:20,803 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:08:20] "[31m[1mGET /courseInstructors/3/enrollments HTTP/1.1[0m" 403 -
-2026-08-23 15:09:03,538 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:09:03] "POST /login HTTP/1.1" 200 -
-2026-08-23 15:09:07,869 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:09:07] "GET /enrollments HTTP/1.1" 200 -
-2026-08-23 15:09:15,389 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:09:15] "[31m[1mGET /courseInstructors/2/enrollments HTTP/1.1[0m" 403 -
-2026-08-23 15:09:59,669 [INFO] controllers.authController: User registered successfully: unenrollSt@example.com
-2026-08-23 15:09:59,675 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:09:59] "[35m[1mPOST /register HTTP/1.1[0m" 201 -
-2026-08-23 15:10:19,754 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:10:19] "[31m[1mPOST /login HTTP/1.1[0m" 400 -
-2026-08-23 15:10:26,437 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:10:26] "POST /login HTTP/1.1" 200 -
-2026-08-23 15:10:30,904 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:10:30] "GET /enrollments HTTP/1.1" 200 -
-2026-08-23 15:10:36,991 [INFO] controllers.enrollmentController: Student 11 enrolled via course-instructor 1
-2026-08-23 15:10:37,007 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:10:37] "[35m[1mPOST /courseInstructors/1/enroll HTTP/1.1[0m" 201 -
-2026-08-23 15:10:41,101 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:10:41] "GET /enrollments HTTP/1.1" 200 -
-2026-08-23 15:11:14,657 [INFO] controllers.enrollmentController: Enrollment 5 removed
-2026-08-23 15:11:14,657 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:11:14] "POST /enrollments/5/unenroll HTTP/1.1" 200 -
-2026-08-23 15:11:26,455 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:11:26] "GET /enrollments HTTP/1.1" 200 -
-2026-08-23 15:11:37,368 [INFO] controllers.enrollmentController: Student 11 enrolled via course-instructor 1
-2026-08-23 15:11:37,384 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:11:37] "[35m[1mPOST /courseInstructors/1/enroll HTTP/1.1[0m" 201 -
-2026-08-23 15:11:43,205 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:11:43] "GET /enrollments HTTP/1.1" 200 -
-2026-08-23 15:13:15,589 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:13:15] "GET /enrollments HTTP/1.1" 200 -
-2026-08-23 15:13:27,074 [WARNING] controllers.enrollmentController: Unenroll failed for id 5
-2026-08-23 15:13:27,074 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:13:27] "[33mPOST /enrollments/5/unenroll HTTP/1.1[0m" 404 -
-2026-08-23 15:13:37,870 [INFO] controllers.enrollmentController: Enrollment 6 removed
-2026-08-23 15:13:37,873 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:13:37] "POST /enrollments/6/unenroll HTTP/1.1" 200 -
-2026-08-23 15:13:42,869 [WARNING] controllers.enrollmentController: Unenroll failed for id 7
-2026-08-23 15:13:42,869 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:13:42] "[33mPOST /enrollments/7/unenroll HTTP/1.1[0m" 404 -
-2026-08-23 15:13:47,470 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:13:47] "GET /enrollments HTTP/1.1" 200 -
+2026-08-23 15:39:36,450 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:39:36] "GET /enrollments/1/progress HTTP/1.1" 200 -
+2026-08-23 15:40:36,078 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:40:36] "POST /login HTTP/1.1" 200 -
+2026-08-23 15:40:49,045 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:40:49] "GET /enrollments HTTP/1.1" 200 -
+2026-08-23 15:42:16,204 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:42:16] "GET /courses/1 HTTP/1.1" 200 -
+2026-08-23 15:42:32,695 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:42:32] "GET /courses/1/modules HTTP/1.1" 200 -
+2026-08-23 15:44:27,296 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:44:27] "GET /enrollments HTTP/1.1" 200 -
+2026-08-23 15:45:09,727 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:45:09] "GET /courses/1/modules HTTP/1.1" 200 -
+2026-08-23 15:45:41,078 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:45:41] "GET /modules/1/lessons HTTP/1.1" 200 -
+2026-08-23 15:45:57,161 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:45:57] "GET /modules/2/lessons HTTP/1.1" 200 -
+2026-08-23 15:46:38,959 [ERROR] controllers.lessonProgressController: Progress update failed for enrollment 2 lesson 1
+Traceback (most recent call last):
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\controllers\lessonProgressController.py", line 61, in markLessonComplete
+    progress = lessonProgressService.markLessonComplete(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\services\lessonProgressService.py", line 15, in markLessonComplete
+    progress = self.lessonProgressDao.getProgressByEnrollmentAndLesson(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'LessonProgressDao' object has no attribute 'getProgressByEnrollmentAndLesson'. Did you mean: 'getProgresssByEnrollmentAndLesson'?
+2026-08-23 15:46:38,959 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:46:38] "[31m[1mPOST /enrollments/2/lessons/1/complete HTTP/1.1[0m" 400 -
+2026-08-23 15:47:41,141 [INFO] werkzeug:  * Detected change in 'E:\\projects\\LearningThings\\psl_python\\day_3\\problems\\p1_0\\services\\lessonProgressService.py', reloading
+2026-08-23 15:47:41,590 [INFO] werkzeug:  * Restarting with stat
+2026-08-23 15:47:43,072 [INFO] __main__: Flask appplication initialed successfully
+2026-08-23 15:47:43,134 [WARNING] werkzeug:  * Debugger is active!
+2026-08-23 15:47:43,139 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-23 15:47:44,239 [INFO] werkzeug:  * Detected change in 'E:\\projects\\LearningThings\\psl_python\\day_3\\problems\\p1_0\\dao\\lessonProgressDao.py', reloading
+2026-08-23 15:47:44,418 [INFO] werkzeug:  * Restarting with stat
+2026-08-23 15:47:45,603 [INFO] __main__: Flask appplication initialed successfully
+2026-08-23 15:47:45,631 [WARNING] werkzeug:  * Debugger is active!
+2026-08-23 15:47:45,637 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-23 15:47:46,309 [ERROR] controllers.lessonProgressController: Progress update failed for enrollment 2 lesson 1
+Traceback (most recent call last):
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\controllers\lessonProgressController.py", line 61, in markLessonComplete
+    progress = lessonProgressService.markLessonComplete(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\services\lessonProgressService.py", line 31, in markLessonComplete
+    completedCount, totalCount = self.lessonProgressDao.getCompletionStats(enrollmentId)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\dao\lessonProgressDao.py", line 38, in getCompletionStats
+    courseId = enrollmentId.course_instructor.course_id
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'int' object has no attribute 'course_instructor'
+2026-08-23 15:47:46,309 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:47:46] "[31m[1mPOST /enrollments/2/lessons/1/complete HTTP/1.1[0m" 400 -
+2026-08-23 15:50:41,445 [INFO] werkzeug:  * Detected change in 'E:\\projects\\LearningThings\\psl_python\\day_3\\problems\\p1_0\\dao\\lessonProgressDao.py', reloading
+2026-08-23 15:50:41,832 [INFO] werkzeug:  * Restarting with stat
+2026-08-23 15:50:43,122 [INFO] __main__: Flask appplication initialed successfully
+2026-08-23 15:50:43,159 [WARNING] werkzeug:  * Debugger is active!
+2026-08-23 15:50:43,159 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-23 15:50:58,756 [INFO] werkzeug:  * Detected change in 'E:\\projects\\LearningThings\\psl_python\\day_3\\problems\\p1_0\\dao\\lessonProgressDao.py', reloading
+2026-08-23 15:50:59,110 [INFO] werkzeug:  * Restarting with stat
+2026-08-23 15:51:00,309 [INFO] __main__: Flask appplication initialed successfully
+2026-08-23 15:51:00,337 [WARNING] werkzeug:  * Debugger is active!
+2026-08-23 15:51:00,353 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-23 15:51:06,307 [WARNING] controllers.lessonProgressController: Progress update failed for enrollment 2 lesson 1
+2026-08-23 15:51:06,307 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:51:06] "[31m[1mPOST /enrollments/2/lessons/1/complete HTTP/1.1[0m" 400 -
+2026-08-23 15:51:11,495 [ERROR] controllers.lessonProgressController: Progress update failed for enrollment 2 lesson 2
+Traceback (most recent call last):
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\controllers\lessonProgressController.py", line 61, in markLessonComplete
+    progress = lessonProgressService.markLessonComplete(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\services\lessonProgressService.py", line 35, in markLessonComplete
+    enrollment = self.enrollmentDao.updateStatus(enrollmentId, "ongoing")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\dao\enrollmentDao.py", line 47, in updateStatus
+    enrollmentId.status = status
+    ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'int' object has no attribute 'status'
+2026-08-23 15:51:11,495 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:51:11] "[31m[1mPOST /enrollments/2/lessons/2/complete HTTP/1.1[0m" 400 -
+2026-08-23 15:51:58,089 [INFO] werkzeug:  * Detected change in 'E:\\projects\\LearningThings\\psl_python\\day_3\\problems\\p1_0\\dao\\enrollmentDao.py', reloading
+2026-08-23 15:51:58,436 [INFO] werkzeug:  * Restarting with stat
+2026-08-23 15:51:59,535 [INFO] __main__: Flask appplication initialed successfully
+2026-08-23 15:51:59,577 [WARNING] werkzeug:  * Debugger is active!
+2026-08-23 15:51:59,586 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-23 15:52:07,134 [WARNING] controllers.lessonProgressController: Progress update failed for enrollment 2 lesson 2
+2026-08-23 15:52:07,136 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:52:07] "[31m[1mPOST /enrollments/2/lessons/2/complete HTTP/1.1[0m" 400 -
+2026-08-23 15:52:09,222 [WARNING] controllers.lessonProgressController: Progress update failed for enrollment 2 lesson 2
+2026-08-23 15:52:09,222 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:52:09] "[31m[1mPOST /enrollments/2/lessons/2/complete HTTP/1.1[0m" 400 -
+2026-08-23 15:52:15,792 [INFO] controllers.lessonProgressController: Lesson progress updated: enrollment=2 lesson=3 completed=True
+2026-08-23 15:52:15,795 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:52:15] "POST /enrollments/2/lessons/3/complete HTTP/1.1" 200 -
+2026-08-23 15:52:26,683 [INFO] controllers.lessonProgressController: Lesson progress updated: enrollment=2 lesson=4 completed=True
+2026-08-23 15:52:26,684 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:52:26] "POST /enrollments/2/lessons/4/complete HTTP/1.1" 200 -
+2026-08-23 15:52:29,956 [INFO] controllers.lessonProgressController: Lesson progress updated: enrollment=2 lesson=5 completed=True
+2026-08-23 15:52:29,956 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:52:29] "POST /enrollments/2/lessons/5/complete HTTP/1.1" 200 -
+2026-08-23 15:53:24,167 [INFO] controllers.lessonProgressController: Lesson progress updated: enrollment=2 lesson=6 completed=True
+2026-08-23 15:53:24,170 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:53:24] "POST /enrollments/2/lessons/6/complete HTTP/1.1" 200 -
+2026-08-23 15:53:28,024 [INFO] controllers.lessonProgressController: Lesson progress updated: enrollment=2 lesson=7 completed=True
+2026-08-23 15:53:28,024 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:53:28] "POST /enrollments/2/lessons/7/complete HTTP/1.1" 200 -
+2026-08-23 15:53:32,419 [INFO] controllers.lessonProgressController: Lesson progress updated: enrollment=2 lesson=8 completed=True
+2026-08-23 15:53:32,434 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:53:32] "POST /enrollments/2/lessons/8/complete HTTP/1.1" 200 -
+2026-08-23 15:53:36,942 [ERROR] controllers.lessonProgressController: Progress update failed for enrollment 2 lesson 9
+Traceback (most recent call last):
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1969, in _exec_single_context
+    self.dialect.do_execute(
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\cursors.py", line 159, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\cursors.py", line 330, in _query
+    conn.query(q)
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\connections.py", line 582, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\connections.py", line 847, in _read_query_result
+    result.read()
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\connections.py", line 1245, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\connections.py", line 803, in _read_packet
+    packet.raise_for_error()
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\err.py", line 154, in raise_mysql_exception
+    raise errorclass(errno, errval, sqlstate=sqlstate)
+pymysql.err.IntegrityError: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`lms_1`.`lesson_progress`, CONSTRAINT `lesson_progress_ibfk_2` FOREIGN KEY (`lesson_id`) REFERENCES `lessons` (`id`))')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\controllers\lessonProgressController.py", line 61, in markLessonComplete
+    progress = lessonProgressService.markLessonComplete(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\services\lessonProgressService.py", line 30, in markLessonComplete
+    res = self.lessonProgressDao.saveProgress(progress)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\dao\lessonProgressDao.py", line 30, in saveProgress
+    db.session.commit()
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\orm\scoping.py", line 596, in commit
+    return self._proxied.commit()
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2035, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\orm\state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 1316, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\orm\state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 1290, in _prepare_impl
+    self.session.flush()
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4353, in flush
+    self._flush(objects)
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4488, in _flush
+    with util.safe_reraise():
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 122, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4449, in _flush
+    flush_context.execute()
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 465, in execute
+    rec.execute(self)
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 641, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 94, in save_obj
+    _emit_insert_statements(
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 1234, in _emit_insert_statements
+    result = connection.execute(
+             ^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1421, in execute
+    return meth(
+           ^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 526, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1643, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1848, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1988, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2365, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1969, in _exec_single_context
+    self.dialect.do_execute(
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\cursors.py", line 159, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\cursors.py", line 330, in _query
+    conn.query(q)
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\connections.py", line 582, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\connections.py", line 847, in _read_query_result
+    result.read()
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\connections.py", line 1245, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\connections.py", line 803, in _read_packet
+    packet.raise_for_error()
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\err.py", line 154, in raise_mysql_exception
+    raise errorclass(errno, errval, sqlstate=sqlstate)
+sqlalchemy.exc.IntegrityError: (pymysql.err.IntegrityError) (1452, 'Cannot add or update a child row: a foreign key constraint fails (`lms_1`.`lesson_progress`, CONSTRAINT `lesson_progress_ibfk_2` FOREIGN KEY (`lesson_id`) REFERENCES `lessons` (`id`))')
+[SQL: INSERT INTO lesson_progress (enrollment_id, lesson_id, completed, created_at, updated_at) VALUES (%(enrollment_id)s, %(lesson_id)s, %(completed)s, %(created_at)s, %(updated_at)s)]
+[parameters: {'enrollment_id': 2, 'lesson_id': 9, 'completed': 1, 'created_at': datetime.datetime(2026, 8, 23, 10, 23, 36, 942493, tzinfo=datetime.timezone.utc), 'updated_at': datetime.datetime(2026, 8, 23, 10, 23, 36, 942493, tzinfo=datetime.timezone.utc)}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2026-08-23 15:53:36,977 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:53:36] "[31m[1mPOST /enrollments/2/lessons/9/complete HTTP/1.1[0m" 400 -
+2026-08-23 15:53:44,659 [INFO] controllers.lessonProgressController: Lesson progress updated: enrollment=2 lesson=10 completed=True
+2026-08-23 15:53:44,659 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:53:44] "POST /enrollments/2/lessons/10/complete HTTP/1.1" 200 -
+2026-08-23 15:53:53,906 [INFO] controllers.lessonProgressController: Lesson progress updated: enrollment=2 lesson=11 completed=True
+2026-08-23 15:53:53,907 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:53:53] "POST /enrollments/2/lessons/11/complete HTTP/1.1" 200 -
+2026-08-23 15:54:00,325 [ERROR] controllers.lessonProgressController: Progress update failed for enrollment 2 lesson 12
+Traceback (most recent call last):
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1969, in _exec_single_context
+    self.dialect.do_execute(
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\cursors.py", line 159, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\cursors.py", line 330, in _query
+    conn.query(q)
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\connections.py", line 582, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\connections.py", line 847, in _read_query_result
+    result.read()
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\connections.py", line 1245, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\connections.py", line 803, in _read_packet
+    packet.raise_for_error()
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\err.py", line 154, in raise_mysql_exception
+    raise errorclass(errno, errval, sqlstate=sqlstate)
+pymysql.err.IntegrityError: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`lms_1`.`lesson_progress`, CONSTRAINT `lesson_progress_ibfk_2` FOREIGN KEY (`lesson_id`) REFERENCES `lessons` (`id`))')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\controllers\lessonProgressController.py", line 61, in markLessonComplete
+    progress = lessonProgressService.markLessonComplete(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\services\lessonProgressService.py", line 30, in markLessonComplete
+    res = self.lessonProgressDao.saveProgress(progress)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\dao\lessonProgressDao.py", line 30, in saveProgress
+    db.session.commit()
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\orm\scoping.py", line 596, in commit
+    return self._proxied.commit()
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2035, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\orm\state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 1316, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\orm\state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 1290, in _prepare_impl
+    self.session.flush()
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4353, in flush
+    self._flush(objects)
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4488, in _flush
+    with util.safe_reraise():
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 122, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4449, in _flush
+    flush_context.execute()
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 465, in execute
+    rec.execute(self)
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 641, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 94, in save_obj
+    _emit_insert_statements(
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 1234, in _emit_insert_statements
+    result = connection.execute(
+             ^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1421, in execute
+    return meth(
+           ^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 526, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1643, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1848, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1988, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2365, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1969, in _exec_single_context
+    self.dialect.do_execute(
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\cursors.py", line 159, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\cursors.py", line 330, in _query
+    conn.query(q)
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\connections.py", line 582, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\connections.py", line 847, in _read_query_result
+    result.read()
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\connections.py", line 1245, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\connections.py", line 803, in _read_packet
+    packet.raise_for_error()
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\venv\Lib\site-packages\pymysql\err.py", line 154, in raise_mysql_exception
+    raise errorclass(errno, errval, sqlstate=sqlstate)
+sqlalchemy.exc.IntegrityError: (pymysql.err.IntegrityError) (1452, 'Cannot add or update a child row: a foreign key constraint fails (`lms_1`.`lesson_progress`, CONSTRAINT `lesson_progress_ibfk_2` FOREIGN KEY (`lesson_id`) REFERENCES `lessons` (`id`))')
+[SQL: INSERT INTO lesson_progress (enrollment_id, lesson_id, completed, created_at, updated_at) VALUES (%(enrollment_id)s, %(lesson_id)s, %(completed)s, %(created_at)s, %(updated_at)s)]
+[parameters: {'enrollment_id': 2, 'lesson_id': 12, 'completed': 1, 'created_at': datetime.datetime(2026, 8, 23, 10, 24, 0, 325467, tzinfo=datetime.timezone.utc), 'updated_at': datetime.datetime(2026, 8, 23, 10, 24, 0, 325467, tzinfo=datetime.timezone.utc)}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2026-08-23 15:54:00,342 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 15:54:00] "[31m[1mPOST /enrollments/2/lessons/12/complete HTTP/1.1[0m" 400 -
+2026-08-23 15:55:43,199 [INFO] werkzeug:  * Detected change in 'E:\\projects\\LearningThings\\psl_python\\day_3\\problems\\p1_0\\services\\lessonProgressService.py', reloading
+2026-08-23 15:55:43,473 [INFO] werkzeug:  * Restarting with stat
+2026-08-23 15:55:44,505 [INFO] __main__: Flask appplication initialed successfully
+2026-08-23 15:55:44,539 [WARNING] werkzeug:  * Debugger is active!
+2026-08-23 15:55:44,553 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-23 16:03:28,014 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 16:03:28] "POST /login HTTP/1.1" 200 -
+2026-08-23 16:03:39,215 [INFO] controllers.moduleController: Module deleted successfully: 3
+2026-08-23 16:03:39,216 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 16:03:39] "POST /modules/3/delete HTTP/1.1" 200 -
+2026-08-23 16:04:14,890 [INFO] controllers.lessonController: Lesson created successfully: New Lesson
+2026-08-23 16:04:14,891 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 16:04:14] "[35m[1mPOST /modules/1/lessons HTTP/1.1[0m" 201 -
+2026-08-23 16:05:07,347 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 16:05:07] "POST /login HTTP/1.1" 200 -
+2026-08-23 16:05:13,916 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 16:05:13] "GET /enrollments/1/progress HTTP/1.1" 200 -
+2026-08-23 16:05:21,360 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 16:05:21] "GET /enrollments/9/progress HTTP/1.1" 200 -
+2026-08-23 16:05:30,018 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 16:05:30] "GET /enrollments/1/progress HTTP/1.1" 200 -
+2026-08-23 16:05:45,498 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 16:05:45] "GET /enrollments/2/progress HTTP/1.1" 200 -
+2026-08-23 16:06:15,529 [INFO] controllers.lessonProgressController: Lesson progress updated: enrollment=1 lesson=12 completed=True
+2026-08-23 16:06:15,529 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 16:06:15] "POST /enrollments/1/lessons/12/complete HTTP/1.1" 200 -
+2026-08-23 16:06:24,184 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 16:06:24] "GET /enrollments HTTP/1.1" 200 -
+2026-08-23 16:07:41,766 [INFO] controllers.lessonProgressController: Lesson progress updated: enrollment=2 lesson=12 completed=True
+2026-08-23 16:07:41,768 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 16:07:41] "POST /enrollments/2/lessons/12/complete HTTP/1.1" 200 -
+2026-08-23 16:15:10,827 [INFO] werkzeug:  * Detected change in 'E:\\projects\\LearningThings\\psl_python\\day_3\\problems\\p1_0\\dao\\lessonProgressDao.py', reloading
+2026-08-23 16:15:11,213 [INFO] werkzeug:  * Restarting with stat
+2026-08-23 16:15:12,868 [INFO] __main__: Flask appplication initialed successfully
+2026-08-23 16:15:12,926 [WARNING] werkzeug:  * Debugger is active!
+2026-08-23 16:15:12,940 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-23 16:17:01,210 [INFO] werkzeug:  * Detected change in 'E:\\projects\\LearningThings\\psl_python\\day_3\\problems\\p1_0\\services\\lessonProgressService.py', reloading
+2026-08-23 16:17:01,476 [INFO] werkzeug:  * Restarting with stat
+2026-08-23 16:17:02,979 [INFO] __main__: Flask appplication initialed successfully
+2026-08-23 16:17:03,042 [WARNING] werkzeug:  * Debugger is active!
+2026-08-23 16:17:03,049 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-23 16:19:02,941 [INFO] werkzeug:  * Detected change in 'E:\\projects\\LearningThings\\psl_python\\day_3\\problems\\p1_0\\services\\lessonProgressService.py', reloading
+2026-08-23 16:19:03,281 [INFO] werkzeug:  * Restarting with stat
+2026-08-23 16:19:04,803 [INFO] __main__: Flask appplication initialed successfully
+2026-08-23 16:19:04,850 [WARNING] werkzeug:  * Debugger is active!
+2026-08-23 16:19:04,862 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-23 16:19:23,610 [INFO] werkzeug:  * Detected change in 'E:\\projects\\LearningThings\\psl_python\\day_3\\problems\\p1_0\\dao\\enrollmentDao.py', reloading
+2026-08-23 16:19:23,975 [INFO] werkzeug:  * Restarting with stat
+2026-08-23 16:19:25,240 [INFO] __main__: Flask appplication initialed successfully
+2026-08-23 16:19:25,273 [WARNING] werkzeug:  * Debugger is active!
+2026-08-23 16:19:25,285 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-23 16:21:28,488 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 16:21:28] "POST /login HTTP/1.1" 200 -
+2026-08-23 16:22:48,231 [INFO] controllers.courseController: Course created successfully: WebDesign
+2026-08-23 16:22:48,231 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 16:22:48] "[35m[1mPOST /courses/create HTTP/1.1[0m" 201 -
+2026-08-23 16:23:36,023 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 16:23:36] "GET /courses HTTP/1.1" 200 -
+2026-08-23 16:24:08,847 [INFO] controllers.moduleController: Module created successfully: web Module 1
+2026-08-23 16:24:08,849 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 16:24:08] "[35m[1mPOST /courses/9/modules HTTP/1.1[0m" 201 -
+2026-08-23 16:24:28,531 [INFO] controllers.moduleController: Module created successfully: web Module 2
+2026-08-23 16:24:28,532 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 16:24:28] "[35m[1mPOST /courses/9/modules HTTP/1.1[0m" 201 -
+2026-08-23 16:25:02,906 [INFO] controllers.lessonController: Lesson created successfully: web lesson 1
+2026-08-23 16:25:02,906 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 16:25:02] "[35m[1mPOST /modules/8/lessons HTTP/1.1[0m" 201 -
+2026-08-23 16:25:26,952 [INFO] controllers.lessonController: Lesson created successfully: web lesson 2
+2026-08-23 16:25:26,954 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 16:25:26] "[35m[1mPOST /modules/7/lessons HTTP/1.1[0m" 201 -
+2026-08-23 16:26:00,068 [INFO] controllers.courseInstructorController: Instructor 7 assigned to course 9
+2026-08-23 16:26:00,079 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 16:26:00] "[35m[1mPOST /courses/9/instructors HTTP/1.1[0m" 201 -
+2026-08-23 16:26:29,468 [INFO] controllers.authController: User registered successfully: web1@example.com
+2026-08-23 16:26:29,485 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 16:26:29] "[35m[1mPOST /register HTTP/1.1[0m" 201 -
+2026-08-23 16:26:44,955 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 16:26:44] "POST /login HTTP/1.1" 200 -
+2026-08-23 16:26:50,037 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 16:26:50] "GET /enrollments HTTP/1.1" 200 -
+2026-08-23 16:26:58,287 [WARNING] controllers.enrollmentController: Enrollment failed for student 12: Course Offering Not found
+2026-08-23 16:26:58,287 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 16:26:58] "[31m[1mPOST /courseInstructors/9/enroll HTTP/1.1[0m" 400 -
+2026-08-23 16:27:46,187 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 16:27:46] "GET /enrollments HTTP/1.1" 200 -
+2026-08-23 16:27:52,537 [INFO] controllers.enrollmentController: Student 12 enrolled via course-instructor 7
+2026-08-23 16:27:52,555 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 16:27:52] "[35m[1mPOST /courseInstructors/7/enroll HTTP/1.1[0m" 201 -
+2026-08-23 16:28:25,851 [INFO] controllers.lessonProgressController: Lesson progress updated: enrollment=7 lesson=13 completed=True
+2026-08-23 16:28:25,854 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 16:28:25] "POST /enrollments/7/lessons/13/complete HTTP/1.1" 200 -
+2026-08-23 16:28:30,177 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 16:28:30] "GET /enrollments HTTP/1.1" 200 -
+2026-08-23 16:28:42,120 [INFO] controllers.lessonProgressController: Lesson progress updated: enrollment=7 lesson=14 completed=True
+2026-08-23 16:28:42,125 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 16:28:42] "POST /enrollments/7/lessons/14/complete HTTP/1.1" 200 -
+2026-08-23 16:28:45,733 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 16:28:45] "GET /enrollments HTTP/1.1" 200 -

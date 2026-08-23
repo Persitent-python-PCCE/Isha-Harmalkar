@@ -1,4 +1,4 @@
-from ast import Module
+from models.module import Module
 
 from config.database import db
 from models.enrollment import Enrollment
@@ -12,7 +12,7 @@ class LessonProgressDao:
         return db.session.get(LessonProgress, progressId)
 
 
-    def getProgresssByEnrollmentAndLesson(self, enrollmentId, lessonId):
+    def getProgressByEnrollmentAndLesson(self, enrollmentId, lessonId):
         return LessonProgress.query.filter_by(
             enrollment_id=enrollmentId,
             lesson_id=lessonId
@@ -27,7 +27,8 @@ class LessonProgressDao:
 
     def saveProgress(self, progress):
         db.session.add(progress)
-        db.session.commit()
+        #db.session.commit()
+        db.session.flush()
         return progress
 
     def getCompletionStats(self, enrollmentId):
@@ -35,7 +36,7 @@ class LessonProgressDao:
         if not enrollment:
             return 0, 0
 
-        courseId = enrollmentId.course_instructor.course_id
+        courseId = enrollment.course_instructor.course_id
 
         totalLessons = (
             Lesson.query.join(Module).filter(Module.course_id == courseId).count()
