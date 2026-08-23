@@ -51,8 +51,31 @@ class CourseInstructorService:
         return self.courseInstructorDao.getInstructorsByCourseId(courseId)
 
     def getCoursesByInstructorId(self, instructorId):
-        return self.courseInstructorDao.getCourseByInstructorId(instructorId)
+        return self.courseInstructorDao.getCoursesByInstructorId(instructorId)
 
     def removeInstructor(self, courseInstructorId):
         courseInstructor = self.getCourseInstructorById(courseInstructorId)
         self.courseInstructorDao.deleteCourseInstructor(courseInstructor)
+
+
+
+    def getAllInstructors(self):
+        return self.userDao.getUsersByRole("instructor")
+
+
+    def getAvailableInstructors(self, courseId):
+
+        assignments = self.getInstructorsByCourseId(courseId)
+
+        assignedInstructorIds = {
+            assignment.instructor_id
+            for assignment in assignments
+        }
+
+        instructors = self.userDao.getUsersByRole("instructor")
+
+        return [
+            instructor
+            for instructor in instructors
+            if instructor.id not in assignedInstructorIds
+        ]

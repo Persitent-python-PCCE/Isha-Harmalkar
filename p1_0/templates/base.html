@@ -10,16 +10,111 @@
 <body class="bg-light">
 
     <!-- Simple Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="/">LMS Platform</a>
-            <div class="ms-auto">
-                <a href="{{ url_for('auth.login') }}" class="btn btn-outline-light btn-sm me-2">Login</a>
-                <a href="{{ url_for('auth.register') }}" class="btn btn-primary btn-sm">Register</a>
-            </div>
-        </div>
-    </nav>
+     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
 
+    <div class="container">
+
+        <!-- Brand -->
+        <a
+            class="navbar-brand fw-bold"
+            href="{% if currentUser.isAuthenticated %}
+                        {{ url_for('dashboard.dashboard') }}
+                   {% else %}
+                        /
+                   {% endif %}"
+        >
+            LMS Platform
+        </a>
+
+
+        <div class="ms-auto d-flex align-items-center">
+
+            {% if currentUser.isAuthenticated %}
+
+                <!-- Dashboard -->
+                <a
+                    href="{{ url_for('dashboard.dashboard') }}"
+                    class="btn btn-outline-light btn-sm me-2"
+                >
+                    Dashboard
+                </a>
+
+
+                <!-- Courses -->
+                <a
+                    href="{{ url_for('course.listCourses') }}"
+                    class="btn btn-outline-light btn-sm me-3"
+                >
+                    Courses
+                </a>
+
+
+                <!-- Role -->
+                {% if currentUser.role == 'admin' %}
+
+                    <span class="badge bg-danger me-3">
+                        Admin
+                    </span>
+
+                {% elif currentUser.role == 'instructor' %}
+
+                    <span class="badge bg-warning text-dark me-3">
+                        Instructor
+                    </span>
+
+                {% elif currentUser.role == 'student' %}
+
+                    <span class="badge bg-primary me-3">
+                        Student
+                    </span>
+
+                {% endif %}
+
+
+                <!-- Logout -->
+                <form
+                    action="{{ url_for('auth.logout') }}"
+                    method="POST"
+                    class="d-inline"
+                >
+
+                    <button
+                        type="submit"
+                        class="btn btn-danger btn-sm"
+                    >
+                        Logout
+                    </button>
+
+                </form>
+
+
+            {% else %}
+
+                <!-- Login -->
+                <a
+                    href="{{ url_for('auth.login') }}"
+                    class="btn btn-outline-light btn-sm me-2"
+                >
+                    Login
+                </a>
+
+
+                <!-- Register -->
+                <a
+                    href="{{ url_for('auth.register') }}"
+                    class="btn btn-primary btn-sm"
+                >
+                    Register
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    </nav>
+    
     <!-- Main Content Container -->
     <main class="container">
         <!-- Flash Messages -->

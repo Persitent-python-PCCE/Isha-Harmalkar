@@ -55,7 +55,8 @@ class Lesson(db.Model):
 
     progress_records = db.relationship(
         "LessonProgress",
-        back_populates="lesson"
+        back_populates="lesson",
+        cascade="all, delete-orphan"
     )
 
     def toDict(self):

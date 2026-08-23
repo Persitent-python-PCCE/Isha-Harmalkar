@@ -30,7 +30,7 @@ def listModules(courseId):
             "modules": [module.toDict() for module in modules]
         })
 
-    return render_template("moduleList.html", modules=modules, courseId=courseId)
+    return render_template("module/moduleList.html", modules=modules, courseId=courseId)
 
 
 @moduleBp.route("/courses/<int:courseId>/modules/create", methods=["GET","POST"])
@@ -79,7 +79,7 @@ def createModule(courseId):
         }), 400
 
 
-    return render_template("moduleForm.html", form=form, courseId=courseId)
+    return render_template("module/moduleForm.html", form=form, courseId=courseId)
 
    
 
@@ -144,7 +144,7 @@ def updateModule(moduleId):
             "errors": form.errors
         }), 400
 
-    return render_template("moduleForm.html", form=form, courseId=courseId)
+    return render_template("module/moduleForm.html", form=form, courseId=courseId)
 
 
 @moduleBp.route("/modules/<int:moduleId>/delete", methods=["POST"])

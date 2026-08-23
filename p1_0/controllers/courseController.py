@@ -41,7 +41,7 @@ def listCourses():
 
 
     return render_template(
-        "courseList.html",
+        "course/courseList.html",
         courses=courses
     )
 
@@ -57,7 +57,7 @@ def getCourse(courseId):
             })
 
         return render_template(
-            "courseDetail.html",
+            "course/courseDetail.html",
             course=course
         )
 
@@ -142,7 +142,7 @@ def createCourse():
 
 
     return render_template(
-        "courseForm.html",
+        "course/courseForm.html",
         form=form
     )
 
@@ -221,7 +221,7 @@ def updateCourse(courseId):
 
 
     return render_template(
-        "courseForm.html",
+        "course/courseForm.html",
         form=form
     )
 

@@ -1,4 +1,5 @@
 from config.database import db
+from models.role import Role
 from models.user import User
 
 
@@ -31,4 +32,12 @@ class UserDao:
         return User.query.filter_by(
             email=email
         ).first() is not None
+
+    def getUsersByRole(self, roleName):
+        return (
+            User.query.join(User.role)
+            .filter(Role.role_name == roleName)
+            .order_by(User.id)
+            .all()
+        )
     

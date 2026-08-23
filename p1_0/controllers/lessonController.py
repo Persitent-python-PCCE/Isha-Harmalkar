@@ -30,7 +30,7 @@ def listLessons(moduleId):
             "lessons": [lesson.toDict() for lesson in lessons]
         })
 
-    return render_template("lessonList.html", lessons=lessons, moduleId=moduleId)
+    return render_template("lesson/lessonList.html", lessons=lessons, moduleId=moduleId)
 
 
 
@@ -42,7 +42,7 @@ def getLesson(lessonId):
 
         if wantsJson():
             return jsonify({"success": True, "lesson": lesson.toDict()})
-        return render_template("lesson.html", lesson=lesson)
+        return render_template("lesson/lesson.html", lesson=lesson)
 
     except ValueError as ve:
         logger.warning("Lesson lookup failed for id %s", lessonId)
@@ -115,7 +115,7 @@ def createLesson(moduleId):
             "errors": form.errors
         }), 400
 
-    return render_template("lessonForm.html", form=form, moduleId=moduleId)
+    return render_template("lesson/lessonForm.html", form=form, moduleId=moduleId)
 
 
 @lessonBp.route("/lessons/<int:lessonId>/update", methods=["GET", "POST"])
@@ -162,7 +162,7 @@ def updateLesson(lessonId):
             }), 400
 
         return render_template(
-            "lessonForm.html",
+            "lesson/lessonForm.html",
 
             form=form,
             moduleId=moduleId

@@ -20,6 +20,7 @@ from controllers.materialController import materialBp
 from controllers.lessonProgressController import lessonProgressBp
 from controllers.courseInstructorController import courseInstructorBp
 from controllers.enrollmentController import enrollmentBp
+from controllers.dashboardController import dashboardBp
 
 load_dotenv()
 
@@ -76,6 +77,7 @@ logger = logging.getLogger(__name__)
 logger.info("Flask appplication initialed successfully")
 
 app.register_blueprint(authBp)
+app.register_blueprint(dashboardBp)
 app.register_blueprint(courseBp)
 app.register_blueprint(moduleBp)
 app.register_blueprint(lessonBp)

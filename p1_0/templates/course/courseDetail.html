@@ -18,7 +18,13 @@
                 </div>
                 {% if currentUser.role == 'admin' %}
                 <div class="d-flex gap-2">
-                    <a href="{{ url_for('course.updateCourse', courseId=course.id) }}" class="btn btn-outline-secondary btn-sm">Edit Course</a>
+                    <a href="{{ url_for('courseInstructor.listInstructors', courseId=course.id) }}" class="btn btn-outline-primary btn-sm">
+                        Instructors
+                    </a>
+
+                    <a href="{{ url_for('course.updateCourse', courseId=course.id) }}"  class="btn btn-outline-secondary btn-sm">
+                    Edit Course
+                    </a>
                 </div>
                 {% endif %}
             </div>

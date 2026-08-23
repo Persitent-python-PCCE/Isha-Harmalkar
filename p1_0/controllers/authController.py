@@ -146,7 +146,7 @@ def login():
                 
             }), 200
 
-        if roleName == "admin":
+        """         if roleName == "admin":
             targetUrl = url_for("admin.dashboard")
             
 
@@ -155,7 +155,9 @@ def login():
        
 
         else:
-            targetUrl = url_for("student.dashboard")
+            targetUrl = url_for("student.dashboard") """
+
+        targetUrl = url_for("dashboard.dashboard")
 
         response = make_response(redirect(targetUrl))
         set_access_cookies(response, accessToken)

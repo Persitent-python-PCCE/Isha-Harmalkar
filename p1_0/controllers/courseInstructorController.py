@@ -24,22 +24,83 @@ userDao = UserDao()
 courseInstructorService = CourseInstructorService(courseInstructorDao, courseDao,userDao)
 
 
-
-@courseInstructorBp.route("/courses/<int:courseId>/instructors", methods=["GET"])
+@courseInstructorBp.route(
+    "/courses/<int:courseId>/instructors",
+    methods=["GET"]
+)
 @roleRequired("admin", "instructor")
 def listInstructors(courseId):
-    assignments = courseInstructorService.getInstructorsByCourseId(courseId)
 
-    if wantsJson():
-        return jsonify({
-            "success": True,
-            "instructors": [assignment.toDict() for assignment in assignments]
-        })
+    try:
+        assignments = courseInstructorService.getInstructorsByCourseId(
+            courseId
+        )
 
-    return jsonify({
-        "instructors": [assignment.toDict() for assignment in assignments]
-    })
+        instructors = courseInstructorService.getAvailableInstructors(courseId)
 
+        if wantsJson():
+            return jsonify({
+                "success": True,
+                "instructors": [
+                    assignment.toDict()
+                    for assignment in assignments
+                ]
+            })
+
+        return render_template(
+            "course/instructorList.html",           
+            courseId=courseId,
+             assignments=assignments,
+             instructors=instructors
+        )
+
+    except ValueError as ve:
+
+        logger.warning(
+            "Failed to get instructors for course %s: %s",
+            courseId,
+            str(ve)
+        )
+
+        if wantsJson():
+            return jsonify({
+                "success": False,
+                "message": str(ve)
+            }), 404
+
+        flash(str(ve), "danger")
+
+        return redirect(
+            url_for(
+                "course.getCourse",
+                courseId=courseId
+            )
+        )
+
+    except Exception as e:
+
+        logger.exception(
+            "Unexpected error getting instructors for course %s",
+            courseId
+        )
+
+        if wantsJson():
+            return jsonify({
+                "success": False,
+                "message": str(e)
+            }), 400
+
+        flash(
+            "Unable to load course instructors",
+            "danger"
+        )
+
+        return redirect(
+            url_for(
+                "course.getCourse",
+                courseId=courseId
+            )
+        )
 
 
 

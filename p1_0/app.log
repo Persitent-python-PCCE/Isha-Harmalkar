@@ -1,17 +1,24 @@
-2026-08-23 19:25:47,918 [INFO] werkzeug:  * Detected change in 'E:\\projects\\LearningThings\\psl_python\\day_3\\problems\\p1_0\\models\\lessonProgress.py', reloading
-2026-08-23 19:25:48,248 [INFO] werkzeug:  * Restarting with stat
-2026-08-23 19:25:49,624 [INFO] __main__: Flask appplication initialed successfully
-2026-08-23 19:25:49,658 [WARNING] werkzeug:  * Debugger is active!
-2026-08-23 19:25:49,658 [INFO] werkzeug:  * Debugger PIN: 258-857-572
-2026-08-23 19:26:11,624 [INFO] werkzeug:  * Detected change in 'E:\\projects\\LearningThings\\psl_python\\day_3\\problems\\p1_0\\models\\lessonProgress.py', reloading
-2026-08-23 19:26:11,972 [INFO] werkzeug:  * Restarting with stat
-2026-08-23 19:26:13,274 [INFO] __main__: Flask appplication initialed successfully
-2026-08-23 19:26:13,350 [WARNING] werkzeug:  * Debugger is active!
-2026-08-23 19:26:13,360 [INFO] werkzeug:  * Debugger PIN: 258-857-572
-2026-08-23 19:26:36,574 [INFO] werkzeug:  * Detected change in 'E:\\projects\\LearningThings\\psl_python\\day_3\\problems\\p1_0\\models\\lessonProgress.py', reloading
-2026-08-23 19:26:36,990 [INFO] werkzeug:  * Restarting with stat
-2026-08-23 19:26:38,217 [INFO] __main__: Flask appplication initialed successfully
-2026-08-23 19:26:38,270 [WARNING] werkzeug:  * Debugger is active!
-2026-08-23 19:26:38,277 [INFO] werkzeug:  * Debugger PIN: 258-857-572
-2026-08-23 19:27:01,130 [INFO] app: Flask appplication initialed successfully
-2026-08-23 19:28:57,221 [INFO] app: Flask appplication initialed successfully
+2026-08-23 21:09:40,336 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 21:09:40] "GET /courses/1 HTTP/1.1" 200 -
+2026-08-23 21:09:42,987 [ERROR] controllers.courseInstructorController: Unexpected error getting instructors for course 1
+Traceback (most recent call last):
+  File "E:\projects\LearningThings\psl_python\day_3\problems\p1_0\controllers\courseInstructorController.py", line 39, in listInstructors
+    instructors = courseInstructorService.getAvailableInstructors()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: CourseInstructorService.getAvailableInstructors() missing 1 required positional argument: 'courseId'
+2026-08-23 21:09:42,991 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 21:09:42] "[32mGET /courses/1/instructors HTTP/1.1[0m" 302 -
+2026-08-23 21:09:43,010 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 21:09:43] "GET /courses/1 HTTP/1.1" 200 -
+2026-08-23 21:10:07,230 [INFO] werkzeug:  * Detected change in 'E:\\projects\\LearningThings\\psl_python\\day_3\\problems\\p1_0\\controllers\\courseInstructorController.py', reloading
+2026-08-23 21:10:07,543 [INFO] werkzeug:  * Restarting with stat
+2026-08-23 21:10:08,913 [INFO] __main__: Flask appplication initialed successfully
+2026-08-23 21:10:08,930 [WARNING] werkzeug:  * Debugger is active!
+2026-08-23 21:10:08,947 [INFO] werkzeug:  * Debugger PIN: 258-857-572
+2026-08-23 21:10:11,147 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 21:10:11] "GET /courses/1 HTTP/1.1" 200 -
+2026-08-23 21:10:12,965 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 21:10:12] "GET /courses/1/instructors HTTP/1.1" 200 -
+2026-08-23 21:10:20,265 [INFO] controllers.courseInstructorController: Instructor 7 assigned to course 1
+2026-08-23 21:10:20,265 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 21:10:20] "[32mPOST /courses/1/instructors HTTP/1.1[0m" 302 -
+2026-08-23 21:10:20,538 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 21:10:20] "GET /courses/1 HTTP/1.1" 200 -
+2026-08-23 21:10:23,571 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 21:10:23] "GET /courses/1/instructors HTTP/1.1" 200 -
+2026-08-23 21:10:26,497 [INFO] controllers.courseInstructorController: Removed course instructor assignment 8
+2026-08-23 21:10:26,497 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 21:10:26] "[32mPOST /courses/8/remove HTTP/1.1[0m" 302 -
+2026-08-23 21:10:26,516 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 21:10:26] "GET /courses/1 HTTP/1.1" 200 -
+2026-08-23 21:10:29,631 [INFO] werkzeug: 127.0.0.1 - - [23/Aug/2026 21:10:29] "GET /courses HTTP/1.1" 200 -
