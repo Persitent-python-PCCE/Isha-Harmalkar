@@ -62,6 +62,17 @@
                                 View Progress
                             </a>
 
+                             <a
+                                href="{{ url_for(
+                                    'quiz.listQuizzes',
+                                    courseInstructorId=enrollment.course_instructor_id
+                                ) }}"
+                                class="btn btn-outline-success btn-sm"
+                            >
+                                Quizzes
+                            </a>
+
+
                         </div>
 
                     </div>

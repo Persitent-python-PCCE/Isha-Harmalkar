@@ -112,7 +112,7 @@ class QuizService:
     def getQuizForStudent(self, quizId, studentId):
         quiz = self._getQuizOrRaise(quizId)
 
-        if not self.enrollmentDao.isStudentEnrolled(studentId, quiz.course_instructor_id):
+        if not self.enrollmentDao.enrollmentExists(studentId, quiz.course_instructor_id):
             raise PermissionError("You are not enrolled in this course")
 
         existingRecord = self.quizRecordDao.getRecordByQuizAndStudent(quizId, studentId)
@@ -121,7 +121,7 @@ class QuizService:
     def submitQuiz(self, quizId, studentId, answers):
         quiz = self._getQuizOrRaise(quizId)
 
-        if not self.enrollmentDao.isStudentEnrolled(studentId, quiz.course_instructor_id):
+        if not self.enrollmentDao.enrollmentExists(studentId, quiz.course_instructor_id):
             raise PermissionError("You are not enrolled in this course")
 
         if self.quizRecordDao.getRecordByQuizAndStudent(quizId, studentId):
