@@ -41,4 +41,12 @@ class EnrollmentDao:
             course_instructor_id=courseInstructorId
         ).first() is not None
 
-    
+    def updateStatus(self, enrollmentId, status):
+        enrollment = self.getEnrollmentById(enrollmentId)
+        if enrollmentId:
+            enrollmentId.status = status
+
+            db.session.commit()
+            return enrollment
+
+        return None

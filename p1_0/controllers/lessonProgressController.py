@@ -9,6 +9,7 @@ from flask import (
     flash
 )
 
+from dao.enrollmentDao import EnrollmentDao
 from dao.lessonProgressDao import LessonProgressDao
 from services.lessonProgressService import LessonProgressService
 from config.auth import wantsJson, loginRequired, roleRequired
@@ -18,7 +19,8 @@ logger = logging.getLogger(__name__)
 
 lessonProgressBp = Blueprint("lessonProgress", __name__)
 lessonProgressDao = LessonProgressDao()
-lessonProgressService = LessonProgressService(lessonProgressDao)
+enrollmentDao = EnrollmentDao()
+lessonProgressService = LessonProgressService(lessonProgressDao=lessonProgressDao, enrollmentDao=enrollmentDao)
 
 @lessonProgressBp.route("/enrollments/<int:enrollmentId>/progress", methods=["GET"])
 @roleRequired("student", "instructor", "admin")

@@ -6,8 +6,9 @@ logger = logging.getLogger(__name__)
 
 class LessonProgressService:
 
-    def __init__(self, lessonProgressDao):
+    def __init__(self, lessonProgressDao, enrollmentDao):
         self.lessonProgressDao = lessonProgressDao
+        self.enrollmentDao = enrollmentDao
 
 
     def markLessonComplete(self, enrollmentId, lessonId, completed=True):
@@ -15,16 +16,25 @@ class LessonProgressService:
             enrollmentId, lessonId
         )
 
-        if not progress:
-            progress = LessonProgress(
-                enrollment_id=enrollmentId,
-                lesson_id=lessonId,
-                completed=completed                
-            )
-        else:
-            progress.completed = completed
+        if progress:
+            raise ValueError("Lesson already marked as completed")
 
-        return self.lessonProgressDao.saveProgress(progress)
+        progress = LessonProgress(
+            enrollment_id=enrollmentId,
+            lesson_id=lessonId,
+            completed=completed                
+        )
+        
+
+        res = self.lessonProgressDao.saveProgress(progress)
+        completedCount, totalCount = self.lessonProgressDao.getCompletionStats(enrollmentId)
+        if completedCount == totalCount and totalCount > 0:
+            enrollment = self.enrollmentDao.updateStatus(enrollmentId, "completed")
+        elif completedCount >= 1:
+            enrollment = self.enrollmentDao.updateStatus(enrollmentId, "ongoing")
+
+        return res
+
 
 
     def getProgressByEnrollmentId(self, enrollmentId):

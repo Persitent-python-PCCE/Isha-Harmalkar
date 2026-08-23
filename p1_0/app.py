@@ -17,7 +17,7 @@ from controllers.courseController import courseBp
 from controllers.moduleController import moduleBp
 from controllers.lessonController import lessonBp
 from controllers.materialController import materialBp
-from controllers.lessonProgress import lessonProgressBp
+from controllers.lessonProgressController import lessonProgressBp
 from controllers.courseInstructorController import courseInstructorBp
 from controllers.enrollmentController import enrollmentBp
 

@@ -3,18 +3,17 @@ from flask import(
     Blueprint,
     render_template,
     redirect,
-    session,
+  
     url_for,
     jsonify,
     request,
     flash
 )
 
-
 from dao.enrollmentDao import EnrollmentDao
 from dao.courseInstructorDao import CourseInstructorDao
 from services.enrollmentService import EnrollmentService
-from config.auth import wantsJson, loginRequired, roleRequired
+from config.auth import getCurrentUserClaims, wantsJson, loginRequired, roleRequired, getCurrentUserIdentity
 
 logger = logging.getLogger(__name__)
 enrollmentBp = Blueprint("enrollment", __name__)
@@ -26,7 +25,7 @@ enrollmentService = EnrollmentService(enrollmentDao, courseInstructorDao)
 @enrollmentBp.route("/enrollments", methods=["GET"])
 @roleRequired("student")
 def listMyEnrollments():
-    studentId = session["user_id"]
+    studentId = getCurrentUserIdentity()
     enrollments = enrollmentService.getEnrollmentsByStudentId(studentId)
 
     if wantsJson():
@@ -44,7 +43,7 @@ def listMyEnrollments():
 @enrollmentBp.route("/courseInstructors/<int:courseInstructorId>/enroll", methods=["POST"])
 @roleRequired("student")
 def enroll(courseInstructorId):
-    studentId = session["user_id"]
+    studentId =  getCurrentUserIdentity()
 
 
     try:
@@ -84,53 +83,59 @@ def enroll(courseInstructorId):
         return redirect(url_for("course.listCourses"))
 
 
-@enrollmentBp.route("/courseInstrucotrs/<int:courseInstructorId>/enrollments", methods=["GET"])
+@enrollmentBp.route("/courseInstructors/<int:courseInstructorId>/enrollments", methods=["GET"])
 @roleRequired("admin", "instructor")
 def listEnrollmentsForOffering(courseInstructorId):
-    enrollments = enrollmentService.getEnrollmentByCourseInstructorId(courseInstructorId)
-    if wantsJson():
-        return jsonify({
-            "success": True,
-            "enrollments": [enrollment.toDict() for enrollment in enrollments]
-        
-        })
-
-    return jsonify({
-        "enrollments": [enrollment.toDict() for enrollment in enrollments]
-    })
-
-
-@enrollmentBp.route("/enrollments/<int:enrollmentId>/status", methods=["POST"])
-@roleRequired("admin", "instructor", "student")
-def updateStatus(enrollmentId):
-    payload  = request.get_json(silent=True) or request.form
-    status = payload.get("status")
+   
 
     try:
-        enrollment = enrollmentService.updateStatus(enrollmentId, status)
-        logger.info("Enrollment %s status updated to %s", enrollmentId, status)
+        userId = getCurrentUserIdentity()
+        role = getCurrentUserClaims().get("role")
+    
+        enrollments = enrollmentService.getEnrollmentByCourseInstructorId(courseInstructorId, userId, role )
+        if wantsJson():
+            return jsonify({
+                "success": True,
+                "enrollments": [enrollment.toDict() for enrollment in enrollments]
+            
+            })
 
         return jsonify({
-            "success": True,
-            "message": "Status updated",
-            "enrollment": enrollment.toDict()
+            "enrollments": [enrollment.toDict() for enrollment in enrollments]
         })
+    except PermissionError as pe:
+        logger.warning("Unauthorized access attempete by user on enrollments %s", pe)
+        if wantsJson():
+            return jsonify({
+                "success": False,
+                "message": str(pe)
+            }), 403
 
+        flash(str(pe), "danger")
+        return redirect(url_for("course.listCourses"))
     except ValueError as ve:
-        logger.warning("Status update failed for enrollment %s", enrollmentId)
-        return jsonify({
-            "success": False,
-            "message": str(ve)
-        }), 400
+       
+        if wantsJson():
+            return jsonify({
+                "success": False,
+                "message": str(ve)
+            }), 404
 
+        flash(str(ve), "danger")
+        return redirect(url_for("course.listCourses"))
     except Exception as e:
-        logging.exception("Unexpected error updating status for enrollment %s", enrollmentId)
-        return jsonify({
-            "success": False,
-            "message": str(e)
-        }), 400
+        logger.warning("An exception occured when trying to get enrollments for a CI")
+        if wantsJson():
+            return jsonify({
+                "success": False,
+                "message": str(e)
+            }), 404
 
-  
+        flash("Could not get enrollments", "danger")
+        return redirect(url_for("course.listCourses"))
+
+    
+
 
 @enrollmentBp.route("/enrollments/<int:enrollmentId>/unenroll", methods=["POST"])
 @roleRequired("student")

@@ -1,6 +1,8 @@
 import logging
 
 from models.enrollment import Enrollment
+from config.auth import wantsJson, loginRequired, roleRequired, getCurrentUserIdentity
+
 logger = logging.getLogger(__name__)
 
 class EnrollmentService:
@@ -40,7 +42,15 @@ class EnrollmentService:
     def getEnrollmentsByStudentId(self, studentId):
         return self.enrollmentDao.getEnrollmentByStudentId(studentId)
 
-    def getEnrollmentByCourseInstructorId(self, courseInstructorId):
+    def getEnrollmentByCourseInstructorId(self, courseInstructorId, userId, role):
+        courseInstructor = self.courseInstructorDao.getCourseInstructorById(courseInstructorId)
+        if not courseInstructor:
+            raise ValueError("Course instructor offering not found")
+
+        if role != "admin" and courseInstructor.instructor_id != int(userId):
+            raise PermissionError("You are not authoried to view enrollments for this offering")
+
+       
         return self.enrollmentDao.getEnrollmentsByCourseInstructorId(courseInstructorId)
 
 

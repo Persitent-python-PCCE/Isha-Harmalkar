@@ -1,4 +1,8 @@
+from ast import Module
+
 from config.database import db
+from models.enrollment import Enrollment
+from models.lesson import Lesson
 from models.lessonProgress import LessonProgress
 
 
@@ -25,3 +29,23 @@ class LessonProgressDao:
         db.session.add(progress)
         db.session.commit()
         return progress
+
+    def getCompletionStats(self, enrollmentId):
+        enrollment = Enrollment.query.get(enrollmentId)
+        if not enrollment:
+            return 0, 0
+
+        courseId = enrollmentId.course_instructor.course_id
+
+        totalLessons = (
+            Lesson.query.join(Module).filter(Module.course_id == courseId).count()
+        )
+
+        completedLessons = (
+            LessonProgress.query.filter_by(
+                enrollment_id=enrollmentId,
+                completed=True
+            ).count()
+        )
+
+        return completedLessons, totalLessons
