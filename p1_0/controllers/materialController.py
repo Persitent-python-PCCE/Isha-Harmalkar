@@ -190,7 +190,7 @@ def deleteMaterial(materialId):
                 }), 403
     
 
-            flash(str(ve), "danger")
+            flash(str(pe), "danger")
      
 
 

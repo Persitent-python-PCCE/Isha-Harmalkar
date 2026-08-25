@@ -8,11 +8,11 @@ migrate = Migrate()
 
 def init_db(app):
     if os.environ.get("FLASK_ENV") == "testing" or app.config.get("TESTING"):
-        dbURI = os.environ.get("TEST_DATABASE_URI", "mysql+pymysql://root:password@localhost/lms_test")
+        dbURI = os.environ.get("TEST_DATABASE_URI")
     else:
-         dbURI = os.environ.get("TEST_DATABASE_URI", "mysql+pymysql://root:password@localhost/lms_1")
+        dbURI = os.environ.get("DATABASE_URI")
 
-    #app.config["SQLALCHEMY_DATABASE_URI"] = ("mysql+pymysql://root:password@localhost/product_1")
+   
     app.config["SQLALCHEMY_DATABASE_URI"] = dbURI
 
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False

@@ -1,7 +1,7 @@
 import os
+from dotenv import load_dotenv
+load_dotenv()
 os.environ["FLASK_ENV"] = "testing"
-os.environ["TEST_DATABASE_URI"] =  "mysql+pymysql://root:password@localhost/lms_test"
-
 import pytest
 from app import app as flask_app
 from config.database import db
@@ -11,7 +11,8 @@ from models import(
 )
 
 
-TEST_DATABASE_URI = "mysql+pymysql://root:password@localhost/lms_test"
+
+TEST_DATABASE_URI = os.environ.get("TEST_DATABASE_URI")
 
 
 @pytest.fixture(scope="session")
