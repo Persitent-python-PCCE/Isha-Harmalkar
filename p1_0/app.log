@@ -46,3 +46,4 @@
 2026-08-25 11:32:42,452 [INFO] werkzeug: 127.0.0.1 - - [25/Aug/2026 11:32:42] "GET /courses HTTP/1.1" 200 -
 2026-08-25 11:32:43,858 [INFO] werkzeug: 127.0.0.1 - - [25/Aug/2026 11:32:43] "GET /courses/1 HTTP/1.1" 200 -
 2026-08-25 11:38:47,792 [INFO] app: Flask appplication initialed successfully
+2026-08-31 12:05:32,099 [INFO] app: Flask appplication initialed successfully
