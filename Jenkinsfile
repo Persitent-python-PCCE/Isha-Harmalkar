@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     stages {
-
         stage('Checkout') {
             steps {
                 git branch: 'main',
@@ -18,7 +17,7 @@ pipeline {
             }
         }
 
-        stage('Docker Login') {
+        stage('Push to Docker Hub') {
             steps {
                 withCredentials([
                     usernamePassword(
@@ -28,26 +27,13 @@ pipeline {
                     )
                 ]) {
                     bat '''
-                        docker logout
-
-                        echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin
-
-                        if errorlevel 1 (
-                            echo Docker login failed
-                            exit /b 1
-                        )
-
-                        echo Docker login successful
+                        echo %DOCKER_PASS%| docker login -u %DOCKER_USER% --password-stdin
+                        if errorlevel 1 exit /b 1
+                        
+                        docker push midblue12/flask-lms:latest
                     '''
                 }
             }
         }
-
-        stage('Push to Docker Hub') {
-            steps {
-                bat 'docker push midblue12/flask-lms:latest'
-            }
-        }
-
     }
 }
