@@ -58,8 +58,8 @@ class ProductController:
             print("Could not create product: ", err)
             logger.exception(f"Could Not  create product because of: {err}")
         except Exception as e:
-            print("Unexcpecte error: ", e)
-            logger.exception(f"Failed to create product because of: {err}")
+            print("Cannot delete this product.", )
+            logger.exception(f"Failed to create product because of: {e}")
 
 
         return None

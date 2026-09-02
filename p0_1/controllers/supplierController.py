@@ -42,6 +42,8 @@ class SupplierController:
 
         except ValueError as err:
             print(f"Creating Supplier Failed: ",err)
+        except Exception as other:
+            print("Failed to create supplier")
 
         return None
 
@@ -56,6 +58,9 @@ class SupplierController:
 
         except ValueError as err:
             print("Getting supplier failed: ", err)
+
+        except Exception as otherErr:
+            print("Cannot get this supplier")
 
         return None
 
@@ -78,6 +83,8 @@ class SupplierController:
 
         except ValueError as err:
             print("Could not get all suppliers: ", err)
+        except Exception as otherErr:
+            print("Counld not get all suppliers")
 
         return []
 
@@ -113,7 +120,9 @@ class SupplierController:
 
         except ValueError as err:
             print("Could not update supplier: ", err)
-
+        except Exception as other:
+            print("Cannot update supplier")
+          
         return False
 
 
@@ -140,6 +149,9 @@ class SupplierController:
 
         except ValueError as err:
             print("Could not delete supplier: ", err)
+        except Exception as otherErr:
+            print("Cannot delete this supplier.")
+            
 
         return False
 

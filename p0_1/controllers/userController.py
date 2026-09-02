@@ -30,6 +30,8 @@ class UserController:
         except ValueError as err:
             print("Error: ",err)
             return None
+        except Exception as e:
+            print(e)
 
         #return None
 
@@ -47,6 +49,8 @@ class UserController:
 
         except ValueError as err:
             print("Login Error: ", err)
+        except Exception as e:
+                    print("Cannot Delete this user as they have orders.")
 
         return None
 
@@ -63,6 +67,8 @@ class UserController:
             return user
         except ValueError as err:
             print("Failed to get User: ", err)
+        except Exception as e:
+                    print(e)
 
         return None
 
@@ -82,6 +88,8 @@ class UserController:
             return users
         except ValueError as err:
             print("Error while getting all users: ", err)
+        except Exception as e:
+                    print(e)
 
         return []
 
@@ -112,6 +120,8 @@ class UserController:
             return updated
         except ValueError as err:
             print("Updating error: ", err)
+        except Exception as e:
+                    print(e)
 
         return False
 
@@ -137,6 +147,8 @@ class UserController:
 
         except ValueError as err:
             print("Could not delete as: ", err)
+        except Exception as e:
+                    print(e)
 
         return False
         

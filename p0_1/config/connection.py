@@ -9,7 +9,7 @@ def getConnection():
         database = 'p_01'
 
         conn = mysql.connector.connect(host=host, user=user, password=password,database=database)
-        print("Connected to db successfully.")
+        #print("Connected to db successfully.")
         return conn
     except Exception as err:
         print("Sql Connection error: ", err)

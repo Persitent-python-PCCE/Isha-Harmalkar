@@ -1,3 +1,5 @@
+from config.logger import setupLogging
+
 from config.connection import getConnection
 
 from config.logger import setupLogging
@@ -89,7 +91,6 @@ orderController.getUserOrders(user2) """
 
 
 setupLogging()
-
 
 while True:
     userController = UserController()
