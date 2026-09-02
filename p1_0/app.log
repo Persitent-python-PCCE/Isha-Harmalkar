@@ -95,3 +95,4 @@
 2026-08-31 14:07:32,551 [INFO] werkzeug: 127.0.0.1 - - [31/Aug/2026 14:07:32] "GET /dashboard HTTP/1.1" 200 -
 2026-08-31 14:07:34,385 [INFO] werkzeug: 127.0.0.1 - - [31/Aug/2026 14:07:34] "[32mPOST /logout HTTP/1.1[0m" 302 -
 2026-08-31 14:07:34,391 [INFO] werkzeug: 127.0.0.1 - - [31/Aug/2026 14:07:34] "GET /login HTTP/1.1" 200 -
+2026-09-02 12:05:52,987 [INFO] app: Flask appplication initialed successfully
